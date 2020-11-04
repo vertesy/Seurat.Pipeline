@@ -16,7 +16,6 @@ plot3DFiltLinear = F
 for (i in 1:n.datasets) {
   iprint(names(ls.Seurat)[i], percentage_formatter(i/n.datasets, digitz = 1))
 
-
   plotting.data <- ls.Seurat[[i]]@meta.data
   plotting.data$'percent.ribo' <- clip.outliers(plotting.data$percent.ribo, probs = c(.005, .995))
   plotting.data$'percent.mito' <- clip.outliers(plotting.data$percent.mito, probs = c(.005, .995))
@@ -26,9 +25,8 @@ for (i in 1:n.datasets) {
   plotting.data$'percent.mito.log10' <- log10(plotting.data$percent.mito + 0.01)
   plotting.data$'log_nFeature_RNA' <- log10(plotting.data$nFeature_RNA + 1)
 
-
   # Plot3D log scale ------------------------
-  plt <-  plot_ly(data = plotting.data
+  pltLog <-  plot_ly(data = plotting.data
                  , x = ~log_nFeature_RNA, y = ~percent.mito.log10, z = ~percent.ribo.log10
                  , type = "scatter3d"
                  , mode = "markers"
@@ -42,13 +40,13 @@ for (i in 1:n.datasets) {
                             , title = "Filtering in 3 parameters separate dying cells"
                             , aspectratio = list(x = 1, y = 1, z = 1)))
 
-  # plt
+  # pltLog
 
-  SavePlotlyAsHtml(plt, category. = ppp("log10.Filtering", meta.tags$library[i]))
+  SavePlotlyAsHtml(pltLog, category. = ppp("log10.Filtering", meta.tags$library[i]))
 
   # Plot3D ------------------------
   if (plot3DFiltLinear) {
-    plt <-  plot_ly(data = plotting.data
+    pltLin <-  plot_ly(data = plotting.data
                     , x = ~nFeature_RNA, y = ~percent.mito, z = ~percent.ribo
                     , type = "scatter3d"
                     , mode = "markers"
@@ -60,8 +58,8 @@ for (i in 1:n.datasets) {
                     # , text=~label
     ) %>% layout(scene = list(aspectmode = "manual", title = "Filtering in 3 parameters separate dying cells"
                               , aspectratio = list(x = 1, y = 1, z = 1)))
-    # plt
-    SavePlotlyAsHtml(plt, category. = ppp("Filtering", meta.tags$library[i]))
+    # pltLin
+    SavePlotlyAsHtml(pltLin, category. = ppp("Filtering", meta.tags$library[i]))
   }
 
 }
