@@ -7,12 +7,13 @@ try.dev.off()
 
 
 # Setup ------------------------------------------------------------------------
+create_set_Original_OutDir()
 create_set_SubDir("01.Basic.Stats")
-stopifnot(exists('tags'))
+stopifnot(exists('meta.tags'))
 file.ext = "png"
 
 annot.clust <- GetClusteringRuns()
-plnames.fixed.params = names(tags) # , "RNA.model" , "organoid.fixed",  "organoid",
+plnames.fixed.params = names(meta.tags) # , "RNA.model" , "organoid.fixed",  "organoid",
 
 plots = c(annot.clust, plnames.fixed.params)
 plot_list = list.fromNames(c(annot.clust, plnames.fixed.params))
