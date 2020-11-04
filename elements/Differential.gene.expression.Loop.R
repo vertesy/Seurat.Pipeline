@@ -61,7 +61,8 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   df.markers <- Add.DE.combined.score(df.markers)
 
   combined.obj@misc$'df.markers'[[ppp('res',res)]] <- df.markers
-  write.simple.tsv(df.markers, ManualName = ppp('df.markers',res,'tsv'))
+  fname <- ppp('df.markers',res,'tsv')
+  write.simple.tsv(df.markers, ManualName = fname)
   df.markers.all[[i]] <- df.markers
 
   clUMAP(ident = p$'Ident.for.DEG')
@@ -86,10 +87,11 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
   }
 
-} # for resolutions
+  write.simple.xlsx(named_list = df.markers.all )
 
+} # for resolutions
 p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
-write.simple.xlsx(named_list = df.markers.all)
+
 
 
 
