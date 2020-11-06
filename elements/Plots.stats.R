@@ -1,7 +1,7 @@
 ######################################################################
 # Plot basic stats
 ######################################################################
-# source ('~/GitHub/Packages/Seurat.pipeline/elements/Plots.stats.R')
+# source('~/GitHub/Packages/Seurat.pipeline/elements/Plots.stats.R')
 try.dev.off()
 
 
@@ -24,7 +24,7 @@ nrStat = length(annot.clust)
 nrClass = length(plot_list)
 
 for (pl in 1:length(plots)) {
-  LB = ( pl<=nrStat || pl > nrClass)
+  LB = ( pl <=  nrStat || pl > nrClass)
   plot_list[[pl]] <- DimPlot(combined.obj, reduction = "umap", group.by = plots[pl], label = LB, repel =LB) +
     ggtitle(names(plot_list[pl]));
 }

@@ -1,7 +1,7 @@
 ######################################################################
 # STRING.db.auto.cluster.annotation.R
 ######################################################################
-# source ('~/GitHub/Packages/Seurat.pipeline/elements/STRING.db.auto.cluster.annotation.R')
+# source('~/GitHub/Packages/Seurat.pipeline/elements/STRING.db.auto.cluster.annotation.R')
 library(magrittr)
 
 # Setup ------------------------

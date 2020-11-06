@@ -42,5 +42,6 @@ if (length(ls_genes) < 6) {
 # barplot ------------------------------------------------
 rowSums(gene.overlap)
 GenesDetected <- colSums(gene.overlap)
-wbarplot(GenesDetected, incrBottMarginBy = 3, tilted_text = 15  , col = wcolorize(meta.tags$project, set = "rich"))
+wbarplot(GenesDetected, incrBottMarginBy = 3, tilted_text = 15
+         , col = wcolorize(meta.tags$project, set = "rich"))
 
