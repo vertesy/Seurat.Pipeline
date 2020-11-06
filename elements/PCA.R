@@ -1,7 +1,7 @@
 ######################################################################
 # Principal Components PCA
 ######################################################################
-# source ('~/GitHub/Packages/Seurat.pipeline/elements/PCA.R')
+# source('~/GitHub/Packages/Seurat.pipeline/elements/PCA.R')
 # try(dev.off(), silent = T)
 
 # Functions ------------------------
@@ -16,13 +16,14 @@ seu.plot.PC.var.explained(obj =  combined.obj)
 
 
 # PCA.heatmap ------------------------
-DefaultAssay(combined.obj) <- "integrated"
+slotused <- if (p$'integrate.multiple') "integrated" else "RNA"
+DefaultAssay(combined.obj) <- slotused
 
-PCA.heatmap=T
+PCA.heatmap = T
 if (PCA.heatmap) {
   AllPcs = list( c(1:12),c(13:24), c(25:30))
   for (pcDIMS in AllPcs) {
-    iprint('Principal.Components',pcDIMS)
+    iprint('Principal.Components', pcDIMS)
     PCs <- DimHeatmap(combined.obj, dims = pcDIMS, cells = 500,
                       raster = T, combine = F, fast = F)
     for (i in 1:length(PCs)) {PCs[[i]] <- PCs[[i]] + NoLegend()}
@@ -36,12 +37,12 @@ if (PCA.heatmap) {
 
 # PCA.plots ------------------------
 
-PCA.plots=T
+PCA.plots = T
 if (PCA.plots) {
   Idents(combined.obj) <- 'integrated_snn_res.0.3'
   plist.PCA = list.fromNames(2:13)
   for (PC in 2:13) {
-    plist.PCA[[(PC-1)]] <-  (DimPlot(combined.obj, reduction = 'pca', label = T, dims = c(PC-1, PC))+ NoLegend())
+    plist.PCA[[(PC - 1)]] <- (DimPlot(combined.obj, reduction = 'pca', label = T, dims = c(PC - 1, PC)) + NoLegend())
   }
 
   PCA.c = plot_grid(plotlist = plist.PCA, nrow = 4, ncol = 3,
