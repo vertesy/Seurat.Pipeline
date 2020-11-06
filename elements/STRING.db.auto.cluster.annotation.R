@@ -41,11 +41,13 @@ if (!exists("string_db")) string_db <- STRINGdb$new( version="11", species=9606,
 i=15
 
 clnames.GO <- vec.fromNames(sort(v.clusters))
-for (i in (as.numeric(as.character(sort(v.clusters))))) { print(i)
+clzUsed <- (as.numeric(as.character(sort(v.clusters))))
+if (min(clzUsed)<1) clzUsed <- clzUsed+1
+for (i in clzUsed) { print(i)
   cl <- (i-1)
   cl.char <- as.character(cl)
 
-  table(DEG.top.genes.Padj[[i]]$cluster)
+  # table(DEG.top.genes.Padj[[i]]$cluster)
   DEG.top.genes.Padj[[i]] <-
     combined.obj@misc$df.markers[[p$'def_res']] %>%
     # rownames_to_column('gene') %>%
@@ -61,9 +63,10 @@ for (i in (as.numeric(as.character(sort(v.clusters))))) { print(i)
   iprint("    ",l(genesX),"Genes met enrichment criteria.")
 
   string_ids = string_db$mp(genesX)
-  stopif(l(string_ids)==0, message = "string_ids  is empty")
-
-
+  if(l(string_ids) == 0) {
+    print("string_ids  is empty")
+    next
+  }
 
   if (p$"getSTRINGlinks") {
     string_link[i] = string_db$get_link(string_ids)
@@ -79,10 +82,10 @@ for (i in (as.numeric(as.character(sort(v.clusters))))) { print(i)
   enrichmentGO <- enrichmentGO[order(  enrichmentGO$'p_value'),]
   specific.GO.terms <- which(enrichmentGO$number_of_genes_in_background < p$'STRING.max.genes')
 
-  filter.specific.GO.terms =T #
+  filter.specific.GO.terms = T #
   if (filter.specific.GO.terms) {
     idx.exclude <- which(enrichmentGO$description %in% GO.terms.removed)
-    if (l(idx.exclude)>0) enrichmentGO <- enrichmentGO[-idx.exclude,]
+    if (l(idx.exclude) > 0) enrichmentGO <- enrichmentGO[-idx.exclude,]
   }
 
   clnames.GO[cl.char] <-
