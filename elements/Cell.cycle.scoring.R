@@ -117,24 +117,29 @@ if (PlotRidgeplots) {
 
 
 
-# End ------------------------------------------------------------------------
-Idents(combined.obj) = p$"res.MetaD.colname"
-create_set_Original_OutDir()
 
 
 
 
 # Individual S and G2/M score plots ------------------------
-# if (F) {
-#
-#   # S ------------------------
-#   iprint("UMAP S ------------------------")
-#   multiFeaturePlot.A4(list.of.genes = expr.q90.s.genes.found[1:n.CC.genes], obj = combined.obj
-#                       , subdir =T, foldername = "S.genes")
-#
-#   # g2m ------------------------
-#   iprint("UMAP g2m ------------------------")
-#   multiFeaturePlot.A4(list.of.genes = expr.q90.g2m.genes.found[1:n.CC.genes], obj = combined.obj
-#                       , subdir =T, foldername = "G2M.genes")
-#
-# }
+
+expr.q90.s.genes.found
+if (T) {
+
+  # S ------------------------
+  iprint("UMAP S ------------------------")
+  multiFeaturePlot.A4(list.of.genes = expr.q90.s.genes.found[1:n.CC.genes], obj = combined.obj
+                      , subdir = T, foldername = "S.genes")
+
+  # g2m ------------------------
+  iprint("UMAP g2m ------------------------")
+  multiFeaturePlot.A4(list.of.genes = expr.q90.g2m.genes.found[1:n.CC.genes], obj = combined.obj
+                      , subdir = T, foldername = "G2M.genes")
+
+}
+
+
+
+# End ------------------------------------------------------------------------
+Idents(combined.obj) = p$"res.MetaD.colname"
+create_set_Original_OutDir()
