@@ -1,7 +1,7 @@
 ######################################################################
 # Differential.gene.expression.Loop.R
 ######################################################################
-# source ('~/GitHub/Packages/Seurat.pipeline/elements/Differential.gene.expression.Loop.R')
+# source('~/GitHub/Packages/Seurat.pipeline/elements/Differential.gene.expression.Loop.R')
 # try(dev.off(), silent = T)
 
 # Functions ------------------------
@@ -84,12 +84,9 @@ for (i in 1:length(p$'res.analyzed.DE')) {
       combined.obj <- AddGOGeneList.manual(genes = p$"Cluster.Labels.Hybrid.Genes", GO = "BestMarkers")
       combined.obj <- AutoLabel.KnownMarkers(KnownMarkers = p$"Cluster.Labels.Hybrid.Genes", res = res)
       clUMAP(ident = ppp("cl.names.KnownMarkers",res))
-
   }
-
-  write.simple.xlsx(named_list = df.markers.all )
-
 } # for resolutions
+write.simple.xlsx(named_list = df.markers.all )
 p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
 
 
