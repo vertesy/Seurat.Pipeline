@@ -1,11 +1,14 @@
 ######################################################################
 # Pairwise.Std.var.correlation.R
 ######################################################################
-# source ('~/GitHub/Packages/Seurat.pipeline/elements/Pairwise.Std.var.correlation.R')
+# source('~/GitHub/Packages/Seurat.pipeline/elements/Pairwise.Std.var.correlation.R')
 
 # Setup ------------------------------------------------------------------------
-ls.VarGenes.top20 = list.fromNames(names(ls.Seurat))
+ls.VarGenes.top20 = ls.VarGenes.top100 = list.fromNames(names(ls.Seurat))
 create_set_OutDir(OutDirOrig, "variable.genes")
+usePNG = T
+pairwise.scatters=T
+
 
 # Plot ------------------------------------------------------------------------
 
@@ -20,8 +23,8 @@ tic(); for (i in 1:n.datasets ) { print(i)
 }; toc()
 # wvenn(ls.VarGenes.top20)
 
-pairwise.scatters=T
-if (pairwise.scatters && !p$'use.SCTransform') {
+# not testing for !p$'use.SCTransform' &&
+if (pairwise.scatters &&  n.datasets > 1 ) {
   topN =100
   ls.variance.standardized =
     lapply(
@@ -38,11 +41,14 @@ if (pairwise.scatters && !p$'use.SCTransform') {
 
   plotname=ppp("Pairwise Correlation of Standardized Variance\ntopN", topN)
   pairs(ls.variance.standardized, main=plotname, upper.panel = panel.cor.pearson)
-  # pairs(ls.variance.standardized, main=plotname ,
-  #       col=rgb(0,0,0,0.25), pch=18) # , upper.panel = panel.cor.pearson
-  #
-  wplot_save_this(plotname, w = 10)
+  wplot_save_this(plotname, w = 10, PNG = usePNG)
 }
+
+# Overlap ------------------------------------------------------------------------
+tic(); for (i in 1:n.datasets ) { # print(i)
+  ls.VarGenes.top100[[i]] <- head(VariableFeatures(ls.Seurat[[i]]), 100)
+}; toc()
+
 
 # End ------------------------------------------------------------------------
 
