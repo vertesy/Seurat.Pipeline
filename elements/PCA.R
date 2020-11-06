@@ -10,7 +10,7 @@
 # Setup ------------------------
 create_set_OutDir(OutDirOrig)
 create_set_SubDir("PCA")
-
+axistextPCA = 6
 
 seu.plot.PC.var.explained(obj =  combined.obj)
 
@@ -26,7 +26,10 @@ if (PCA.heatmap) {
     iprint('Principal.Components', pcDIMS)
     PCs <- DimHeatmap(combined.obj, dims = pcDIMS, cells = 500,
                       raster = T, combine = F, fast = F)
-    for (i in 1:length(PCs)) {PCs[[i]] <- PCs[[i]] + NoLegend()}
+    for (i in 1:length(PCs)) {
+      PCs[[i]] <- PCs[[i]] + NoLegend() +
+      theme(axis.text.y = element_text(size = axistextPCA))
+      }
 
     PCs.c = plot_grid(plotlist = PCs, nrow = 4, ncol = 3,
                       labels = p0('PC ', pcDIMS), label_colour = "green", hjust = -2 )
