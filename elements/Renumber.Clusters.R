@@ -1,11 +1,11 @@
 ######################################################################
 # Renumber.Clusters.R
 ######################################################################
-# source ("~/GitHub/Packages/Seurat.pipeline/elements/Renumber.Clusters.R")
+# source("~/GitHub/Packages/Seurat.pipeline/elements/Renumber.Clusters.R")
 
 
 # Functions ------------------------
-source ('~/GitHub/Packages/Seurat.utils/Cluster.Auto-naming.DE.R')
+source('~/GitHub/Packages/Seurat.utils/Cluster.Auto-naming.DE.R')
 stopifnot(exists('p'))
 stopif(is.null(p$'OrderClsByPrCurve'),message = 'OrderClsByPrCurve not found')
 stopif(is.null(p$'res.analyzed.DE'),message = 'res.analyzed.DE not found')
@@ -14,8 +14,8 @@ if (p$'OrderClsByPrCurve') require(princurve)
 
 # Setup ------------------------
 create_set_Original_OutDir()
-suffix =""
-prefix ="integrated_snn_res"
+suffix = ""
+prefix = p0(if (p$'integrate.multiple') "integrated" else "RNA", "_snn_res")
 
 
 # AutoNumber.by.UMAP ------------------------

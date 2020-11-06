@@ -1,7 +1,7 @@
 ######################################################################
 # Cell Cycle Scoring
 ######################################################################
-# source ('~/GitHub/Packages/Seurat.pipeline/elements/Cell.cycle.scoring.R')
+# source('~/GitHub/Packages/Seurat.pipeline/elements/Cell.cycle.scoring.R')
 # Based on https://satijalab.org/seurat/v3.1/cell_cycle_vignette.html
 # try(dev.off(), silent = T)
 
@@ -9,10 +9,12 @@
 PlotRidgeplots = F
 n.CC.genes = 16
 
-stopifnot(all(names(tags) %in% colnames(combined.obj@meta.data)))
+stopifnot(all(names(meta.tags) %in% colnames(combined.obj@meta.data)))
 
 # Setup ------------------------
 create_set_OutDir(OutDirOrig, "Cell.cycle")
+slotused <- if (p$'integrate.multiple') "integrated" else "RNA"
+
 
 ccDir = "~/Dropbox/Abel.IMBA/MetadataD/Gene.lists/cell_cycle_vignette_files/"
 try(file.copy(from = ccDir, to = OutDir, recursive = T))
@@ -34,8 +36,9 @@ Idents(combined.obj) = "Phase"
 (expr.q90.s.genes.found = names(sort(na.omit.strip(combined.obj@misc$'expr.q90'[ cc.genes$'s.genes']), decreasing = T) ) )
 (expr.q90.g2m.genes.found = names(sort(na.omit.strip(combined.obj@misc$'expr.q90'[ cc.genes$'g2m.genes']), decreasing = T) ) )
 
-expr.q90.s.genes.found = check.genes(expr.q90.s.genes.found, assay.slot = "integrated")
-expr.q90.g2m.genes.found = check.genes(expr.q90.g2m.genes.found, assay.slot = "integrated")
+
+expr.q90.s.genes.found = check.genes(expr.q90.s.genes.found, assay.slot = slotused)
+expr.q90.g2m.genes.found = check.genes(expr.q90.g2m.genes.found, assay.slot = slotused)
 
 
 Idents(combined.obj) <- "Phase"
@@ -55,7 +58,7 @@ CC.score = list(
 )
 save2umaps.A4(CC.score)
 
-
+clUMAP('Phase')
 
 # CellFractionsBarplots ------------------------
 if (TRUE) {
@@ -71,7 +74,8 @@ if (TRUE) {
 
 
 # CellFractionsBarplots ------------------------
-if (TRUE) {
+
+if ("plotCellFractionsBarplots") {
   pl.Fr = list(2)
   plotname = "Fraction.of.age.and.location.per.cluster"
   pl.Fr[[1]] = CellFractionsBarplot2(fill.by = "age", group.by = p$'res.MetaD.colname', downsample = T)
