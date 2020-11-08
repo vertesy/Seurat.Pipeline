@@ -3,14 +3,13 @@
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Plots.stats.R')
 try.dev.off()
-
+file.ext = "pdf"
 
 
 # Setup ------------------------------------------------------------------------
 create_set_Original_OutDir()
-create_set_SubDir("01.Basic.Stats")
+create_set_SubDir(ppp("01.Basic.Stats",file.ext))
 stopifnot(exists('meta.tags'))
-file.ext = "png"
 
 annot.clust <- GetClusteringRuns()
 plnames.fixed.params = names(meta.tags) # , "RNA.model" , "organoid.fixed",  "organoid",
@@ -45,7 +44,7 @@ for (i in 1:length(lsplot.combinations)) {
 
 
   plotz = plot_grid(plotlist = plot_list[plot.comination], nrow = 2, ncol = 2, labels = LETTERS[1:l(plot.comination)]  )
-  save_plot(filename = fname, plot = plotz, base_height =12, ncol=1, nrow=1)
+  save_plot(filename = fname, plot = plotz, base_height = 12, ncol = 1, nrow = 1)
 }
 iprint('-------- ', length(plot_list), "plots are saved")
 
@@ -53,28 +52,28 @@ for (cr in GetClusteringRuns()) clUMAP(cr)
 
 # Basic stats -----------------------------------
 stats2plot <- intersect(p$"StatFeatures", colnames(combined.obj@meta.data))
-stopifnot(l(stats2plot)>0)
+stopifnot(l(stats2plot) > 0)
 
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'umap', features = stats2plot)
-       , filename = "umap.StatMarkers.jpg", width = hA4, height = wA4)
+       , filename = ppp("umap.StatMarkers", file.ext), width = hA4, height = wA4)
 
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'tsne', features = stats2plot)
-       , filename = "tsne.StatMarkers.jpg", width = hA4, height = wA4)
+       , filename = ppp("tsne.StatMarkers", file.ext), width = hA4, height = wA4)
 
 
 # Basic stat hexbinplots -----------------------------------
 if (p$"plotHexBinStatPlots") {
-  pl.hex <- foreach(i=1:length(stats2plot)) %dopar% {
+  pl.hex <- foreach(i = 1:length(stats2plot)) %dopar% {
     plot_hexbin_meta(combined.obj, col = stats2plot[i], action = "median")
   }
   p.stat.hex = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
-  save_plot(filename = "UMAPs.stat.hex.png", plot = p.stat.hex, base_height=12, ncol=1, nrow=1) #Figure 2
+  save_plot(filename = ppp("UMAPs.stat.hex", file.ext), plot = p.stat.hex, base_height = 12, ncol = 1, nrow = 1) #Figure 2
 
-  pl.hex <- foreach(i=1:length(plnames.fixed.params)) %dopar% {
+  pl.hex <- foreach(i = 1:length(plnames.fixed.params)) %dopar% {
     plot_hexbin_meta(combined.obj, col = plnames.fixed.params[i], action = "prop")
   }
   p.stat.hex2 = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
-  save_plot(filename = "UMAPs.proportions.hex.png", plot = p.stat.hex2, base_height=12, ncol=1, nrow=1) #Figure 2
+  save_plot(filename = ppp("UMAPs.proportions.hex", file.ext), plot = p.stat.hex2, base_height = 12, ncol = 1, nrow = 1) #Figure 2
 }
 
 
@@ -99,8 +98,8 @@ if (p$"plotClusterPhylogeny") {
     # Plot on UMAP
     nr_cl <- max(as.numeric(Idents(combined.obj))) # Supercluster naming starts above
     x.ClusterTree <- Tool(object = combined.obj, slot = 'BuildClusterTree')
-    nodeX <- nr_cl+3
-    plotsplit <- ColorDimSplit(combined.obj, node = nodeX) +ggtitle(label = ppp("Hierarchy node",nodeX))
+    nodeX <- nr_cl + 3
+    plotsplit <- ColorDimSplit(combined.obj, node = nodeX) + ggtitle(label = ppp("Hierarchy node",nodeX))
   }
 }
 #  -----------------------------------
