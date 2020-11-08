@@ -9,7 +9,7 @@ library(dplyr)
 
 # Parameters ------------------------
 # is.subclustering = p$"subclustering"
-
+plotHeatmap <- TRUE
 
 # Setup ------------------------
 create_set_Original_OutDir()
@@ -90,6 +90,32 @@ write.simple.xlsx(named_list = df.markers.all )
 p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
 
 
+# plotHeatmap ------------------------------------------------------------------------
+if (plotHeatmap) {
+  create_set_SubDir("heatmaps")
+  p.hm <- list(
+    assay = c('RNA', 'integrated')[2],
+    slot = c('scale.data')
+  )
+
+  {
+    NT <- c('GLRA2', 'GRM5', 'GRIN2B', 'GRIK2', 'GRID2', 'GRIA4', 'GRIA3', 'GRIA2', 'GRIA1', 'GABBR2', 'GABBR1', 'GABRG3', 'GABRG2', 'GABRG1', 'GABRB3', 'GABRB2', 'GABRA2', 'GABRA1', 'CNR1', 'HTR2C')
+    p.hm <- list(assay = 'integrated', slot = 'scale.data', group.by = GetNamedClusteringRuns(res = p$'def_res'))
+    hm.NT <- DoHeatmap(combined.obj, assay = p.hm$'assay', slot = p.hm$'slot', features = NT, group.by = p.hm$'group.by') # + NoLegend()
+    ggsave2(plot = hm.NT, filename = ppp('hm.NT', flag.names_list.all.new(pl =  p.hm), 'pdf'))
+  }
+
+  p.hm$'rank'  <- c("combined.score", "avg_logFC", "p_val_adj", "p_val")[4]
+  p.hm$'nrDEG' <- c(5, 10)[2]
+  md.LogSettingsFromList(p.hm)
+  {
+    markers.use <- GetTopMarkers(dfDE = df.markers, n = p.hm$'nrDEG', order.by = p.hm$'rank')
+    hm.NT <- DoHeatmap(combined.obj, assay = p.hm$'assay', slot = p.hm$'slot'
+                       , features = as.character(markers.use), group.by = GetNamedClusteringRuns(res = p$'def_res')) # + NoLegend()
+    ggsave2(plot = hm.NT, filename = ppp('hm.DEG', nrDEG,flag.names_list.all.new(pl= p.hm), 'pdf'), width = hA4, height = hA4)
+  }
+  create_set_Original_OutDir()
+}
 
 
 # End ------------------------------------------------------------------------
