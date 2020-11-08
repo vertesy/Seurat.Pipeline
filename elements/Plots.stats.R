@@ -24,8 +24,8 @@ nrStat = length(annot.clust)
 nrClass = length(plot_list)
 
 for (pl in 1:length(plots)) {
-  LB = ( pl <=  nrStat || pl > nrClass)
-  plot_list[[pl]] <- DimPlot(combined.obj, reduction = "umap", group.by = plots[pl], label = LB, repel =LB) +
+  LB = (pl <=  nrStat || pl > nrClass)
+  plot_list[[pl]] <- DimPlot(combined.obj, reduction = "umap", group.by = plots[pl], label = LB, repel = LB) +
     ggtitle(names(plot_list[pl]));
 }
 plot_list = plot_list[1:pl]
@@ -45,7 +45,7 @@ for (i in 1:length(lsplot.combinations)) {
 
 
   plotz = plot_grid(plotlist = plot_list[plot.comination], nrow = 2, ncol = 2, labels = LETTERS[1:l(plot.comination)]  )
-  save_plot(filename = fname, plot = plotz, base_height=12, ncol=1, nrow=1)
+  save_plot(filename = fname, plot = plotz, base_height =12, ncol=1, nrow=1)
 }
 iprint('-------- ', length(plot_list), "plots are saved")
 
@@ -97,7 +97,7 @@ if (p$"plotClusterPhylogeny") {
 
   if (FALSE) {
     # Plot on UMAP
-    nr_cl<- max(as.numeric(Idents(combined.obj))) # Supercluster naming starts above
+    nr_cl <- max(as.numeric(Idents(combined.obj))) # Supercluster naming starts above
     x.ClusterTree <- Tool(object = combined.obj, slot = 'BuildClusterTree')
     nodeX <- nr_cl+3
     plotsplit <- ColorDimSplit(combined.obj, node = nodeX) +ggtitle(label = ppp("Hierarchy node",nodeX))

@@ -13,7 +13,7 @@ stopifnot(all(names(meta.tags) %in% colnames(combined.obj@meta.data)))
 
 # Setup ------------------------
 create_set_OutDir(OutDirOrig, "Cell.cycle")
-slotused <- if (p$'integrate.multiple') "integrated" else "RNA"
+slotused <- if (n.datasets > 1) "integrated" else "RNA"
 
 
 ccDir = "~/Dropbox/Abel.IMBA/MetadataD/Gene.lists/cell_cycle_vignette_files/"
@@ -75,18 +75,18 @@ if (TRUE) {
 
 # CellFractionsBarplots ------------------------
 
-if ("plotCellFractionsBarplots") {
+if (plotCellFractionsBarplots) {
   pl.Fr = list(2)
   plotname = "Fraction.of.age.and.location.per.cluster"
   pl.Fr[[1]] = CellFractionsBarplot2(fill.by = "age", group.by = p$'res.MetaD.colname', downsample = T)
   pl.Fr[[2]] = CellFractionsBarplot2(fill.by = "location", group.by = p$'res.MetaD.colname', downsample = T)
-  qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "png"))
+  qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "pdf"))
 
   plotname = "Fraction.of.samples.per.cluster"
   CellFractionsBarplot2(fill.by = "sample", group.by = p$'res.MetaD.colname')
   pl.Fr[[1]] = CellFractionsBarplot2(fill.by = "sample", group.by = p$'res.MetaD.colname', downsample = T)
   pl.Fr[[2]] = NULL
-  qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "png"))
+  qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "pdf"))
 
 }
 
