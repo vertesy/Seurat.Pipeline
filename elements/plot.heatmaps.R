@@ -23,7 +23,7 @@ p.hm$'nrDEG' <- c(5, 10)[1]
 md.LogSettingsFromList(p.hm)
 {
   cl.markers <- unique(GetTopMarkers(dfDE = df.markers, n = p.hm$'nrDEG', order.by = p.hm$'rank'))
-  hm.CM <- DoHeatmap(features = as.character(cl.markers)
+  hm.CM <- DoHeatmap(features = as.character(cl.markers), raster = FALSE
                      , object = combined.obj, assay = p.hm$'assay', slot = p.hm$'slot'
                      , group.by = GetNamedClusteringRuns(res = p$'def_res')) # + NoLegend()
   ggsave2(plot = hm.CM, filename = ppp('hm.DEG',  p.hm$'nrDEG',flag.names_list.all.new(pl = p.hm), 'pdf'), width = hA4, height = hA4)
@@ -44,7 +44,7 @@ md.LogSettingsFromList(p.hm)
                        "CXCL14", "NPY", "NXPH1", "NRG1", "NRG2", "NRG3", "NRG4")
   check.genes(list.of.genes = genes.migration, assay.slot = p.hm$'assay')
 
-  hm.GM <- DoHeatmap(features = as.character(genes.migration)
+  hm.GM <- DoHeatmap(features = as.character(genes.migration), raster = FALSE
                      , object = combined.obj, assay = p.hm$'assay', slot = p.hm$'slot'
                      , group.by = GetNamedClusteringRuns(res = p$'def_res')) # + NoLegend()
   ggsave2(plot = hm.GM, filename = ppp('hm.genes.migration', 'pdf'), width = hA4, height = hA4)
@@ -59,7 +59,7 @@ md.LogSettingsFromList(p.hm)
 {
   neuro.transmitters <- c('GLRA2', 'GRM5', 'GRIN2B', 'GRIK2', 'GRID2', 'GRIA4', 'GRIA3', 'GRIA2', 'GRIA1',
                           'GABBR2', 'GABBR1', 'GABRG3', 'GABRG2', 'GABRG1', 'GABRB3', 'GABRB2', 'GABRA2', 'GABRA1', 'CNR1', 'HTR2C')
-  hm.NT <- DoHeatmap(combined.obj, assay = p.hm$'assay', slot = p.hm$'slot'
+  hm.NT <- DoHeatmap(combined.obj, assay = p.hm$'assay', slot = p.hm$'slot', raster = FALSE
                      , features = neuro.transmitters, group.by = p.hm$'group.by') # + NoLegend()
   ggsave2(plot = hm.NT, filename = ppp('hm.NT', flag.names_list.all.new(pl =  p.hm), 'pdf'))
   AvEx.NT <- AverageExpression(object = combined.obj, assays = 'RNA', slot = "data"
