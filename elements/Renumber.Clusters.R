@@ -15,7 +15,7 @@ if (p$'OrderClsByPrCurve') require(princurve)
 # Setup ------------------------
 create_set_Original_OutDir()
 suffix = ""
-prefix = p0(if (n.datasets >1) "integrated" else "RNA", "_snn_res")
+prefix = p0(if (n.datasets > 1) "integrated" else "RNA", "_snn_res")
 
 
 # AutoNumber.by.UMAP ------------------------
@@ -23,7 +23,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   res = p$'res.analyzed.DE'[i]
   (res.full = trimws(ppp(prefix, res, suffix), whitespace = '\\.'))
 
-  combined.obj <- AutoNumber.by.UMAP(obj = combined.obj, dimension = 1, reduction = "umap", swap = F, res = res.full)
+  combined.obj <- AutoNumber.by.UMAP(obj = combined.obj, dimension = p$"Reorder.Dim", reduction = "umap", swap = (p$"Reorder.Dim" < 0), res = res.full)
   identity.used <- ppp(res.full, "ordered")
   umap.snn_res.X.ordered <- DimPlot.ClusterNames(ident = identity.used)
   qqsave(umap.snn_res.X.ordered
