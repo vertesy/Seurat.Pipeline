@@ -35,16 +35,16 @@ DEG.top.genes.Padj <- list.fromNames(v.clusters)
 # x=get_STRING_species(version = 11, species_name=NULL); View(x)
 # Homo sapiens 9606
 # Mus musculus 10090
-if (!exists("string_db")) string_db <- STRINGdb$new( version="11", species=9606, score_threshold=0, input_directory="" )
+if (!exists("string_db")) string_db <- STRINGdb$new(version = "11", species = 9606, score_threshold = 0, input_directory = "" )
 
 
-i=15
+i = 15
 
 clnames.GO <- vec.fromNames(sort(v.clusters))
 clzUsed <- (as.numeric(as.character(sort(v.clusters))))
-if (min(clzUsed)<1) clzUsed <- clzUsed+1
+if (min(clzUsed) < 1) clzUsed <- clzUsed + 1
 for (i in clzUsed) { print(i)
-  cl <- (i-1)
+  cl <- (i - 1)
   cl.char <- as.character(cl)
 
   # table(DEG.top.genes.Padj[[i]]$cluster)
@@ -55,7 +55,7 @@ for (i in clzUsed) { print(i)
     filter(cluster == cl) %>%
     filter(avg_logFC > 0.5) %>%     # which means at least 2 fold enriched (e logN()s)
     filter(p_val_adj < 0.05) %>%
-    head(n=p$'STRING.nr.genes') %>%
+    head(n = p$'STRING.nr.genes') %>%
     pull("gene" )
 
   (genesX = DEG.top.genes.Padj[[i]])
@@ -63,7 +63,7 @@ for (i in clzUsed) { print(i)
   iprint("    ",l(genesX),"Genes met enrichment criteria.")
 
   string_ids = string_db$mp(genesX)
-  if(l(string_ids) == 0) {
+  if (l(string_ids) == 0) {
     print("string_ids  is empty")
     next
   }
@@ -92,7 +92,7 @@ for (i in clzUsed) { print(i)
     if (nrow(enrichmentGO)) {
       if (l(specific.GO.terms)) {  enrichmentGO$description[specific.GO.terms][1]
       } else {                     enrichmentGO$description[1] }
-    } else { ppp('No Enrichment',i)} # if
+    } else {ppp('No Enrichment', i)} # if
 
   (clnames.GO[cl.char] <- ppd(clnames.GO[cl.char],l(DEG.top.genes.Padj[[i]])))
 }
@@ -105,7 +105,7 @@ is(Idents(combined.obj))
 symdiff(Idents(combined.obj),  v.clusters)
 
 
-(Ident.GO <- translate(vec =as.character(combined.obj@meta.data[, p$'Ident.for.DEG'])
+(Ident.GO <- translate(vec = as.character(combined.obj@meta.data[, p$'Ident.for.DEG'])
                        , oldvalues = as.character(v.clusters), newvalues = clnames.GO))
 combined.obj[[GOident]] <- Ident.GO
 clUMAP(ident = GOident , sub = "nr. of genes provided to STRING after dash")

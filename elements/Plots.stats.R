@@ -3,12 +3,10 @@
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Plots.stats.R')
 try.dev.off()
-file.ext = "pdf"
-
 
 # Setup ------------------------------------------------------------------------
 create_set_Original_OutDir()
-create_set_SubDir(ppp("01.Basic.Stats",file.ext))
+create_set_SubDir(ppp("01.Basic.Stats",p$"file.ext"))
 stopifnot(exists('meta.tags'))
 
 annot.clust <- GetClusteringRuns()
@@ -40,7 +38,7 @@ names(lsplot.combinations) <- pl.names
 
 for (i in 1:length(lsplot.combinations)) {
   plot.comination <- lsplot.combinations[[i]]
-  fname <- ppp("UMAP", names(lsplot.combinations)[i], file.ext)
+  fname <- ppp("UMAP", names(lsplot.combinations)[i], p$"file.ext")
 
 
   plotz = plot_grid(plotlist = plot_list[plot.comination], nrow = 2, ncol = 2, labels = LETTERS[1:l(plot.comination)]  )
@@ -55,10 +53,10 @@ stats2plot <- intersect(p$"StatFeatures", colnames(combined.obj@meta.data))
 stopifnot(l(stats2plot) > 0)
 
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'umap', features = stats2plot)
-       , filename = ppp("umap.StatMarkers", file.ext), width = hA4, height = wA4)
+       , filename = ppp("umap.StatMarkers", p$"file.ext"), width = hA4, height = wA4)
 
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'tsne', features = stats2plot)
-       , filename = ppp("tsne.StatMarkers", file.ext), width = hA4, height = wA4)
+       , filename = ppp("tsne.StatMarkers", p$"file.ext"), width = hA4, height = wA4)
 
 
 # Basic stat hexbinplots -----------------------------------
@@ -67,13 +65,13 @@ if (p$"plotHexBinStatPlots") {
     plot_hexbin_meta(combined.obj, col = stats2plot[i], action = "median")
   }
   p.stat.hex = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
-  save_plot(filename = ppp("UMAPs.stat.hex", file.ext), plot = p.stat.hex, base_height = 12, ncol = 1, nrow = 1) #Figure 2
+  save_plot(filename = ppp("UMAPs.stat.hex", p$"file.ext"), plot = p.stat.hex, base_height = 12, ncol = 1, nrow = 1) #Figure 2
 
   pl.hex <- foreach(i = 1:length(plnames.fixed.params)) %dopar% {
     plot_hexbin_meta(combined.obj, col = plnames.fixed.params[i], action = "prop")
   }
   p.stat.hex2 = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
-  save_plot(filename = ppp("UMAPs.proportions.hex", file.ext), plot = p.stat.hex2, base_height = 12, ncol = 1, nrow = 1) #Figure 2
+  save_plot(filename = ppp("UMAPs.proportions.hex", p$"file.ext"), plot = p.stat.hex2, base_height = 12, ncol = 1, nrow = 1) #Figure 2
 }
 
 
