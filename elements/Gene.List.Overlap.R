@@ -5,7 +5,9 @@
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
 
 # Functions ------------------------
-try(source('~/GitHub/Packages/Seurat.utils/Jaccard.toolkit.R'))
+# try(source('~/GitHub/Packages/Seurat.utils/Jaccard.toolkit.R'))
+try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/Jaccard.toolkit.R'))
+
 # source('~/Github/TheCorvinas/R/DatabaseLinke.r')
 require(MarkdownReportsDev)
 
@@ -39,6 +41,10 @@ colnames(PairwiseJaccardIndices)
 
 ph.Jac.wo <- pheatmap::pheatmap(PairwiseJaccardIndices, display_numbers = T, cutree_rows = 3, cutree_cols = 3)
 wplot_save_pheatmap(ph.Jac.wo, width = 15)
+
+nrGenesPerDataset <- unlapply(ls_genes, length)
+wbarplot(nrGenesPerDataset, incrBottMarginBy = 2, tilted_text = T
+         , hline = 20000, w = 14, h=7, sub = "Not actually filtered on this thr.")
 
 # End ------------------------
 create_set_Original_OutDir()
