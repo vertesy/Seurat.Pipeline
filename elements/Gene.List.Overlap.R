@@ -21,20 +21,9 @@ require(MarkdownReportsDev)
 # Read In ------------------------
 # ls_genes <- read_rds(file = "/Volumes/abel/cbehome/Dropbox/Abel.IMBA/AnalysisD/Abel/SEO2/INTEGR~1/variable.genes/ls_genes.Rds")
 
-# idxEx <- which(names(ls_genes) %in% "TSC.122580_WT.20201015")
-# if (l(which(names(ls_genes) %in% "TSC.122580_WT.20201015"))) {
-#   ls_genes <- ls_genes[-idxEx]
-# }
-
-
-# str(ls_genes)
-
-
-
 
 # Calculate Jaccard ------------------------
-df.presence <- jPresenceMatrix(string_list = ls_genes)
-PairwiseJaccardIndices <- jPairwiseJaccardIndex(binary.presence.matrix = df.presence)
+PairwiseJaccardIndices <- jPairwiseJaccardIndexList(lsG = ls_genes)
 
 # ------------------------
 colnames(PairwiseJaccardIndices)
