@@ -36,13 +36,35 @@ if (pairwise.scatters ) {
       FUN = head, n = topN)
   names(ls.variance.standardized) = samples
 
-  plotname=ppp("Pairwise Correlation of Standardized Variance\ntopN", topN)
-  pairs(ls.variance.standardized, main=plotname, upper.panel = panel.cor.pearson)
-  # pairs(ls.variance.standardized, main=plotname ,
-  #       col=rgb(0,0,0,0.25), pch=18) # , upper.panel = panel.cor.pearson
-  #
-  wplot_save_this(plotname, w = 10)
+  plotname=ppp("Pairwise Correlation of Standardized Variance of top", topN,"genes.")
+  size <- round(length(ls.Seurat)/2)+5
+  try.dev.off()
+  pdf(file = "Genes standardized variance correlation across datasets.jpg",width = size, height = size)
+  x <- pairs(ls.variance.standardized, main=plotname, upper.panel = panel.cor.pearson)
+  try.dev.off()
+
 }
+
+# Heatmap ------------------------------------------------------------------------
+# if (FALSE) {
+#   ls.variance.standardized.1000 =
+#     lapply(
+#       lapply(
+#         lapply(
+#           lapply(
+#             lapply(ls.Seurat,
+#                    FUN = HVFInfo),
+#             FUN = `[`, i='variance.standardized'),
+#           FUN = as.named.vector, WhichDimNames = 1),
+#         FUN = sort, decreasing = TRUE),
+#       FUN = head, n = topN)
+#   names(ls.variance.standardized.1000) = samples
+#   df.x <- list2fullDF.byNames(ls.variance.standardized.1000)
+#
+#
+#   pho <- pheatmap::pheatmap(df.x, show_rownames = F)
+#
+# }
 
 # End ------------------------------------------------------------------------
 
