@@ -31,8 +31,8 @@ try(source('https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpres
 # # try(source("~/GitHub/Packages/Seurat.multicore/Seurat3.Multicore.Load.R"));
 
 # 3. Load CBE specific function libraries ------------------------
-dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64")
-library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/')
+try(dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64"), silent = F)
+try(library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/'), silent = F)
 require("htmltools")
 
 # options for CBE ------------------------
