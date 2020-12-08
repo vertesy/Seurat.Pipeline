@@ -1,7 +1,8 @@
 ######################################################################
-# Load.packages.local.R
+# Load.packages.CBE.R
 ######################################################################
-# source('~/GitHub/Packages/Seurat.pipeline/elements/Load.packages.local.R')
+# source('~/GitHub/Packages/Seurat.pipeline/elements/Load.packages.CBE.R')
+# source('https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Load.packages.CBE.R')
 
 
 # 1. Load packages ------------------------
