@@ -26,8 +26,8 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   combined.obj <- AutoNumber.by.UMAP(obj = combined.obj, dimension = p$"Reorder.Dim", reduction = "umap", swap = (p$"Reorder.Dim" < 0), res = res.full)
   identity.used <- ppp(res.full, "ordered")
   umap.snn_res.X.ordered <- DimPlot.ClusterNames(ident = identity.used)
-  qqsave(umap.snn_res.X.ordered
-         , plotname = ppp("umap", identity.used), PNG = T, plotit = T)
+  qqSave(ggobj = umap.snn_res.X.ordered, page = 'A5l'
+         , title = ppp("umap", identity.used), ext = 'png')
 
 
   # AutoNumber.by.PrinCurve ------------------------
@@ -35,8 +35,8 @@ for (i in 1:length(p$'res.analyzed.DE')) {
     combined.obj <- AutoNumber.by.PrinCurve(obj = combined.obj, dimension = 1:2, reduction = "umap", plotit = T, swap = -1, res = res.full)
     identity.used <- ppp(res.full, "prin.curve")
     umap.snn_res.X.prin.curve <- DimPlot.ClusterNames(ident = identity.used)
-    qqsave(umap.snn_res.X.prin.curve
-           , plotname = ppp("umap", identity.used), PNG = T, plotit = T)
+    qqSave(umap.snn_res.X.prin.curve, page = 'A5l'
+           , plotname = ppp("umap", identity.used), ext = 'png')
   }
 
 
