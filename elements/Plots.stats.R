@@ -27,7 +27,7 @@ for (pl in 1:length(plots)) {
 }
 plot_list = plot_list[1:pl]
 
-iprint('-------- ', length(plot_list), "plots are made")
+iprint('-------- ', length(plot_list), "plots are compiled.")
 
 
 # Draw and combine plots------------------------------------------------------------------------
@@ -44,7 +44,7 @@ for (i in 1:length(lsplot.combinations)) {
   plotz = plot_grid(plotlist = plot_list[plot.comination], nrow = 2, ncol = 2, labels = LETTERS[1:l(plot.comination)]  )
   save_plot(filename = fname, plot = plotz, base_height = 12, ncol = 1, nrow = 1)
 }
-iprint('-------- ', length(plot_list), "plots are saved")
+iprint('-------- ', length(plot_list), "plots are saved.")
 
 for (cr in GetClusteringRuns()) clUMAP(cr)
 
@@ -89,8 +89,11 @@ if (p$"plotClusterPhylogeny") {
   set.seed(p$seed)
   combined.obj <- BuildClusterTree(object = combined.obj, dims = 1:p$n.PC
                                    ,  assay = 'integrated', slot = 'scale.data',verbose = TRUE)
+  try.dev.off()
+  jpeg(filename = "PlotClusterTree.jpeg", width = 1200, height = 600)
   PlotClusterTree(combined.obj)
-  wplot_save_this("PlotClusterTree")
+  try.dev.off()
+
 
   if (FALSE) {
     # Plot on UMAP
