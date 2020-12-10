@@ -17,7 +17,7 @@ require(future) # parallelization
 require(doMC)
 
 require(tictoc)
-require(schex)
+# require(schex)
 
 # 2. Load custom function libraries ------------------------
 try(source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R'),silent = F)
