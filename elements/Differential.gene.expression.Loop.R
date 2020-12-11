@@ -32,7 +32,7 @@ ParentDirDE <- OutDir
 res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
-i = 2
+i = 1
 for (i in 1:length(p$'res.analyzed.DE')) {
 
   res = p$'res.analyzed.DE'[i]
@@ -49,6 +49,20 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   Idents(combined.obj) <- p$'Ident.for.DEG'
 
   # Find DEG ------------------------------------
+
+  # Increasing min.pct, logfc.threshold, and min.diff.pct, will increase the speed of DE testing,
+  # but could also miss features that are prefiltered
+  # p$"min.pct" = 0.2
+  # p$"logfc.threshold" = 0.5
+  # p$"min.diff.pct" = 0.05
+  # p$"min.cells.feature" = 100
+  # p$"min.cells.group" = 100
+
+  # p$"min.pct" = 0.1
+  # p$"logfc.threshold" = 0.25
+  # p$"min.diff.pct" = 0.01
+  # p$"min.cells.feature" = 20
+  # p$"min.cells.group" = 20
   tic(); df.markers <- FindAllMarkers(combined.obj, verbose = T
                                       , test.use = p$"test"
                                       , only.pos = p$"only.pos"
