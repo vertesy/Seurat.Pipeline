@@ -51,8 +51,8 @@ sourceGitHub("Differential.gene.expression.Loop.R" , repo = "Seurat.Pipeline"); 
 sourceGitHub("PCA.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 sourceGitHub("Cell.cycle.scoring.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
-sourceGitHub("plot.3D.umaps.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
-sourceGitHub("plot.heatmaps.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
+sourceGitHub("Plot.3D.umaps.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
+sourceGitHub("Plot.heatmaps.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 sourceGitHub("Plot.variable.Genes.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
 # ------------------------
