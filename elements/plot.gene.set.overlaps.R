@@ -15,7 +15,6 @@ names(ls_genes) = samples.short
 try.dev.off()
 ls_genes = lapply(ls.Seurat, rownames); names(ls_genes) = samples; try.dev.off()
 
-library("UpSetR")
 gene.overlap <- fromList(ls_genes)
 
 if (length(ls_genes) < 6) {
@@ -25,7 +24,9 @@ if (length(ls_genes) < 6) {
   # plotUpset ------------------------------------------------
   # devtools::install_github("hms-dbmi/UpSetR") # too old version: install.packages("UpSetR")
 
-} else if (p$"plotUpset") {
+} else if (p$"plotUpset" & (length(ls_genes) < 12) ) {
+  library("UpSetR")
+
   # Sys.setenv('R_MAX_VSIZE'=32000000000)
   p$"n.overlaps" = 5
   upsetplot <- upset(data = gene.overlap,  sets.bar.color = "#56B4E9"
@@ -37,6 +38,8 @@ if (length(ls_genes) < 6) {
   # wplot_save_this(plotname = 'upsetplot')
   ggsave2(filename = "Overlaps.png" , plot = upsetplot)
 
+} else {
+  iprint("You need to run Gene.List.Overlap.R")
 }
 
 # barplot ------------------------------------------------
