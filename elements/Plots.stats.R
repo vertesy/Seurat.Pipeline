@@ -6,11 +6,11 @@ try.dev.off()
 
 # Setup ------------------------------------------------------------------------
 create_set_Original_OutDir()
-create_set_SubDir(ppp("01.Basic.Stats",p$"file.ext"))
+create_set_SubDir(ppp("01.Basic.Stats", p$"file.ext"))
 stopifnot(exists('meta.tags'))
 
 annot.clust <- GetClusteringRuns()
-plnames.fixed.params = names(meta.tags) # , "RNA.model" , "organoid.fixed",  "organoid",
+plnames.fixed.params <- if (exists('meta.tags')) {  names(meta.tags) } else { NULL } # , "RNA.model" , "organoid.fixed",  "organoid",
 
 plots = c(annot.clust, plnames.fixed.params)
 plot_list = list.fromNames(c(annot.clust, plnames.fixed.params))
