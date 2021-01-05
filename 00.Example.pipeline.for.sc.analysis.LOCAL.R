@@ -46,8 +46,8 @@ meta.tags <- list(
 
 "The part below will not work out of the box."
 for (i in 1:n.datasets ) {
-  ls.Seurat[[i]] <- add.meta.fraction(col.name = "percent.mito", gene.symbol.pattern = "^MT\\.|^MT-", obj = ls.Seurat[[1]])
-  ls.Seurat[[i]] <- add.meta.fraction(col.name = "percent.ribo", gene.symbol.pattern = "^RPL|^RPS", obj = ls.Seurat[[1]])
+  ls.Seurat[[i]] <- add.meta.fraction(col.name = "percent.mito", gene.symbol.pattern = "^MT\\.|^MT-", obj = ls.Seurat[[i]])
+  ls.Seurat[[i]] <- add.meta.fraction(col.name = "percent.ribo", gene.symbol.pattern = "^RPL|^RPS", obj = ls.Seurat[[i]])
 
   META = ls.Seurat[[i]]@meta.data
   ls.Seurat[[i]] <- AddMetaData(object = ls.Seurat[[i]], metadata = log10(META[, 'nCount_RNA']), col.name = 'log10.nCount_RNA')
