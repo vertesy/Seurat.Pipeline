@@ -6,6 +6,7 @@
 # try(dev.off(), silent = T)
 
 # Parameters ------------------------
+plotCellFractionsBarplots = T
 PlotRidgeplots = F
 n.CC.genes = 16
 
@@ -76,17 +77,21 @@ if (TRUE) {
 # CellFractionsBarplots ------------------------
 
 if (plotCellFractionsBarplots) {
-  pl.Fr = list(2)
-  plotname = "Fraction.of.age.and.location.per.cluster"
-  pl.Fr[[1]] = CellFractionsBarplot2(fill.by = "age", group.by = p$'res.MetaD.colname', downsample = T)
-  pl.Fr[[2]] = CellFractionsBarplot2(fill.by = "location", group.by = p$'res.MetaD.colname', downsample = T)
+  pl.Fr = list.fromNames(names(meta.tags))
+
+  # cols <- p$'res.MetaD.colname'
+  cols <- GetNamedClusteringRuns(res = p$res.analyzed.DE[1])
+  for (i in 1:l(meta.tags)) {
+    pl.Fr[[i]] <- CellFractionsBarplot2(fill.by = names(meta.tags)[i], group.by = cols, downsample = T)
+  }
+
+
+  plotname = kpp("Fraction.of", names(meta.tags)[1], "and", names(meta.tags)[2], "per.cluster")
   qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "pdf"))
 
-  plotname = "Fraction.of.samples.per.cluster"
-  CellFractionsBarplot2(fill.by = "sample", group.by = p$'res.MetaD.colname')
-  pl.Fr[[1]] = CellFractionsBarplot2(fill.by = "sample", group.by = p$'res.MetaD.colname', downsample = T)
-  pl.Fr[[2]] = NULL
-  qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "pdf"))
+  plotname = kpp("Fraction.of", names(meta.tags)[3], "and", names(meta.tags)[4], "per.cluster")
+  qqSaveGridA4(plotlist= pl.Fr, plots = 3:4, fname = ppp(plotname, "pdf"))
+
 
 }
 
