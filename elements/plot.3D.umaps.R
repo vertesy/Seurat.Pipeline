@@ -13,18 +13,34 @@ create_set_Original_OutDir()
 # Setup ------------------------
 
 combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 3)
-(categ3Dplots <- unique(c(names(tags), "Phase", GetClusteringRuns(),  GetNamedClusteringRuns() )))
 
 
 # Plot Categories ------------------------
-GetNamedClusteringRuns()
+if(!exists("meta.tags")) names(meta.tags) <- c("sample", "library", "project", "medium", "percent.mito")
+cl.categ  <- intersect(c(names(meta.tags), "Phase"), colnames(combined.obj@meta.data))
+(categ3Dplots <- unique(c(cl.categ, GetClusteringRuns(),  GetNamedClusteringRuns())))
+
 Plot3D.ListOfCategories(obj = combined.obj, cex = 1.75, ListOfCategories = categ3Dplots, annotate.by =  GetNamedClusteringRuns())
 
 
-# Plot Genes ------------------------
-genes.for.3D.plots <- union.ls(list(ClassicMarkers.plus, combined.obj@misc[[ppp('top.markers.res', p$def_res)]]))
-combined.obj <- AddGOGeneList.manual(genes = genes.for.3D.plots, GO = "genes.for.3D.plots")
-Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = genes.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
+# Plot Classic Marker Genes ------------------------
+ClassicMarkers.for.3D.plots <- union.ls(list(ClassicMarkers, ClassicMarkers))
+combined.obj <- AddGOGeneList.manual(genes = ClassicMarkers.for.3D.plots, GO = "ClassicMarkers.for.3D.plots")
+Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = ClassicMarkers.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
+
+# Plot DE Genes ------------------------
+DE.genes.for.3D.plots <- combined.obj@misc[[ppp('top.markers.res', p$"def_res")]]
+combined.obj <- AddGOGeneList.manual(genes = DE.genes.for.3D.plots, GO = "DE.genes.for.3D.plots")
+Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = DE.genes.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
+
+if (F) {
+  TAP.genes.above.q1.25.for.3D.plots = c("ATF4", "BNIP3", "DDIT4", "EGR1", "ENO1", "ENO2", "FOS", "GAPDH", "HSPA8", "IER2", "JUN", "JUNB", "LDHA", "LDHB", "MARCKSL1", "PGAM1", "PGK1", "PKM", "SAT1", "TPI1", "PPP1R15A", "DDIT3", "SQSTM1", "P4HB")
+  combined.obj <- AddGOGeneList.manual(genes = TAP.genes.above.q1.25.for.3D.plots, GO = "TAP.genes.above.q1.25.for.3D.plots")
+  Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = TAP.genes.above.q1.25.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
+
+
+
+}
 
 
 # End ------------------------
