@@ -4,7 +4,6 @@
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Load.packages.CBE.R')
 # source('https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Load.packages.CBE.R')
 
-
 # 1. Load packages ------------------------
 require(tidyverse) # graphics / utils
 require(cowplot)
@@ -32,12 +31,18 @@ try(source('https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpres
 # # try(source("~/GitHub/Packages/Seurat.multicore/Seurat3.Multicore.Load.R"));
 
 # 3. Load CBE specific function libraries ------------------------
-try(dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64"), silent = F)
-try(library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/'), silent = F)
-require("htmltools")
+if (IfExistsAndTrue("onCBE")) {
+  try(dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64"), silent = F)
+  try(library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/'), silent = F)
+  require("htmltools")
 
-# options for CBE ------------------------
-options(bitmapType = 'cairo')
+  # options for CBE ------------------------
+  options(bitmapType = 'cairo')
+
+} else {
+  print("!!! onCBE is not defined as TRUE, thus CBE specific settings are not loaded.")
+}
+
 
 
 print("Packages loaded")
