@@ -51,12 +51,13 @@ for (cr in GetClusteringRuns()) clUMAP(cr)
 # Basic stats -----------------------------------
 stats2plot <- intersect(p$"StatFeatures", colnames(combined.obj@meta.data))
 stopifnot(l(stats2plot) > 0)
+plot.scaling.f <- max(1,round(l(stats2plot)/8))
 
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'umap', features = stats2plot)
-       , filename = ppp("umap.StatMarkers", p$"file.ext"), width = hA4, height = wA4)
+       , filename = ppp("umap.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
 
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'tsne', features = stats2plot)
-       , filename = ppp("tsne.StatMarkers", p$"file.ext"), width = hA4, height = wA4)
+       , filename = ppp("tsne.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
 
 
 # Basic stat hexbinplots -----------------------------------
