@@ -15,7 +15,7 @@ names(ls_genes) = samples.short
 try.dev.off()
 ls_genes = lapply(ls.Seurat, rownames); names(ls_genes) = samples; try.dev.off()
 
-gene.overlap <- fromList(ls_genes)
+gene.overlap <- UpSetR::fromList(ls_genes)
 
 if (length(ls_genes) < 6) {
   # Wenn diagram ------------------------------------------------
@@ -45,6 +45,7 @@ if (length(ls_genes) < 6) {
 # barplot ------------------------------------------------
 rowSums(gene.overlap)
 GenesDetected <- colSums(gene.overlap)
-wbarplot(GenesDetected, incrBottMarginBy = 3, tilted_text = 15
-         , col = wcolorize(meta.tags$project, set = "rich"))
+qbarplot(GenesDetected, xlab.angle = 45)
+# wbarplot(GenesDetected, incrBottMarginBy = 3, tilted_text = 15
+#          , col = wcolorize(meta.tags$project, set = "rich"))
 

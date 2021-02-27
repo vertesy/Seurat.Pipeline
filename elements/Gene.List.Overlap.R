@@ -5,8 +5,8 @@
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
 
 # Functions ------------------------
-# try(source('~/GitHub/Packages/Seurat.utils/Jaccard.toolkit.R'))
-try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/Jaccard.toolkit.R'))
+# try(source('~/GitHub/Packages/Seurat.utils/Functions/Jaccard.toolkit.R'))
+try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/Functions/Jaccard.toolkit.R'))
 
 # source('~/Github/TheCorvinas/R/DatabaseLinke.r')
 require(MarkdownReportsDev)
@@ -29,11 +29,14 @@ PairwiseJaccardIndices <- jPairwiseJaccardIndexList(lsG = ls_genes)
 colnames(PairwiseJaccardIndices)
 
 ph.Jac.wo <- pheatmap::pheatmap(PairwiseJaccardIndices, display_numbers = T, cutree_rows = 3, cutree_cols = 3)
-wplot_save_pheatmap(ph.Jac.wo, width = 15)
+wplot_save_pheatmap(ph.Jac.wo, width = max(round(n.datasets*0.3), 8))
 
 nrGenesPerDataset <- unlapply(ls_genes, length)
-wbarplot(nrGenesPerDataset, incrBottMarginBy = 2, tilted_text = T
-         , hline = 20000, w = 14, h=7, sub = "Not actually filtered on this thr.")
+qbarplot(nrGenesPerDataset
+         , subtitle = "Not actually filtered on this thr.", hline = 20000
+         , xlab.angle = 45)
+# wbarplot(nrGenesPerDataset, incrBottMarginBy = 2, tilted_text = T
+#          , hline = 20000, w = 14, h=7, )
 
 # End ------------------------
 create_set_Original_OutDir()
