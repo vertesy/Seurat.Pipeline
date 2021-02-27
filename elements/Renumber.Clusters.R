@@ -5,7 +5,7 @@
 
 
 # Functions ------------------------
-source('~/GitHub/Packages/Seurat.utils/Cluster.Auto-naming.DE.R')
+# source('~/GitHub/Packages/Seurat.utils/Functions/Cluster.Auto-naming.DE.R')
 stopifnot(exists('p'))
 stopif(is.null(p$'OrderClsByPrCurve'),message = 'OrderClsByPrCurve not found')
 stopif(is.null(p$'res.analyzed.DE'),message = 'res.analyzed.DE not found')

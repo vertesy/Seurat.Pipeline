@@ -6,7 +6,7 @@ try.dev.off()
 
 # Setup ------------------------------------------------------------------------
 create_set_Original_OutDir()
-create_set_SubDir(ppp("01.Basic.Stats", p$"file.ext"))
+create_set_SubDir(kppu("01.Basic.Stats", p$"file.ext"))
 stopifnot(exists('meta.tags'))
 
 annot.clust <- GetClusteringRuns()

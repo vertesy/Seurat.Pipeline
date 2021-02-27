@@ -39,7 +39,7 @@ if (pairwise.scatters ) {
   plotname=ppp("Pairwise Correlation of Standardized Variance of top", topN,"genes.")
   size <- round(length(ls.Seurat)/2)+5
   try.dev.off()
-  pdf(file = "Genes standardized variance correlation across datasets.jpg",width = size, height = size)
+  pdf(file = "Genes standardized variance correlation across datasets.pdf",width = size, height = size)
   x <- pairs(ls.variance.standardized, main=plotname, upper.panel = panel.cor.pearson)
   try.dev.off()
 
