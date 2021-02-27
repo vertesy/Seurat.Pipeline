@@ -4,9 +4,96 @@
 # source('~/GitHub/Packages/Seurat.pipeline/misc/Soup.or.Cell.Stats.visualisation.R')
 try.dev.off()
 
-# Setup ------------------------------------------------------------------------
+# Functions ------------------------
+# source('~/Github/TheCorvinas/R/DatabaseLinke.r')
+require(tidyverse);  require(cowplot)
+require(MarkdownReportsDev);
+require(tictoc);
+source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R')
+try(source("~/GitHub/Packages/ggExpressDev/ggExpress.functions.R"));
 
-Soup.or.Cell.Stats.visualisation.R
+# Setup ------------------------------------------------------------------------
+OutDir <- OutDirOrig <- "~/Dropbox/Abel.IMBA/AnalysisD/Abel/SEO/Soup.or.Cell.Stats/SEO/"
+setup_MarkdownReports(OutDir = OutDir, scriptname = 'Soup.or.Cell.Stats.visualisation.R')
+oo()
+
+
+
+
+
+# Read in ------------------------
+
+InputProjectDir = "/Volumes/SNP.deconvolution/abel.202102.vcf/SEO.R10015.124719/"
+path.SubDirs <- list.dirs(path = InputProjectDir)[-1]
+for (i in 1:l(path.SubDirs)) {
+
+  # Read in ------------------------
+  Subdir.path <- path.SubDirs[i]
+  SubDir <- basename(Subdir.path)
+
+  create_set_SubDir(basename(Subdir.path))
+  file.AR <- list.files(path = Subdir.path, pattern = "ambient_rna")
+  Ambient <-  read.simple.vec(kpps(Subdir.path,file.AR))
+  Ambient.RNA <- iround(as.numeric(
+    str_split_fixed(
+      str_split_fixed(Ambient, pattern = "ambient RNA estimated as ", n=2)[2]
+      , pattern = '%', n=2)[1]
+    ))
+  qbarplot(Ambient.RNA, ylim = c(0,100), label.pos = "out",  label = TRUE, ylab ="% Ambient RNA estimated")
+
+  "Manually created file containing the names of the lines is necessary: lines.txt, one name per line."
+  file.lines <- list.files(path = Subdir.path, pattern = "lines.txt") ;
+  cell.lines <-  read.simple.vec(kpps(Subdir.path,file.lines))
+  nr.lines <- length(cell.lines)
+  orig.IDs <- 0:(nr.lines-1)
+
+  file.assignments <- list.files(path = Subdir.path, pattern = "clusters.tsv")
+  df.assignments <- readr::read_tsv(file = (kpps(Subdir.path,file.assignments)))
+
+  # Parse metadata ------------------------
+  df.assignments$assignment.named <- translate(vec = df.assignments$assignment
+                                               , oldvalues = orig.IDs
+                                               , newvalues = ppp(orig.IDs, cell.lines))
+  # Basic stats ------------------------
+  status.of.assignment <- table(df.assignments$status)
+  qpie(status.of.assignment)
+
+  {
+    cell.line.assignment <- table(df.assignments$assignment.named)
+    qbarplot(cell.line.assignment, subtitle = SubDir
+             , label = TRUE, label.pos = "out", xlab.angle = 45)
+  }
+
+  {
+    idx.small.fraction <- (cell.line.assignment/sum(cell.line.assignment) ) < 0.02
+    cell.line.assignment.filt <- cell.line.assignment[which(!idx.small.fraction)]
+    qpie(cell.line.assignment.filt, NamedSlices = T, subtitle = paste(SubDir, "| Fractions < 2% are removed"))
+  }
+
+  {
+    df.clean <- df.assignments %>%
+      filter(status %in% 'singlet') %>%
+      select(c(starts_with("cluster"), starts_with("assignment.named")))
+
+    max1 <- rowMax(df.clean[,1:nr.lines])
+    max2 <- apply(df.clean[,1:nr.lines], 1, MaxN, 2)
+
+    max1.clipped <- clip.values(max1, thr = -500, high = F)
+
+    assignment.Q <- tibble(
+      "Ratio.2nd.Max" = (-max2 / -max1),
+      "-log.likelihood" = max1.clipped,
+        "Line" = df.clean$assignment.named
+    )
+    assignment.quality.scatterplots <- qscatter(assignment.Q
+                                                , facet.by = 'Line', ncol = nr.lines
+                                                , cols = rgb(0,.75,0,.5), size = 1,) + geom_density_2d()
+    qqSave(assignment.quality.scatterplots, w = nr.lines*4, h = 4, ext = 'jpg')
+  }
+  create_set_Original_OutDir()
+
+
+}
 
 # Make plots ------------------------------------------------------------------------
 
