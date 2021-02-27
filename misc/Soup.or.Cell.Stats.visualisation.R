@@ -13,7 +13,7 @@ source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R')
 try(source("~/GitHub/Packages/ggExpressDev/ggExpress.functions.R"));
 
 # Setup ------------------------------------------------------------------------
-OutDir <- OutDirOrig <- "~/Dropbox/Abel.IMBA/AnalysisD/Abel/SEO/Soup.or.Cell.Stats/HCA/s2/"
+OutDir <- OutDirOrig <- "~/Dropbox/Abel.IMBA/AnalysisD/Abel/SEO/SNP.demux.Soup.or.Cell.Stats/HCA/s2/"
 setup_MarkdownReports(OutDir = OutDir, scriptname = 'Soup.or.Cell.Stats.visualisation.R')
 
 # Read in ------------------------
