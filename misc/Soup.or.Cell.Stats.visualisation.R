@@ -9,8 +9,10 @@ try.dev.off()
 require(tidyverse);  require(cowplot)
 require(MarkdownReportsDev);
 require(tictoc);
-source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R')
-try(source("~/GitHub/Packages/ggExpressDev/ggExpress.functions.R"));
+# source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R')
+source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
+# try(source("~/GitHub/Packages/ggExpressDev/ggExpress.functions.R"));
+try(source("https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpress.functions.R"), silent = T)
 
 # Setup ------------------------------------------------------------------------
 OutDir <- OutDirOrig <- "~/Dropbox/Abel.IMBA/AnalysisD/Abel/SEO/SNP.demux.Soup.or.Cell.Stats/HCA/s2/"
