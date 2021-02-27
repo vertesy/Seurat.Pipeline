@@ -6,6 +6,7 @@
 
 # Functions ------------------------
 library(dplyr)
+library(cowplot)
 
 # Parameters ------------------------
 # is.subclustering = p$"subclustering"
@@ -32,7 +33,7 @@ ParentDirDE <- OutDir
 res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
-i = 1
+i = 2
 for (i in 1:length(p$'res.analyzed.DE')) {
 
   res = p$'res.analyzed.DE'[i]
@@ -72,7 +73,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
                                       , min.cells.group = p$"min.cells.group"
                                       , min.cells.feature = p$"min.cells.feature"
                                       , logfc.threshold = p$"logfc.threshold"); toc();
-  df.markers <- Add.DE.combined.score(df.markers)
+  df.markers <- Add.DE.combined.score(df.markers, colLFC = 'avg_logFC')
 
   combined.obj@misc$'df.markers'[[ppp('res',res)]] <- df.markers
   fname <- ppp('df.markers',res,'tsv')
