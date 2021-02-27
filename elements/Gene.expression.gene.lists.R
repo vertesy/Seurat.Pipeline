@@ -11,11 +11,15 @@ create_set_OutDir(OutDirOrig,"Gene.expression")
 
 # Plot QC gene sets -----------------------------------
 
-Highest.Expressed.Genes = names(head(sort(combined.obj@misc$expr.q90, decreasing = T), n = 16))
-multiFeaturePlot.A4(list.of.genes = Highest.Expressed.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
+PlotTopGenes(obj = combined.obj)
 
-AutoNaming.Genes = p$Cluster.Labels.Hybrid.Genes
-multiFeaturePlot.A4(list.of.genes = AutoNaming.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
+# Highest.Expressed.Genes = names(head(sort(combined.obj@misc$expr.q90, decreasing = T), n = 16))
+# multiFeaturePlot.A4(list.of.genes = Highest.Expressed.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
+
+if (l(p$Cluster.Labels.Hybrid.Genes)) {
+  AutoNaming.Genes = gl$Cluster.Labels.Hybrid.Genes
+  multiFeaturePlot.A4(list.of.genes = AutoNaming.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
+} else { iprint("p$Cluster.Labels.Hybrid.Genes IS NOT FOUND.")}
 
 
 # ClassicMarkers.found <- check.genes(obj = combined.obj, list.of.genes = ClassicMarkers)
