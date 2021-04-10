@@ -7,6 +7,8 @@ library(magrittr)
 # Setup ------------------------
 create_set_OutDir(OutDirOrig, "STRING.db.auto.cluster.annotation")
 
+
+
 if (F) {
   # install.packages("BiocManager")
   if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -22,7 +24,10 @@ p$'Ident.for.STRING' <- p$'Ident.for.DEG'
 # gsub(p$'Ident.for.DEG', pattern = '[0-9]\\.[0-9]'
 #                               , replacement = 'STRING.res', perl = T)
 
-GOident = ppp(GetClusteringRuns(res = p$def_res), 'GO.process')
+xslotname.df.res <- stringr::str_extract(string =p$'Ident.for.DEG', pattern ="res\\.[0-9]\\.[0-9]")
+
+rezX <- as.numeric(substr(xslotname.df.res, 5,7))
+GOident = ppp(GetClusteringRuns(res = rezX), 'GO.process')
 
 # STRING database ----------------------
 Idents(combined.obj) <- p$'Ident.for.DEG'
@@ -49,7 +54,7 @@ for (i in clzUsed) { print(i)
 
   # table(DEG.top.genes.Padj[[i]]$cluster)
   DEG.top.genes.Padj[[i]] <-
-    combined.obj@misc$df.markers[[p$'def_res']] %>%
+    combined.obj@misc$df.markers[[xslotname.df.res]] %>%
     # rownames_to_column('gene') %>%
     arrange(p_val_adj) %>%
     filter(cluster == cl) %>%
@@ -81,34 +86,37 @@ for (i in clzUsed) { print(i)
   enrichmentGO <- string_db$get_enrichment(string_ids, category = "Process") # , methodMT =  "FDR", iea = TRUE
   enrichmentGO <- enrichmentGO[order(  enrichmentGO$'p_value'),]
   specific.GO.terms <- which(enrichmentGO$number_of_genes_in_background < p$'STRING.max.genes')
+  if (!l(specific.GO.terms)) specific.GO.terms <- enrichmentGO # use non-specific if no specifcs are found
 
-  filter.specific.GO.terms = T #
-  if (filter.specific.GO.terms) {
+  filter.meaningless.GO.terms = T #
+  if (filter.meaningless.GO.terms) {
     idx.exclude <- which(enrichmentGO$description %in% GO.terms.removed)
     if (l(idx.exclude) > 0) enrichmentGO <- enrichmentGO[-idx.exclude,]
   }
 
   clnames.GO[cl.char] <-
     if (nrow(enrichmentGO)) {
-      if (l(specific.GO.terms)) {  enrichmentGO$description[specific.GO.terms][1]
-      } else {                     enrichmentGO$description[1] }
+      enrichmentGO$description[specific.GO.terms][1]
     } else {ppp('No Enrichment', i)} # if
 
   (clnames.GO[cl.char] <- ppd(clnames.GO[cl.char],l(DEG.top.genes.Padj[[i]])))
-}
+} # for
 # write_clip(enrichmentGO$description[specific.GO.terms])
 
 
 if (p$"getSTRINGlinks") write.simple.tsv(sort.natural(string_link))
-clnames.GO <- ppp(v.clusters,clnames.GO)
+v.clusters.sorted <- sort(v.clusters)
+clnames.GO <- ppp(v.clusters.sorted,clnames.GO)
 is(Idents(combined.obj))
-symdiff(Idents(combined.obj),  v.clusters)
+symdiff(Idents(combined.obj),  v.clusters.sorted)
 
 
 (Ident.GO <- translate(vec = as.character(combined.obj@meta.data[, p$'Ident.for.DEG'])
-                       , oldvalues = as.character(v.clusters), newvalues = clnames.GO))
+                       , oldvalues = as.character(v.clusters.sorted), newvalues = clnames.GO))
 combined.obj[[GOident]] <- Ident.GO
-clUMAP(ident = GOident , sub = "nr. of genes provided to STRING after dash")
+clUMAP(ident = GOident , sub = "nr. of genes provided to STRING after dash", h=15)
+
+plot3D.umap(category = p$'Ident.for.DEG', AutoAnnotBy = GOident)
 say()
 
 # # Manual annotation ------------------------------------------------
