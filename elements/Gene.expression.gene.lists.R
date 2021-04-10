@@ -16,14 +16,14 @@ PlotTopGenes(obj = combined.obj)
 # Highest.Expressed.Genes = names(head(sort(combined.obj@misc$expr.q90, decreasing = T), n = 16))
 # multiFeaturePlot.A4(list.of.genes = Highest.Expressed.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
 
-if (l(p$Cluster.Labels.Hybrid.Genes)) {
-  AutoNaming.Genes = gl$Cluster.Labels.Hybrid.Genes
+if (l(genes.ls$'Cluster.Labels.Hybrid.Genes')) {
+  AutoNaming.Genes = genes.ls$'Cluster.Labels.Hybrid.Genes'
   multiFeaturePlot.A4(list.of.genes = AutoNaming.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
-} else { iprint("p$Cluster.Labels.Hybrid.Genes IS NOT FOUND.")}
+} else { iprint("genes.ls$Cluster.Labels.Hybrid.Genes IS NOT FOUND.")}
 
 
 # ClassicMarkers.found <- check.genes(obj = combined.obj, list.of.genes = ClassicMarkers)
-ClassicMarkers.plus = c(ClassicMarkers, LargeSubsetMarkers, QC.markers)
+ClassicMarkers.plus = c(genes.ls$'ClassicMarkers', genes.ls$'LargeSubsetMarkers', genes.ls$'QC.markers')
 multiFeaturePlot.A4(list.of.genes = ClassicMarkers.plus, obj = combined.obj, subdir =T)
 # multiFeaturePlot.A4(list.of.genes = ClassicMarkers, obj = combined.obj, plot.reduction = 'tsne', subdir =T)
 
