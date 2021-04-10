@@ -5,7 +5,7 @@
 
 # Functions ------------------------
 library(plotly)
-source('~/GitHub/Packages/Seurat.utils/plotting.dim.reduction.3D.R')
+source('~/GitHub/Packages/Seurat.utils/Functions/Plotting.dim.reduction.3D.R')
 create_set_Original_OutDir()
 
 
@@ -24,7 +24,7 @@ Plot3D.ListOfCategories(obj = combined.obj, cex = 1.75, ListOfCategories = categ
 
 
 # Plot Classic Marker Genes ------------------------
-ClassicMarkers.for.3D.plots <- union.ls(list(ClassicMarkers, ClassicMarkers))
+ClassicMarkers.for.3D.plots <- union.ls(list(genes.ls$'ClassicMarkers'))
 combined.obj <- AddGOGeneList.manual(genes = ClassicMarkers.for.3D.plots, GO = "ClassicMarkers.for.3D.plots")
 Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = ClassicMarkers.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
 
@@ -37,9 +37,6 @@ if (F) {
   TAP.genes.above.q1.25.for.3D.plots = c("ATF4", "BNIP3", "DDIT4", "EGR1", "ENO1", "ENO2", "FOS", "GAPDH", "HSPA8", "IER2", "JUN", "JUNB", "LDHA", "LDHB", "MARCKSL1", "PGAM1", "PGK1", "PKM", "SAT1", "TPI1", "PPP1R15A", "DDIT3", "SQSTM1", "P4HB")
   combined.obj <- AddGOGeneList.manual(genes = TAP.genes.above.q1.25.for.3D.plots, GO = "TAP.genes.above.q1.25.for.3D.plots")
   Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = TAP.genes.above.q1.25.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
-
-
-
 }
 
 
