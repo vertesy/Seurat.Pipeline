@@ -2,7 +2,8 @@
 # Dowsample.Seurat.Objects.R
 ######################################################################
 # source("~/GitHub/Packages/Seurat.pipeline/Dowsample.Seurat.Objects.R")
-# rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Dowsample.Seurat.Objects.R")
+
 
 # Metadata ------------------------
 # Parameters ------------------------

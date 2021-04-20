@@ -1,8 +1,11 @@
 ######################################################################
-# Filtering.plots.3D.R
+# Filtering.plots.3D.solo.R
 ######################################################################
-# source("~/GitHub/Packages/Seurat.pipeline/elements/Filtering.plots.3D.R")
+# source("~/GitHub/Packages/Seurat.pipeline/elements/Filtering.plots.3D.solo.R")
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Filtering.plots.3D.solo.R")
 # try(dev.off(), silent = T)
+
+
 
 # Setup ------------------------
 create_set_OutDir(OutDirOrig, "Filtering.plots3D")

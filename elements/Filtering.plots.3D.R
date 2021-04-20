@@ -2,6 +2,7 @@
 # Filtering.plots.3D.R
 ######################################################################
 # source("~/GitHub/Packages/Seurat.pipeline/elements/Filtering.plots.3D.R")
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Filtering.plots.3D.R")
 # try(dev.off(), silent = T)
 
 # Setup ------------------------

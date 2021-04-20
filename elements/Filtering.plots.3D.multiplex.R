@@ -1,7 +1,8 @@
 ######################################################################
-# Filtering.plots.3D.R
+# Filtering.plots.3D.multiplex.R
 ######################################################################
-# source("~/GitHub/Packages/Seurat.pipeline/elements/Filtering.plots.3D.R")
+# source("~/GitHub/Packages/Seurat.pipeline/elements/Filtering.plots.3D.multiplex.R")
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Filtering.plots.3D.multiplex.R")
 # try(dev.off(), silent = T)
 
 # Setup ------------------------

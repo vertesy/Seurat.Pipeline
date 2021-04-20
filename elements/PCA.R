@@ -2,6 +2,7 @@
 # Principal Components PCA
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/PCA.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/PCA.R")
 # try(dev.off(), silent = T)
 
 # Functions ------------------------

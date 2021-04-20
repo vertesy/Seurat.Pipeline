@@ -2,6 +2,7 @@
 # Plot basic stats
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Plots.stats.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Plots.stats.R")
 try.dev.off()
 
 # Setup ------------------------------------------------------------------------

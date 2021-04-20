@@ -2,6 +2,7 @@
 # Renumber.Clusters.R
 ######################################################################
 # source("~/GitHub/Packages/Seurat.pipeline/elements/Renumber.Clusters.R")
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Renumber.Clusters.R")
 
 
 # Functions ------------------------

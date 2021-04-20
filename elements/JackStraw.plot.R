@@ -2,7 +2,9 @@
 # JackStraw.plot.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/JackStraw.plot.R') # takes very long
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/JackStraw.plot.R")
 try.dev.off()
+
 if (F) source('~/GitHub/Packages/Seurat.pipeline/elements/JackStraw.plot.R') # takes very long
 
 # ------------------------

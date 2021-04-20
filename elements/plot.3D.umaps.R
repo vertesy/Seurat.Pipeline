@@ -2,6 +2,7 @@
 # plot.3D.umaps.R
 ######################################################################
 # source("~/GitHub/Packages/Seurat.pipeline/elements/plot.3D.umaps.R")
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Plot.3D.umaps.R")
 
 # Functions ------------------------
 library(plotly)
@@ -43,3 +44,13 @@ if (F) {
 # End ------------------------
 combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 2)
 OutDir = getwd()
+
+
+if (F) {
+  Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = c('POLR2A', 'DCN', 'KAZN'), annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
+
+
+
+
+
+}

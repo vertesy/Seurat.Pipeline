@@ -2,6 +2,7 @@
 # Reduce.Seurat.object.size.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Reduce.Seurat.object.size.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Reduce.Seurat.object.size.R")
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
 
 # Functions ------------------------

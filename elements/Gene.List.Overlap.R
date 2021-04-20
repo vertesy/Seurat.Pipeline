@@ -2,6 +2,7 @@
 # Gene.List.Overlap.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Gene.List.Overlap.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Gene.List.Overlap.R")
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
 
 # Functions ------------------------

@@ -2,6 +2,7 @@
 # Plot.heatmaps.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Plot.heatmaps.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Plot.heatmaps.R")
 # try(dev.off(), silent = T)
 
 # Functions ------------------------

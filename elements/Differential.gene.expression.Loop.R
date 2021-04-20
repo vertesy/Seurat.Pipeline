@@ -2,6 +2,8 @@
 # Differential.gene.expression.Loop.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Differential.gene.expression.Loop.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Differential.gene.expression.Loop.R")
+
 # try(dev.off(), silent = T)
 
 # Functions ------------------------

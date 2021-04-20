@@ -2,6 +2,7 @@
 # Plot.variable.Genes.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Plot.variable.Genes.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Plot.variable.Genes.R")
 
 # Setup ------------------------------------------------------------------------
 ls.VarGenes.top20 = list.fromNames(names(ls.Seurat))

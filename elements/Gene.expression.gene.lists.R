@@ -2,6 +2,7 @@
 # Gene.expression.gene.lists.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Gene.expression.gene.lists.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Gene.expression.gene.lists.R")
 
 
 # create_set_SubDir("Gene.expression")
