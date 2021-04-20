@@ -34,7 +34,7 @@ res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
 i = 2
-for (i in 1:length(p$'res.analyzed.DE')) {
+for (i in 2:length(p$'res.analyzed.DE')) {
 
   res = p$'res.analyzed.DE'[i]
   create_set_OutDir(p0(ParentDirDE,ppp('res',res)))
@@ -73,7 +73,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
                                       , min.cells.group = p$"min.cells.group"
                                       , min.cells.feature = p$"min.cells.feature"
                                       , logfc.threshold = p$"logfc.threshold"); toc();
-  df.markers <- Add.DE.combined.score(df.markers, colLFC = 'avg_logFC')
+  df.markers <- Add.DE.combined.score(df.markers) # , colLFC = 'avg_log2FC'
 
   combined.obj@misc$'df.markers'[[ppp('res',res)]] <- df.markers
   fname <- ppp('df.markers',res,'tsv')
