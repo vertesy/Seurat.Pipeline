@@ -36,7 +36,7 @@ res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
 i = 2
-for (i in 2:length(p$'res.analyzed.DE')) {
+for (i in 1:length(p$'res.analyzed.DE')) {
 
   res = p$'res.analyzed.DE'[i]
   create_set_OutDir(p0(ParentDirDE,ppp('res',res)))
