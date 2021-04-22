@@ -105,7 +105,7 @@ if (useCCA) {
 DefaultAssay(combined.obj) <- "integrated"
 
 ## Perform integrated analysis --------------
-combined.obj <- Calcq90Expression(obj = combined.obj)
+combined.obj <- calc.q90.Expression.and.set.all.genes(obj = combined.obj)
 # all.genes <- obj@misc$all.genes
 
 # Scale / z-score norm ------------------------
