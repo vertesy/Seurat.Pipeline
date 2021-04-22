@@ -8,7 +8,13 @@ try.dev.off()
 # Setup ------------------------------------------------------------------------
 create_set_Original_OutDir()
 create_set_SubDir(kppu("01.Basic.Stats", p$"file.ext"))
-stopifnot(exists('meta.tags'))
+if( !exists('meta.tags') )  {
+  meta.tags <- combined.obj@misc@meta.tags
+  if (is.null(meta.tags)) {
+    dummy <- intersect(c("sample", "library", "project", "medium", "percent.mito"), colnames(combined.obj@meta.data))
+    list.fromNames(name_vec = dummy)
+  }
+}
 
 annot.clust <- GetClusteringRuns()
 plnames.fixed.params <- if (exists('meta.tags')) {  names(meta.tags) } else { NULL } # , "RNA.model" , "organoid.fixed",  "organoid",
@@ -52,7 +58,9 @@ for (cr in GetClusteringRuns()) clUMAP(cr)
 # Basic stats -----------------------------------
 stats2plot <- intersect(p$"StatFeatures", colnames(combined.obj@meta.data))
 stopifnot(l(stats2plot) > 0)
-plot.scaling.f <- max(1,round(l(stats2plot)/8))
+scaling.adj <- if (ncol(combined.obj) > 40000 ) 2 else 1
+plot.scaling.f <- max(1,round(l(stats2plot)/8)) * scaling.adj
+
 
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'umap', features = stats2plot)
        , filename = ppp("umap.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
