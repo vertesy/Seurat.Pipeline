@@ -137,7 +137,15 @@ if (TRUE) { isave.RDS(object = combined.obj, inOutDir = T) } # Add a parameter l
 memory.biggest.objects()
 
 
+# ContinuePreviousAnalysis ------------------------
+if (FALSE) {
+  rdsDir = "~/path/to/_RDS/"
+  combined.obj <- read_rds(kpps(rdsDir, 'combined.obj__2021.04.22_14.10.Rds.gz'))
 
+  recall.parameters()
+  recall.all.genes()
+  recall.meta.tags.n.datasets()
+}
 
 # Not used, kept for reference ------------------------
 
