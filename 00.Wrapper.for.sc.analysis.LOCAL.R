@@ -20,7 +20,6 @@ OutDir = "~/Dropbox/Abel.IMBA/AnalysisD/"
 setup_MarkdownReports(OutDir = OutDir, scriptname = "My.analysis.R")
 OutDirOrig = OutDir
 
-# Metadata ------------------------
 
 # Parameters ------------------------
 source('~/GitHub/Packages/Seurat.pipeline/Parameters.example.R')
@@ -30,23 +29,65 @@ source('~/GitHub/Packages/Seurat.pipeline/Gene.Lists.Example.R')
 # sourceGitHub("Gene.Lists.Example.R" , repo = "Seurat.Pipeline", folder = ""); create_set_Original_OutDir()
 
 # Read In ------------------------
+if (!MseqTabelExists) Convert10Xfolders(InputDir)
+ls.Seurat <- LoadAllSeurats(InputDir, file.pattern =  "*.Rds")
+(samples <- names(ls.Seurat))
+ls.input <- ls.VarGenes <- list.fromNames(samples)
+(n.datasets = length(ls.Seurat))
+
+
+# meta.tags ------------------------
+# Adjust this to each dataset
+meta.tags <- list(
+  'library' = samples,
+  'project' = stringr::str_split_fixed(string = samples, pattern =  '\\.', n = 2)[,1],
+  'sample' = stringr::str_split_fixed(string = samples, pattern =  '\\.', n = 3)[,2]
+)
+lapply(meta.tags, unique)
 
 # QC ------------------------
 
 # Filtering ------------------------
-
+PlotFilters(ls.obj = ls.Seurat)
 source('~/GitHub/Packages/Seurat.pipeline/elements/Filtering.plots.3D.R'); create_set_Original_OutDir()
 # sourceGitHub("Filtering.plots.3D.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
-# ------------------------
+# Gene set comparisons ------------------------
 source('~/GitHub/Packages/Seurat.pipeline/elements/Plot.gene.set.overlaps.R'); create_set_Original_OutDir()
 # sourceGitHub("Plot.gene.set.overlaps.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
 source('~/GitHub/Packages/Seurat.pipeline/elements/Gene.List.Overlap.R'); create_set_Original_OutDir()
 # sourceGitHub("Gene.List.Overlap.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
-source('~/GitHub/Packages/Seurat.pipeline/elements/Dowsample.Seurat.Objects.R'); create_set_Original_OutDir()
-# sourceGitHub("Dowsample.Seurat.Objects.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
+# Downsample individual datasets if needed ------------------------
+if (FALSE) {
+  source('~/GitHub/Packages/Seurat.pipeline/elements/Dowsample.Seurat.Objects.R'); create_set_Original_OutDir()
+  # sourceGitHub("Dowsample.Seurat.Objects.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
+}
+
+# Integrate ------------------------
+tic(); anchors <- FindIntegrationAnchors(object.list = ls.Seurat, dims = 1:p$'n.CC'); toc(); say();
+isave.RDS(anchors); isave.RDS(ls.Seurat)
+tic(); combined.obj <- IntegrateData(anchorset = anchors, dims = 1:p$'n.CC', features.to.integrate = features.2.integrate); toc(); say()
+
+# Save meta.data ------------------------
+combined.obj <- calc.q90.Expression.and.set.all.genes(obj = combined.obj)  # Sets combined.obj@misc$'all.genes' and 'all.genes' variables.
+combined.obj@misc$'n.datasets'  <- n.datasets
+combined.obj@misc$'meta.tags'   <- meta.tags
+combined.obj@misc$'p'           <- p
+
+isave.RDS(combined.obj, inOutDir = T)
+
+# Clustering & co ------------------------
+DefaultAssay(combined.obj) <- "integrated"
+tic(); combined.obj <- ScaleData(combined.obj, verbose = T, vars.to.regress = p$'variables.2.regress'); toc()
+tic(); combined.obj <- RunPCA(combined.obj, npcs = p$'n.PC', verbose = T); toc()
+tic(); combined.obj <- SetupReductionsNtoKdimensions(obj = combined.obj, nPCs = p$'n.PC', dimensions = 3:2, reduction = "umap"); toc()
+tic(); combined.obj <- FindNeighbors(combined.obj, reduction = "pca", dims = 1:p$'n.PC'); toc()
+tic(); combined.obj <- FindClusters(combined.obj, resolution = p$'snn_res'); toc()
+isave.RDS(combined.obj, inOutDir = T)
+tic(); combined.obj <- RunTSNE(combined.obj, reduction = "pca", dims = 1:p$'n.PC', method = "FIt-SNE"); toc() # https://www.rdocumentation.org/packages/Seurat/versions/4.0.1/topics/RunTSNE
+
 
 
 # Basic plots ------------------------
@@ -60,6 +101,8 @@ source('~/GitHub/Packages/Seurat.pipeline/elements/Gene.expression.gene.lists.R'
 # Further calculations ------------------------
 
 # Renumber clusters along a UMAP coordinate
+# 'You need to manually redefine p$"Reorder.Dim".  -1 means right to left aling umap dimension 1.'
+p$"Reorder.Dim" <- 1
 source('~/GitHub/Packages/Seurat.pipeline/elements/Renumber.Clusters.R'); create_set_Original_OutDir()
 # sourceGitHub("Renumber.Clusters.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
@@ -90,7 +133,8 @@ source('~/GitHub/Packages/Seurat.pipeline/elements/Plot.variable.Genes.R'); crea
 
 
 # End ------------------------
-
+if (TRUE) { isave.RDS(object = combined.obj, inOutDir = T) } # Add a parameter list to a Seurat object's misc slot # seuSaveRds(object = combined.obj, use_Original_OutDir = T)
+memory.biggest.objects()
 
 
 
