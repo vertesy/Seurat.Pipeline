@@ -102,6 +102,20 @@ for (i in 1:length(p$'res.analyzed.DE')) {
       combined.obj <- AutoLabel.KnownMarkers(KnownMarkers = p$"Cluster.Labels.Hybrid.Genes", res = res)
       clUMAP(ident = ppp("cl.names.KnownMarkers",res))
   }
+
+  plot.av.enrichment.hist = T
+  if (plot.av.enrichment.hist) {
+    df.markers.tbl$cluster <- as.tibble(df.markers)
+    df.markers.tbl$cluster <- as.character(df.markers.tbl$cluster)
+    p.deg.hist <- gghistogram(df.markers.tbl, x = "avg_log2FC",
+                # add = "mean",
+                rug = TRUE,
+                color = "cluster", fill = "cluster",facet.by = 'cluster', xlim = c(0,3)
+                # palette = c("#00AFBB", "#E7B800")
+    ) + geom_vline(xintercept = 1)
+    qqSave(p.deg.hist, w = 15, h = 15, title = ppp("Enrichment log2FC per cluster",res))
+
+  }
 } # for resolutions
 write.simple.xlsx(named_list = df.markers.all )
 p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
