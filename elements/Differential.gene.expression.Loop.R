@@ -105,7 +105,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
   plot.av.enrichment.hist = T
   if (plot.av.enrichment.hist) {
-    df.markers.tbl$cluster <- as.tibble(df.markers)
+    df.markers.tbl <- as.tibble(df.markers)
     df.markers.tbl$cluster <- as.character(df.markers.tbl$cluster)
     p.deg.hist <- gghistogram(df.markers.tbl, x = "avg_log2FC",
                 # add = "mean",
