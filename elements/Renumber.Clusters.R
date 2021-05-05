@@ -26,18 +26,20 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
   combined.obj <- AutoNumber.by.UMAP(obj = combined.obj, dimension = abs(p$"Reorder.Dim"), reduction = "umap", swap = (p$"Reorder.Dim" < 0), res = res.full)
   identity.used <- ppp(res.full, "ordered")
-  umap.snn_res.X.ordered <- DimPlot.ClusterNames(ident = identity.used)
-  qqSave(ggobj = umap.snn_res.X.ordered, page = 'A5l'
-         , title = ppp("umap", identity.used), ext = 'png')
-
+  # umap.snn_res.X.ordered <- DimPlot.ClusterNames(ident = identity.used)
+  # qqSave(ggobj = umap.snn_res.X.ordered, page = 'A5l'
+  #        , title = ppp("umap", identity.used), ext = 'png')
+  clUMAP(identity.used)
+  ", raster = F, pt.size = .1"
 
   # AutoNumber.by.PrinCurve ------------------------
   if (p$'OrderClsByPrCurve') {
     combined.obj <- AutoNumber.by.PrinCurve(obj = combined.obj, dimension = 1:2, reduction = "umap", plotit = T, swap = (p$"Reorder.Dim" < 0), res = res.full)
     identity.used <- ppp(res.full, "prin.curve")
-    umap.snn_res.X.prin.curve <- DimPlot.ClusterNames(ident = identity.used)
-    qqSave(umap.snn_res.X.prin.curve, page = 'A5l'
-           , plotname = ppp("umap", identity.used), ext = 'png')
+    # umap.snn_res.X.prin.curve <- DimPlot.ClusterNames(ident = identity.used)
+    # qqSave(umap.snn_res.X.prin.curve, page = 'A5l'
+    #        , plotname = ppp("umap", identity.used), ext = 'png')
+    clUMAP(identity.used)
   }
 
 
