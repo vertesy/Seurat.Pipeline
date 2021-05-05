@@ -60,7 +60,7 @@ for (i in clzUsed) { print(i)
     # rownames_to_column('gene') %>%
     arrange(p_val_adj) %>%
     filter(cluster == cl) %>%
-    filter(avg_logFC > 0.5) %>%     # which means at least 2 fold enriched (e logN()s)
+    filter(avg_log2FC > 0.5) %>%     # which means at least 2 fold enriched (e logN()s)
     filter(p_val_adj < 0.05) %>%
     head(n = p$'STRING.nr.genes') %>%
     pull("gene" )
