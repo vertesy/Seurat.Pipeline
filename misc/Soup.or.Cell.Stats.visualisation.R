@@ -7,12 +7,15 @@ try.dev.off()
 # Functions ------------------------
 # source('~/Github/TheCorvinas/R/DatabaseLinke.r')
 require(tidyverse);  require(cowplot)
-require(MarkdownReportsDev);
+require(MarkdownReports);
 require(tictoc);
 # source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R')
-source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
-# try(source("~/GitHub/Packages/ggExpressDev/ggExpress.functions.R"));
-try(source("https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpress.functions.R"), silent = T)
+require(CodeAndRoll2)
+require(Stringendo)
+require(ReadWriter)
+# source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
+# require(ggExpress);
+require(ggExpress)
 
 # Setup ------------------------------------------------------------------------
 OutDir <- OutDirOrig <- "~/Dropbox/Abel.IMBA/AnalysisD/Abel/SEO/SNP.demux.Soup.or.Cell.Stats/HCA/s2/"
