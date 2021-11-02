@@ -10,7 +10,7 @@
 try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/Functions/Jaccard.toolkit.R'))
 
 # source('~/Github/TheCorvinas/R/DatabaseLinke.r')
-require(MarkdownReportsDev)
+require(MarkdownReports)
 
 # Setup ------------------------
 # OutDir = "/Volumes/abel/cbehome/Dropbox/Abel.IMBA/AnalysisD/Abel/SEO2/INTEGR~1/Gene.List.Overlap"

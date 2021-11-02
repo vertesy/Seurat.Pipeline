@@ -6,7 +6,7 @@
 # try(dev.off(), silent = T)
 
 # Functions ------------------------
-# require(MarkdownReportsDev)
+# require(MarkdownReports)
 
 # Setup ------------------------
 create_set_OutDir(OutDirOrig)

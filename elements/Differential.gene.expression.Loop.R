@@ -48,7 +48,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
     } else if (p$"cl.annotation"  == "simple") {    GetClusteringRuns(res = res)
     } else {print("not found")}
 
-  stopifnot(p$'Ident.for.DEG' %in%  names(combined.obj@meta.data))
+  stopifnot(p$'Ident.for.DEG' %in% names(combined.obj@meta.data))
   Idents(combined.obj) <- p$'Ident.for.DEG'
 
   # Find DEG ------------------------------------
@@ -85,9 +85,6 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   clUMAP(ident = p$'Ident.for.DEG')
   PlotTopGenesPerCluster(obj = combined.obj, cl_res = res, nrGenes = p$'n.markers', order_by = p$"DEG.ranking"
                          , df_markers = combined.obj@misc$"df.markers"[[paste0("res.",res)]] )
-
-
-
   create_set_OutDir(ParentDirDE)
 
   if (p$"Cluster.Labels.Automatic") {

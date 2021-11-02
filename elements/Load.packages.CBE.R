@@ -7,7 +7,7 @@
 # 1. Load packages ------------------------
 require(tidyverse) # graphics / utils
 require(cowplot)
-require(MarkdownReportsDev)
+require(MarkdownReports)
 require(colorout)
 
 require(Seurat)
@@ -19,12 +19,18 @@ require(tictoc)
 # require(schex)
 
 # 2. Load custom function libraries ------------------------
-try(source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R'),silent = F)
-# try(source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R'))
+try(require(CodeAndRoll2)
+require(Stringendo)
+require(ReadWriter)
+# source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R'),silent = F)
+# require(CodeAndRoll2)
+require(Stringendo)
+require(ReadWriter)
+# source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
 try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/00.Load.Seurat.Utils.WEB.R'), silent =   T)
 # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.WEB.R"));
 try(source('https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpress.functions.R'), silent =   F)
-# try(source("~/GitHub/Packages/ggExpressDev/ggExpress.functions.R"));
+# require(ggExpress);
 
 # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
 # try(source('https://raw.githubusercontent.com/vertesy/Seurat.multicore/master/00.Load.Seurat3.Multicore.WEB.R'), silent=T)
