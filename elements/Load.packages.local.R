@@ -18,13 +18,12 @@ require(tictoc)
 require(schex)
 
 # 2. Load function libraries ------------------------
-require(CodeAndRoll2)
+require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
 require(Stringendo)
 require(ReadWriter)
 require(MarkdownReports)
-# source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
 require(ggExpress);
-try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
+require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
 # try(source("~/GitHub/Packages/Seurat.multicore/Seurat3.Multicore.Load.R"));
 
 

@@ -52,6 +52,17 @@ PlotFilters(ls.obj = ls.Seurat)
 source('~/GitHub/Packages/Seurat.pipeline/elements/Filtering.plots.3D.R'); create_set_Original_OutDir()
 # sourceGitHub("Filtering.plots.3D.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
+# Filter ------------------------
+for (i in 1:n.datasets ) {
+  iprint(names(ls.Seurat)[i], percentage_formatter(i/n.datasets, digitz = 2))
+  sobj = ls.Seurat[[i]]
+  sobj = subset(x = sobj, subset = `nFeature_RNA` > p$'thr.hp.nFeature_RNA' & `nFeature_RNA` < p$'thr.lp.nFeature_RNA')
+  sobj = subset(x = sobj, subset = `percent.mito` > p$'thr.hp.mito' & `percent.mito` < p$'thr.lp.mito')
+  sobj = subset(x = sobj, subset = `percent.ribo` > p$'thr.hp.ribo' & `percent.ribo` < p$'thr.lp.ribo')
+  ls.Seurat[[i]] <- sobj
+}; toc();
+
+
 # Gene set comparisons ------------------------
 source('~/GitHub/Packages/Seurat.pipeline/elements/Plot.gene.set.overlaps.R'); create_set_Original_OutDir()
 # sourceGitHub("Plot.gene.set.overlaps.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()

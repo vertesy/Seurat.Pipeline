@@ -19,17 +19,14 @@ require(tictoc)
 # require(schex)
 
 # 2. Load custom function libraries ------------------------
-try(require(CodeAndRoll2)
+require(CodeAndRoll2) # # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
 require(Stringendo)
 require(ReadWriter)
-# source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R'),silent = F)
-# require(CodeAndRoll2)
-require(Stringendo)
-require(ReadWriter)
-# source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
-try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/00.Load.Seurat.Utils.WEB.R'), silent =   T)
-# try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.WEB.R"));
-try(source('https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpress.functions.R'), silent =   F)
+require(MarkdownReports)
+require(ggExpress) # try(source('https://raw.githubusercontent.com/vertesy/ggExpressDev/main/ggExpress.functions.R'), silent =   F)
+require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.WEB.R")); # try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/00.Load.Seurat.Utils.WEB.R'), silent =   T)
+
+
 # require(ggExpress);
 
 # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
