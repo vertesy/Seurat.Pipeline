@@ -38,7 +38,7 @@ iprint('-------- ', length(plot_list), "plots are compiled.")
 
 
 # Draw and combine plots------------------------------------------------------------------------
-lsplot.combinations <- iterBy.over(yourvec = plots, by = 4)
+lsplot.combinations <- iterBy.over(vec = plots, by = 4)
 pl.names <-  c("clustering"
                , unlapply(lsplot.combinations, kpp)[-1])
 names(lsplot.combinations) <- pl.names
@@ -65,8 +65,10 @@ plot.scaling.f <- max(1,round(l(stats2plot)/8)) * scaling.adj
 ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'umap', features = stats2plot)
        , filename = ppp("umap.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
 
-ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'tsne', features = stats2plot)
-       , filename = ppp("tsne.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
+if (!is.null(combined.obj@reductions$'tsne')) {
+  ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'tsne', features = stats2plot)
+         , filename = ppp("tsne.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
+}
 
 
 # Basic stat hexbinplots -----------------------------------
