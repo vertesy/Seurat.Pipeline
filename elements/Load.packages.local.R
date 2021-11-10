@@ -18,9 +18,10 @@ require(tictoc)
 require(schex)
 
 # 2. Load function libraries ------------------------
-require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
 require(Stringendo)
 require(ReadWriter)
+require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
+require(MarkdownHelpers)
 require(MarkdownReports)
 require(ggExpress);
 require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
