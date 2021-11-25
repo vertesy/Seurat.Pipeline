@@ -17,6 +17,10 @@ if (F) {
   BiocManager::install("STRINGdb")
 } else { irequire("STRINGdb") }
 
+stopif(is_null(p$'STRING.nr.genes'))
+stopif(is_null(p$'STRING.max.genes'))
+stopif(is_null(p$'getSTRINGlinks'))
+
 
 # Parameters ------------------------
 GO.terms.removed = c("extracellular structure organization")
@@ -87,7 +91,7 @@ for (i in clzUsed) { print(i)
   # http://www.compbio.dundee.ac.uk/user/pschofield/Projects/teaching_BS32010/Workshops/BS32010Workshop4.html
   enrichmentGO <- string_db$get_enrichment(string_ids, category = "Process") # , methodMT =  "FDR", iea = TRUE
   enrichmentGO <- enrichmentGO[order(  enrichmentGO$'p_value'),]
-  specific.GO.terms <- which(enrichmentGO$number_of_genes_in_background < p$'STRING.max.genes')
+  (specific.GO.terms <- which(enrichmentGO$number_of_genes_in_background < p$'STRING.max.genes'))
   if (!l(specific.GO.terms)) specific.GO.terms <- enrichmentGO # use non-specific if no specifcs are found
 
   filter.meaningless.GO.terms = T #
