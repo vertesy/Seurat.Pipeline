@@ -22,7 +22,7 @@ tic(); for (i in 1:n.datasets ) { print(i)
 
 
 # Plot pairwise.scatters------------------------------------------------------------------------
-if (pairwise.scatters ) {
+if (pairwise.scatters && n.datasets >1) {
   topN =100
   ls.variance.standardized =
     lapply(
