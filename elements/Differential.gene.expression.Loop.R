@@ -38,7 +38,7 @@ iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
 i = 2
 for (i in 1:length(p$'res.analyzed.DE')) {
 
-  res = p$'res.analyzed.DE'[i]
+  (res = p$'res.analyzed.DE'[i])
   create_set_OutDir(p0(ParentDirDE,ppp('res',res)))
 
   # Setup clustering identity for DE ------------------------------------
@@ -83,7 +83,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   df.markers.all[[i]] <- df.markers
 
   clUMAP(ident = p$'Ident.for.DEG')
-  PlotTopGenesPerCluster(obj = combined.obj, cl_res = res, nrGenes = p$'n.markers', order_by = p$"DEG.ranking"
+  PlotTopGenesPerCluster(obj = combined.obj, cl_res = res, nrGenes = p$'n.markers', order.by = p$"DEG.ranking"
                          , df_markers = combined.obj@misc$"df.markers"[[paste0("res.",res)]] )
   create_set_OutDir(ParentDirDE)
 
