@@ -27,7 +27,7 @@ ls.pltLog <- foreach(i = 1:n.datasets) %dopar% {
   plotting.data$'log_nFeature_RNA' <- log10(plotting.data$nFeature_RNA + 1)
 
   # Plot3D log scale ------------------------
-  pltLog <-  plot_ly(data = plotting.data
+  pltLog <-  plotly::plot_ly(data = plotting.data
                  , x = ~log_nFeature_RNA, y = ~percent.mito.log10, z = ~percent.ribo.log10
                  , type = "scatter3d"
                  , mode = "markers"
@@ -54,7 +54,7 @@ ls.pltLog <- foreach(i = 1:n.datasets) %dopar% {
 if (plot3DFiltLinear) {
   ls.pltLin <- foreach(i = 1:n.datasets) %dopar% {
 
-    pltLin <-  plot_ly(data = plotting.data
+    pltLin <-  plotly::plot_ly(data = plotting.data
                     , x = ~nFeature_RNA, y = ~percent.mito, z = ~percent.ribo
                     , type = "scatter3d"
                     , mode = "markers"
