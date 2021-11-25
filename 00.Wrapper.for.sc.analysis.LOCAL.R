@@ -11,7 +11,9 @@
 
 # Functions ------------------------
 # sourceGitHub is a function in CodeAndRoll.R
-source('~/GitHub/Packages/Seurat.pipeline/elements/Load.packages.local.R')
+source('~/GitHub/Packages/Seurat.pipeline/Load.packages.local.R')
+source('~/GitHub/Packages/Rocinante/R/Rocinante.R')
+require(clipr)
 # sourceGitHub("Load.packages.CBE.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
 
@@ -59,7 +61,7 @@ for (i in 1:n.datasets ) {
   sobj = subset(x = sobj, subset = `nFeature_RNA` > p$'thr.hp.nFeature_RNA' & `nFeature_RNA` < p$'thr.lp.nFeature_RNA')
   sobj = subset(x = sobj, subset = `percent.mito` > p$'thr.hp.mito' & `percent.mito` < p$'thr.lp.mito')
   sobj = subset(x = sobj, subset = `percent.ribo` > p$'thr.hp.ribo' & `percent.ribo` < p$'thr.lp.ribo')
-  ls.Seurat[[i]] <- sobj
+  ls.Seurat[[i]] <- sobj; rm('sobj')
 }; toc();
 
 
