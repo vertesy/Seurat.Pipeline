@@ -20,7 +20,34 @@ Seurat Pipeline is an example single-cell analysis pipeline using Seurat and a s
 - [Seurat.multicore](https://github.com/vertesy/Seurat.multicore) (optional)
 - [CodeAndRoll](https://github.com/vertesy/CodeAndRoll)
 - [ggExpressDev](https://github.com/vertesy/ggExpressDev)
-- [MarkdownReports](https://github.com/vertesy/MarkdownReportsDev)
+- [MarkdownReports](https://github.com/vertesy/MarkdownReports)
+
+
+
+### Install Function Libraries
+
+```r
+# install.packages("devtools"); # If you don't have it.
+require("devtools")
+
+# Install dependencies
+devtools::install_github(repo = "vertesy/Stringendo", upgrade = F)
+devtools::install_github(repo = "vertesy/CodeAndRoll2", upgrade = F)
+devtools::install_github(repo = "vertesy/ReadWriter", upgrade = F)
+devtools::install_github(repo = "vertesy/MarkdownHelpers", upgrade = F)
+devtools::install_github(repo = "vertesy/Markdownreports", upgrade = F)
+devtools::install_github(repo = "vertesy/ggExpress", upgrade = F)
+devtools::install_github(repo = "vertesy/Seurat.utils", upgrade = F)
+
+# Install Seurat Pipeline
+
+"Clone the repository"
+
+```
+
+
+
+
 
 
 ### Structure of the pipeline
