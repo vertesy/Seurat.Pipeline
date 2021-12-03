@@ -10,7 +10,6 @@
 "This is not a compete dummy pipeline, just steps of Seurat.Pipeline in order, many intermediate steps are missing"
 
 # Functions ------------------------
-# sourceGitHub is a function in CodeAndRoll.R
 source('~/GitHub/Packages/Seurat.pipeline/Load.packages.local.R')
 source('~/GitHub/Packages/Rocinante/R/Rocinante.R')
 require(clipr)
