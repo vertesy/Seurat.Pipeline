@@ -1,7 +1,7 @@
 ######################################################################
 # Load.packages.local.R
 ######################################################################
-# source('~/GitHub/Packages/Seurat.pipeline/elements/Load.packages.local.R')
+# source('~/GitHub/Packages/Seurat.pipeline/Load.packages.local.R')
 # source('https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Load.packages.local.R')
 
 # Load packages ------------------------
@@ -16,6 +16,7 @@ require(doMC)
 
 require(tictoc)
 require(schex)
+require(clipr)
 
 # 2. Load function libraries ------------------------
 require(Stringendo)
@@ -26,6 +27,20 @@ require(MarkdownReports)
 require(ggExpress);
 require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
 # try(source("~/GitHub/Packages/Seurat.multicore/Seurat3.Multicore.Load.R"));
+
+
+{
+  Rocinante.https <- 'https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'
+  Rocinante.local <- '~/GitHub/Packages/Rocinante/R/Rocinante.R'
+  if (RCurl::url.exists(Rocinante.https)) {
+    print('Rocinante.https')
+    try(source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'), silent = F)
+  } else if (file.exists(Rocinante.local)) {
+    print('Rocinante.local')
+    try(source(file.exists(Rocinante.local)), silent = F)
+  }
+}
+
 
 
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R'),silent = F)
