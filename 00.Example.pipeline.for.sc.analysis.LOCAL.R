@@ -6,7 +6,7 @@
 
 
 # Functions ------------------------
-source('~/GitHub/Packages/Seurat.pipeline/elements/Load.packages.local.R')
+source('~/GitHub/Packages/Seurat.pipeline/Load.packages.local.R')
 # sourceGitHub("Load.packages.CBE.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
 
