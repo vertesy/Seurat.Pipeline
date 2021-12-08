@@ -37,7 +37,7 @@ require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seura
     try(source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'), silent = F)
   } else if (file.exists(Rocinante.local)) {
     print('Rocinante.local')
-    try(source(file.exists(Rocinante.local)), silent = F)
+    try(source(Rocinante.local), silent = F)
   }
 }
 
