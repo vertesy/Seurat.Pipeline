@@ -12,11 +12,12 @@ require(colorout)
 require(Seurat)
 
 require(future) # parallelization
-require(doMC)
+# require(doMC)
 
 require(tictoc)
 require(schex)
 require(clipr)
+
 
 # 2. Load function libraries ------------------------
 require(Stringendo)
