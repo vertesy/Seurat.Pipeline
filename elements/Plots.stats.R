@@ -95,11 +95,13 @@ iprint('-------- StatMarker plots are saved')
 
 #  -----------------------------------
 #  -----------------------------------
+p$"plotClusterPhylogeny" = F
 if (p$"plotClusterPhylogeny") {
+  # install.packages('ape')
   # create_set_SubDir("ClusterPhylogeny")
   # Idents(combined.obj) <- GetNamedClusteringRuns(res = p$def_res);  # clUMAP()
   set.seed(p$seed)
-  combined.obj <- BuildClusterTree(object = combined.obj, dims = 1:p$n.PC
+  combined.obj <- Seurat::BuildClusterTree(object = combined.obj, dims = 1:p$n.PC
                                    ,  assay = 'integrated', slot = 'scale.data',verbose = TRUE)
   try.dev.off()
   jpeg(filename = "PlotClusterTree.jpeg", width = 1200, height = 600)
