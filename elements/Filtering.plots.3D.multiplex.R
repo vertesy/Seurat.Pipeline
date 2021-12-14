@@ -11,7 +11,7 @@ plot3DFiltLinear = F
 
 # stopifnot(length(combined.obj$log10.HGA_Markers) > 0 )
 
-
+require(foreach)
 # Calculate ------------------------
 
 
