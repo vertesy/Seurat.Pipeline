@@ -105,12 +105,16 @@ for (i in 1:length(p$'res.analyzed.DE')) {
     df.markers.tbl <- as.tibble(df.markers)
     df.markers.tbl$cluster <- as.character(df.markers.tbl$cluster)
     p.deg.hist <- gghistogram(df.markers.tbl, x = "avg_log2FC",
-                # add = "mean",
-                rug = TRUE,
-                color = "cluster", fill = "cluster",facet.by = 'cluster', xlim = c(0,3)
-                # palette = c("#00AFBB", "#E7B800")
-    ) + geom_vline(xintercept = 1)
-    qqSave(p.deg.hist, w = 15, h = 15, title = ppp("Enrichment log2FC per cluster",res))
+                              title =  "Number of enriched genes per cluster",
+                              subtitle =  "Binned by Log2(FC)",
+                              caption =  paste(p$'Ident.for.DEG', "| v. line @ 2x FC"),
+                              rug = TRUE,
+                              color = "cluster", fill = "cluster",facet.by = 'cluster', xlim = c(0,3)
+                              # palette = c("#00AFBB", "#E7B800")
+    ) +
+      geom_vline(xintercept = 1) +
+      theme_linedraw()
+    qqSave(p.deg.hist, w = 10, h = 6, title = ppp("Enrichment log2FC per cluster",res))
 
   }
 } # for resolutions
@@ -121,4 +125,7 @@ p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
 
 # End ------------------------------------------------------------------------
 create_set_Original_OutDir()
+
+
+
 
