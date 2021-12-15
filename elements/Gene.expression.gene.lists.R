@@ -34,6 +34,18 @@ AdditionalMarkers = c("BRN2", "TBR1", "TBR2", "VGLUT1", "VGLUT2", "NCAM", "L1CAM
 multiFeaturePlot.A4(list.of.genes = AdditionalMarkers, obj = combined.obj, subdir =T)
 
 
+
+# Plot most variable genes from @var.features ------------------------------------------------------------------------
+{
+
+  Most.Variable.Genes <- head(combined.obj@assays$RNA@var.features, n=32)
+  # toclip(combined.obj@assays$RNA@var.features)
+  multiFeaturePlot.A4(list.of.genes = Most.Variable.Genes, obj = combined.obj, subdir =T)
+}
+
+
+
+
 # End ------------------------------------------------------------------------
 create_set_Original_OutDir()
 
