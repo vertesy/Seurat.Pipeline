@@ -58,6 +58,22 @@ if (PCA.plots) {
 
 
 # ------------------------
+if (T) {
+  pcx <- combined.obj@reductions$pca@cell.embeddings
+  idim(pcx)
+
+  idx.num <-
+    c( "nFeature_RNA", "percent.mito",
+       "percent.ribo", "percent.AC.GenBank", "percent.AL.EMBL", "percent.LINC",
+       "percent.MALAT1", "percent.antisense","log10.HGA_Markers",
+       "S.Score",  "G2M.Score")
+  idx.num <- intersect(idx.num, colnames(combined.obj@meta.data))
+  cppx <- cor(cbind(pcx[,1:15], combined.obj@meta.data[, idx.num]))
+  PCA.vs.Meta.cor.heatmap <- pheatmap::pheatmap(cppx, cutree_rows = 4, cutree_cols = 4)
+  wplot_save_pheatmap(x = PCA.vs.Meta.cor.heatmap, width = 10 )
+
+}
+
 # ------------------------
 # ------------------------
 # ------------------------
