@@ -43,7 +43,7 @@ if (PCA.heatmap) {
 
 PCA.plots = T
 if (PCA.plots) {
-  Idents(combined.obj) <- 'integrated_snn_res.0.3'
+  Idents(combined.obj) <- identity.used[1]
   plist.PCA = list.fromNames(2:13)
   for (PC in 2:13) {
     plist.PCA[[(PC - 1)]] <- (DimPlot(combined.obj, reduction = 'pca', label = T, dims = c(PC - 1, PC)) + NoLegend())
