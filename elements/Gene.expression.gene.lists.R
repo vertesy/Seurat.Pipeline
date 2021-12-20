@@ -28,7 +28,6 @@ ClassicMarkers.plus = c(genes.ls$'ClassicMarkers', genes.ls$'LargeSubsetMarkers'
 multiFeaturePlot.A4(list.of.genes = ClassicMarkers.plus, obj = combined.obj, subdir =T)
 # multiFeaturePlot.A4(list.of.genes = ClassicMarkers, obj = combined.obj, plot.reduction = 'tsne', subdir =T)
 
-if (p$'also.tSNE') multiFeaturePlot.A4(list.of.genes = ClassicMarkers.plus, obj = combined.obj, subdir =T, plot.reduction = 'tsne')
 
 AdditionalMarkers = c("BRN2", "TBR1", "TBR2", "VGLUT1", "VGLUT2", "NCAM", "L1CAM", "PSD95")
 multiFeaturePlot.A4(list.of.genes = AdditionalMarkers, obj = combined.obj, subdir =T)
@@ -44,6 +43,8 @@ multiFeaturePlot.A4(list.of.genes = AdditionalMarkers, obj = combined.obj, subdi
 }
 
 
+
+if (p$'also.tSNE') multiFeaturePlot.A4(list.of.genes = ClassicMarkers.plus, obj = combined.obj, subdir =T, plot.reduction = 'tsne')
 
 
 # End ------------------------------------------------------------------------
