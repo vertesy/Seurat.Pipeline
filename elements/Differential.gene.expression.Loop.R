@@ -9,6 +9,7 @@
 # Functions ------------------------
 library(dplyr)
 library(cowplot)
+iprint('DefaultAssay',DefaultAssay(combined.obj))
 
 # Parameters ------------------------
 # is.subclustering = p$"subclustering"
@@ -36,6 +37,8 @@ res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
 i = 2
+
+# p$'res.analyzed.DE' = c(0.3, 0.5)
 for (i in 1:length(p$'res.analyzed.DE')) {
 
   (res = p$'res.analyzed.DE'[i])
@@ -121,7 +124,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 write.simple.xlsx(named_list = df.markers.all )
 p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
 
-
+iprint('DefaultAssay', DefaultAssay(combined.obj))
 
 # End ------------------------------------------------------------------------
 create_set_Original_OutDir()

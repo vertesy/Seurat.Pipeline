@@ -67,8 +67,8 @@ if (TRUE) {
   pl.Fr = list(2)
   plotname = "Fraction.of.cell.cycle.stages.per.cluster"
 
-  pl.Fr[[1]] =CellFractionsBarplot2(obj = combined.obj, fill.by = "Phase", group.by = p$'res.MetaD.colname', downsample = F)
-  pl.Fr[[2]] =CellFractionsBarplot2(obj = combined.obj, group.by = "Phase", fill.by = "sample", downsample = T)
+  pl.Fr[[1]] <- scBarplot.CellFractions(obj = combined.obj, fill.by = "Phase", group.by = p$'res.MetaD.colname', downsample = F)
+  pl.Fr[[2]] <- scBarplot.CellFractions(obj = combined.obj, group.by = "Phase", fill.by = "sample", downsample = T)
 
   qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "png"))
 }
@@ -83,7 +83,7 @@ if (plotCellFractionsBarplots) {
   # cols <- p$'res.MetaD.colname'
   cols <- GetNamedClusteringRuns(res = p$res.analyzed.DE[1])
   for (i in 1:l(meta.tags)) {
-    pl.Fr[[i]] <- CellFractionsBarplot2(fill.by = names(meta.tags)[i], group.by = cols, downsample = T)
+    pl.Fr[[i]] <- scBarplot.CellFractions(fill.by = names(meta.tags)[i], group.by = cols, downsample = T)
   }
 
 
