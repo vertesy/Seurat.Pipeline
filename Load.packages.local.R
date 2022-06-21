@@ -15,7 +15,7 @@ require(future) # parallelization
 # require(doMC)
 
 require(tictoc)
-require(schex)
+# require(schex)
 require(clipr)
 
 
@@ -31,14 +31,16 @@ require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seura
 
 
 {
-  Rocinante.https <- 'https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'
   Rocinante.local <- '~/GitHub/Packages/Rocinante/R/Rocinante.R'
-  if (RCurl::url.exists(Rocinante.https)) {
-    print('Rocinante.https')
-    try(source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'), silent = F)
-  } else if (file.exists(Rocinante.local)) {
+  Rocinante.https <- 'https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'
+  if (file.exists(Rocinante.local)) {
     print('Rocinante.local')
     try(source(Rocinante.local), silent = F)
+  } else if (RCurl::url.exists(Rocinante.https)) {
+    print('Rocinante.https')
+    try(source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'), silent = F)
+  } else {
+    print('ROCINANTE NOT FOUND!!!')
   }
 }
 

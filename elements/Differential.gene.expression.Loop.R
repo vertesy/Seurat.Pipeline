@@ -36,10 +36,12 @@ ParentDirDE <- OutDir
 res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
-i = 2
+i = 1
 
 # p$'res.analyzed.DE' = c(0.3, 0.5)
 for (i in 1:length(p$'res.analyzed.DE')) {
+# p$"Cluster.Labels.Automatic" = T
+# for (i in 1:1) {
 
   (res = p$'res.analyzed.DE'[i])
   create_set_OutDir(p0(ParentDirDE,ppp('res',res)))
@@ -58,17 +60,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
   # Increasing min.pct, logfc.threshold, and min.diff.pct, will increase the speed of DE testing,
   # but could also miss features that are prefiltered
-  # p$"min.pct" = 0.2
-  # p$"logfc.threshold" = 0.5
-  # p$"min.diff.pct" = 0.05
-  # p$"min.cells.feature" = 100
-  # p$"min.cells.group" = 100
 
-  # p$"min.pct" = 0.1
-  # p$"logfc.threshold" = 0.25
-  # p$"min.diff.pct" = 0.01
-  # p$"min.cells.feature" = 20
-  # p$"min.cells.group" = 20
   tic(); df.markers <- FindAllMarkers(combined.obj, verbose = T
                                       , test.use = p$"test"
                                       , only.pos = p$"only.pos"

@@ -50,6 +50,7 @@ for (i in 1:n.datasets ) {
   ls.Seurat[[i]] <- add.meta.fraction(col.name = "percent.ribo", gene.symbol.pattern = "^RPL|^RPS", obj = ls.Seurat[[i]])
 
   META = ls.Seurat[[i]]@meta.data
+  nCells = nrow(META)
   ls.Seurat[[i]] <- AddMetaData(object = ls.Seurat[[i]], metadata = log10(META[, 'nCount_RNA']), col.name = 'log10.nCount_RNA')
   ls.Seurat[[i]] <- AddMetaData(object = ls.Seurat[[i]], metadata = log10(META[, 'nFeature_RNA']), col.name = 'log10.nFeature_RNA')
   ls.Seurat[[i]] <- AddMetaData(object = ls.Seurat[[i]], metadata = rep(samples.short[i], nCells), col.name = 'sample')
@@ -84,6 +85,7 @@ for (i in 1:n.datasets ) {
   ls.Seurat[[i]] <- FindVariableFeatures(object = ls.Seurat[[i]], mean.function = 'FastExpMean', dispersion.function = 'FastLogVMR', nfeatures =10000)
 }
 
+
 source('~/GitHub/Packages/Seurat.pipeline/elements/Plot.variable.Genes.R'); create_set_Original_OutDir()
 # sourceGitHub("Plot.variable.Genes.R" , repo = "Seurat.Pipeline"); create_set_Original_OutDir()
 
@@ -112,6 +114,7 @@ combined.obj <- calc.q90.Expression.and.set.all.genes(obj = combined.obj)
 for (assayX in c("RNA", "integrated")) {
   tic(); combined.obj <- ScaleData(combined.obj, assay = assayX, verbose = T, vars.to.regress = p$'variables.2.regress'); toc()
 }
+
 
 
 # t-SNE and Clustering ---------------------------------------------------------------------------
