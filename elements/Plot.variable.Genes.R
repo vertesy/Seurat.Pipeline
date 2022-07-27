@@ -10,6 +10,14 @@ create_set_OutDir(OutDirOrig, "variable.genes")
 
 pairwise.scatters=T
 
+# n.datasets = 1
+# samples = "sc4"
+
+
+if(!exists('n.datasets')) n.datasets <- length(ls.Seurat)
+if(!exists('samples')) samples <- paste0("Sample.", 1:length(ls.Seurat))
+
+
 # Plot ------------------------------------------------------------------------
 tic(); for (i in 1:n.datasets ) { print(i)
   ls.VarGenes.top20[[i]] <- head(VariableFeatures(ls.Seurat[[i]]), 20) # Identify the 10 most highly variable genes

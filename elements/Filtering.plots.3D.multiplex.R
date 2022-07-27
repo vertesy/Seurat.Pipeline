@@ -18,9 +18,9 @@ require(foreach)
 ls.pltLog <- foreach(i = 1:n.datasets) %dopar% {
 
   plotting.data <- ls.Seurat[[i]]@meta.data
-  plotting.data$'percent.ribo' <- clip.outliers(plotting.data$percent.ribo, probs = c(.005, .995))
-  plotting.data$'percent.mito' <- clip.outliers(plotting.data$percent.mito, probs = c(.005, .995))
-  plotting.data$'nFeature_RNA' <- clip.outliers(plotting.data$nFeature_RNA, probs = c(.005, .995))
+  plotting.data$'percent.ribo' <- clip.outliers.at.percentile(plotting.data$percent.ribo, probs = c(.005, .995))
+  plotting.data$'percent.mito' <- clip.outliers.at.percentile(plotting.data$percent.mito, probs = c(.005, .995))
+  plotting.data$'nFeature_RNA' <- clip.outliers.at.percentile(plotting.data$nFeature_RNA, probs = c(.005, .995))
 
   plotting.data$'percent.ribo.log10' <- log10(plotting.data$percent.ribo + 0.01)
   plotting.data$'percent.mito.log10' <- log10(plotting.data$percent.mito + 0.01)
