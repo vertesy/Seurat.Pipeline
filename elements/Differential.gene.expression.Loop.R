@@ -90,7 +90,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
       clUMAP(ident = ppp("cl.names.top.gene.res",res))
 
       # Hybrid ---------------------------------------------------------------
-      combined.obj <- AddGOGeneList.manual(genes = p$"Cluster.Labels.Hybrid.Genes", GO = "BestMarkers")
+      combined.obj <- gruffi::AddGOGeneList.manual(genes = p$"Cluster.Labels.Hybrid.Genes", GO = "BestMarkers")
       combined.obj <- AutoLabel.KnownMarkers(KnownMarkers = p$"Cluster.Labels.Hybrid.Genes", res = res)
       clUMAP(ident = ppp("cl.names.KnownMarkers",res))
   }
@@ -109,7 +109,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
     ) +
       geom_vline(xintercept = 1) +
       theme_linedraw()
-    qqSave(p.deg.hist, w = 10, h = 6, title = ppp("Enrichment log2FC per cluster",res))
+    qqSave(ggobj = p.deg.hist, w = 10, h = 6, title = ppp("Enrichment log2FC per cluster",res))
 
   }
 } # for resolutions
