@@ -21,7 +21,7 @@ combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 3)
 # Plot Classic Marker Genes ------------------------
 if (exists('genes.ls')) {
   ClassicMarkers.for.3D.plots <- union.ls(list(genes.ls$'ClassicMarkers'))
-  combined.obj <- AddGOGeneList.manual(genes = ClassicMarkers.for.3D.plots, GO = "ClassicMarkers.for.3D.plots")
+  combined.obj <- gruffi::AddGOGeneList.manual(genes = ClassicMarkers.for.3D.plots, GO = "ClassicMarkers.for.3D.plots")
   Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = ClassicMarkers.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
 }
 
@@ -29,7 +29,7 @@ if (exists('genes.ls')) {
 top.markers.exist <- any(grepl('top.markers.res.', names(combined.obj@misc)))
 if (top.markers.exist) {
   DE.genes.for.3D.plots <- combined.obj@misc[[ppp('top.markers.res', p$"def_res")]]
-  combined.obj <- AddGOGeneList.manual(genes = DE.genes.for.3D.plots, GO = "DE.genes.for.3D.plots")
+  combined.obj <- gruffi::AddGOGeneList.manual(genes = DE.genes.for.3D.plots, GO = "DE.genes.for.3D.plots")
   Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = DE.genes.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
 }
 
@@ -45,7 +45,7 @@ if (top.markers.exist) {
 
 if (F) {
   TAP.genes.above.q1.25.for.3D.plots = c("ATF4", "BNIP3", "DDIT4", "EGR1", "ENO1", "ENO2", "FOS", "GAPDH", "HSPA8", "IER2", "JUN", "JUNB", "LDHA", "LDHB", "MARCKSL1", "PGAM1", "PGK1", "PKM", "SAT1", "TPI1", "PPP1R15A", "DDIT3", "SQSTM1", "P4HB")
-  combined.obj <- AddGOGeneList.manual(genes = TAP.genes.above.q1.25.for.3D.plots, GO = "TAP.genes.above.q1.25.for.3D.plots")
+  combined.obj <- gruffi::AddGOGeneList.manual(genes = TAP.genes.above.q1.25.for.3D.plots, GO = "TAP.genes.above.q1.25.for.3D.plots")
   Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = TAP.genes.above.q1.25.for.3D.plots, annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
 }
 
@@ -57,4 +57,15 @@ OutDir = getwd()
 
 if (T) {
   Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = c('POLR2A', 'DCN', 'KAZN'), annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
+}
+
+
+if (F) {
+  combined.obj$cl.names.KnownMarkers.0.4
+  all.genes$KAZN
+  plot3D.umap.gene(obj = combined.obj, gene = 'N.RabV.N2c', AutoAnnotBy = GetNamedClusteringRuns()[1], dotsize = 2)
+  plot3D.umap.gene(obj = combined.obj, gene = 'KAZN', AutoAnnotBy = GetNamedClusteringRuns()[1], dotsize = 2)
+  plot3D.umap(obj = combined.obj, category = 'cl.names.KnownMarkers.0.4', AutoAnnotBy = 'cl.names.KnownMarkers.0.4', dotsize = 2)
+  plot3D.umap(obj = combined.obj, category = 'cl.names.KnownMarkers.0.5', AutoAnnotBy = 'cl.names.KnownMarkers.0.5', dotsize = 2)
+
 }

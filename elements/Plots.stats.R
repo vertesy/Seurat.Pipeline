@@ -38,7 +38,7 @@ iprint('-------- ', length(plot_list), "plots are compiled.")
 
 
 # Draw and combine plots------------------------------------------------------------------------
-lsplot.combinations <- iterBy.over(vec = plots, by = 4)
+lsplot.combinations <- iterBy.over(yourvec = plots, by = 4)
 pl.names <-  c("clustering"
                , unlapply(lsplot.combinations, kpp)[-1])
 names(lsplot.combinations) <- pl.names
@@ -73,17 +73,23 @@ if (!is.null(combined.obj@reductions$'tsne')) {
 
 # Basic stat hexbinplots -----------------------------------
 if (p$"plotHexBinStatPlots") {
-  pl.hex <- foreach(i = 1:length(stats2plot)) %dopar% {
-    schex::plot_hexbin_meta(combined.obj, col = stats2plot[i], action = "median")
+  pl.hex <- list()
+
+  # pl.hex <- foreach(i = 1:length(stats2plot)) %dopar% {
+  for(i in 1:length(stats2plot)) {
+      pl.hex[[i]] <-  schex::plot_hexbin_meta(combined.obj, col = stats2plot[i], action = "median")
   }
+
   p.stat.hex = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
   save_plot(filename = ppp("UMAPs.stat.hex", p$"file.ext"), plot = p.stat.hex, base_height = 12, ncol = 1, nrow = 1) #Figure 2
 
-  pl.hex <- foreach(i = 1:length(plnames.fixed.params)) %dopar% {
-    schex::plot_hexbin_meta(combined.obj, col = plnames.fixed.params[i], action = "prop")
+  # pl.hex <- foreach(i = 1:length(plnames.fixed.params)) %dopar% {
+  for(i in 1:length(plnames.fixed.params)) {
+    pl.hex[[i]] <-  schex::plot_hexbin_meta(combined.obj, col = plnames.fixed.params[i], action = "prop")
   }
   p.stat.hex2 = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
   save_plot(filename = ppp("UMAPs.proportions.hex", p$"file.ext"), plot = p.stat.hex2, base_height = 12, ncol = 1, nrow = 1) #Figure 2
+
 }
 
 
@@ -105,7 +111,7 @@ if (p$"plotClusterPhylogeny") {
                                    ,  assay = 'integrated', slot = 'scale.data',verbose = TRUE)
   try.dev.off()
   jpeg(filename = "PlotClusterTree.jpeg", width = 1200, height = 600)
-  PlotClusterTree(combined.obj)
+  PlotClusterTree(object = combined.obj)
   try.dev.off()
 
 
@@ -120,3 +126,4 @@ if (p$"plotClusterPhylogeny") {
 #  -----------------------------------
 
 create_set_Original_OutDir()
+

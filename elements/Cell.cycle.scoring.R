@@ -7,7 +7,7 @@
 # try(dev.off(), silent = T)
 
 # Parameters ------------------------
-plotCellFractionsBarplots = T
+# plotCellFractionsBarplots = T
 PlotRidgeplots = F
 n.CC.genes = 16
 
@@ -35,8 +35,8 @@ head(combined.obj)
 Idents(combined.obj) = "Phase"
 
 # Read In ------------------------
-(expr.q90.s.genes.found = names(sort(na.omit.strip(combined.obj@misc$'expr.q90'[ cc.genes$'s.genes']), decreasing = T) ) )
-(expr.q90.g2m.genes.found = names(sort(na.omit.strip(combined.obj@misc$'expr.q90'[ cc.genes$'g2m.genes']), decreasing = T) ) )
+(expr.q90.s.genes.found = names(sort(na.omit.strip(combined.obj@misc$'expr.q99'[ cc.genes$'s.genes']), decreasing = T) ) )
+(expr.q90.g2m.genes.found = names(sort(na.omit.strip(combined.obj@misc$'expr.q99'[ cc.genes$'g2m.genes']), decreasing = T) ) )
 
 
 expr.q90.s.genes.found = check.genes(expr.q90.s.genes.found, assay.slot = slotused)
@@ -46,8 +46,8 @@ expr.q90.g2m.genes.found = check.genes(expr.q90.g2m.genes.found, assay.slot = sl
 Idents(combined.obj) <- "Phase"
 Cell.cycle.umap.tsne.pca <- list(
   "umap" = DimPlot(combined.obj,  reduction = "umap"),
-  # "umap.r.0.3" = DimPlot(combined.obj,  reduction = "umap", group.by =  p$"res.MetaD.colname"),
-  "tsne" = DimPlot(combined.obj,  reduction = "tsne"),
+  "umap.r.0.3" = DimPlot(combined.obj,  reduction = "umap", group.by =  p$"res.MetaD.colname"),
+  # "tsne" = DimPlot(combined.obj,  reduction = "tsne"),
   "pca.1.2" = DimPlot(combined.obj,  reduction = "pca", dims = c(1,2)),
   "pca.1.3" = DimPlot(combined.obj,  reduction = "pca", dims = c(1,3))
 )
@@ -63,12 +63,13 @@ save2umaps.A4(CC.score)
 clUMAP('Phase')
 
 # CellFractionsBarplots ------------------------
-if (TRUE) {
+
+if (plotCellFractionsBarplots) {
   pl.Fr = list(2)
   plotname = "Fraction.of.cell.cycle.stages.per.cluster"
 
   pl.Fr[[1]] <- scBarplot.CellFractions(obj = combined.obj, fill.by = "Phase", group.by = p$'res.MetaD.colname', downsample = F)
-  pl.Fr[[2]] <- scBarplot.CellFractions(obj = combined.obj, group.by = "Phase", fill.by = "sample", downsample = T)
+  pl.Fr[[2]] <- scBarplot.CellFractions(obj = combined.obj, group.by = "Phase", fill.by = "library", downsample = T)
 
   qqSaveGridA4(plotlist= pl.Fr, plots = 1:2, fname = ppp(plotname, "png"))
 }

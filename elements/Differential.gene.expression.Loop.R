@@ -36,7 +36,7 @@ ParentDirDE <- OutDir
 res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
-i = 1
+i = 2
 
 # p$'res.analyzed.DE' = c(0.3, 0.5)
 for (i in 1:length(p$'res.analyzed.DE')) {
