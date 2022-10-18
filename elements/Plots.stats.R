@@ -38,7 +38,7 @@ iprint('-------- ', length(plot_list), "plots are compiled.")
 
 
 # Draw and combine plots------------------------------------------------------------------------
-lsplot.combinations <- iterBy.over(yourvec = plots, by = 4)
+lsplot.combinations <- iterBy.over(vec = plots, by = 4)
 pl.names <-  c("clustering"
                , unlapply(lsplot.combinations, kpp)[-1])
 names(lsplot.combinations) <- pl.names

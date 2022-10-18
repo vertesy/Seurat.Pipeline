@@ -16,7 +16,7 @@ if (p$'OrderClsByPrCurve') require(princurve)
 # Setup ------------------------
 create_set_Original_OutDir()
 suffix = ""
-prefix = p0(if (n.datasets > 1) "integrated" else "RNA", "_snn_res")
+prefix = p0(if (n.datasets > 1 & p$'integration' == 'CCA') "integrated" else "RNA", "_snn_res")
 
 
 # AutoNumber.by.UMAP ------------------------
