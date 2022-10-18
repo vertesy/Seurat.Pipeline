@@ -15,7 +15,8 @@ stopifnot(all(names(meta.tags) %in% colnames(combined.obj@meta.data)))
 
 # Setup ------------------------
 create_set_OutDir(OutDirOrig, "Cell.cycle")
-slotused <- if (n.datasets > 1) "integrated" else "RNA"
+slotused <- if (n.datasets > 1 & p$'integration' == 'CCA') "integrated" else "RNA"
+
 
 
 ccDir = "~/Dropbox/Abel.IMBA/MetadataD/Gene.lists/cell_cycle_vignette_files/"

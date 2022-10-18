@@ -17,7 +17,7 @@ seu.plot.PC.var.explained(obj =  combined.obj)
 
 
 # PCA.heatmap ------------------------
-slotused <- if (n.datasets > 1) "integrated" else "RNA"
+slotused <- if (n.datasets > 1 & p$'integration' == 'CCA') "integrated" else "RNA"
 DefaultAssay(combined.obj) <- slotused
 
 PCA.heatmap = T
