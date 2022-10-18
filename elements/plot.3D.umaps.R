@@ -12,9 +12,7 @@ create_set_Original_OutDir()
 
 
 # Setup ------------------------
-
 combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 3)
-
 
 
 
@@ -50,14 +48,13 @@ if (F) {
 }
 
 
-# End ------------------------
-combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 2)
-OutDir = getwd()
-
-
 if (T) {
   Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = c('POLR2A', 'DCN', 'KAZN'), annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
 }
+
+# End ------------------------
+combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 2)
+OutDir = getwd()
 
 
 if (F) {
