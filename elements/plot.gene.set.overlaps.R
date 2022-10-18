@@ -6,6 +6,7 @@
 # Based on https://satijalab.org/seurat/v3.1/cell_cycle_vignette.html
 # try(dev.off(), silent = T)
 
+
 # Parameters ------------------------
 p$"plotUpset" <- F
 # p$"n.overlaps" = 5
@@ -21,7 +22,7 @@ gene.overlap <- UpSetR::fromList(ls_genes)
 
 if (length(ls_genes) < 6) {
   # Wenn diagram ------------------------------------------------
-  wvenn(ls_genes)
+  qvenn(ls_genes, plotname = "Overlap of detected genes")
 
   # plotUpset ------------------------------------------------
   # devtools::install_github("hms-dbmi/UpSetR") # too old version: install.packages("UpSetR")
@@ -47,7 +48,7 @@ if (length(ls_genes) < 6) {
 # barplot ------------------------------------------------
 rowSums(gene.overlap)
 GenesDetected <- colSums(gene.overlap)
-qbarplot(GenesDetected, xlab.angle = 45)
+qbarplot(GenesDetected, label = GenesDetected, ylab = "Genes", xlab = "Libraries", xlab.angle = 45)
 # wbarplot(GenesDetected, incrBottMarginBy = 3, tilted_text = 15
 #          , col = wcolorize(meta.tags$project, set = "rich"))
 
