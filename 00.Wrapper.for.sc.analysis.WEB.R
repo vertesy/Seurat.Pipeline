@@ -1,7 +1,7 @@
 ######################################################################
 # 00.Wrapper.for.sc.analysis.WEB.R
 ######################################################################
-# source('https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/00.Wrapper.for.sc.analysis.LOCAL.R')
+# source('https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/Load.packages.local.R')
 # source('~/GitHub/Packages/Seurat.pipeline/00.Wrapper.for.sc.analysis.WEB.R')
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
 

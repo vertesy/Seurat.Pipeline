@@ -2,9 +2,10 @@
 # Load.packages.local.R
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/Load.packages.local.R')
-# source('https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Load.packages.local.R')
+# source('https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/Load.packages.local.R')
 
-# Load packages ------------------------
+
+# 1. Load packages ------------------------
 require(tidyverse) # graphics / utils
 require(cowplot)
 require(colorout)
@@ -19,7 +20,7 @@ require(tictoc)
 require(clipr)
 
 
-# 2. Load function libraries ------------------------
+# 2. Load custom function libraries ------------------------
 require(Stringendo)
 require(ReadWriter)
 require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
@@ -30,6 +31,7 @@ require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seura
 # try(source("~/GitHub/Packages/Seurat.multicore/Seurat3.Multicore.Load.R"));
 
 
+# 3. Source another custom library that is not a package ------------------------
 {
   Rocinante.local <- '~/GitHub/Packages/Rocinante/R/Rocinante.R'
   Rocinante.https <- 'https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R'
@@ -45,6 +47,13 @@ require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seura
 }
 
 
+# ------------------------------------------------------------------------
+print("All packages loaded")
+
+
+
+
+
 
 # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R'),silent = F)
 # try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/00.Load.Seurat.Utils.WEB.R'), silent =   T)
@@ -53,6 +62,3 @@ require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seura
 
 
 # source('https://raw.githubusercontent.com/vertesy/DatabaseLinke.R/master/DatabaseLinke.R')
-
-print("Packages loaded")
-
