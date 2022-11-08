@@ -52,9 +52,6 @@ if (T) {
   Plot3D.ListOfGenes(obj = combined.obj, ListOfGenes = c('POLR2A', 'DCN', 'KAZN'), annotate.by =  GetNamedClusteringRuns()[1], cex = 2)
 }
 
-# End ------------------------
-combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 2)
-OutDir = getwd()
 
 
 if (F) {
@@ -66,3 +63,9 @@ if (F) {
   plot3D.umap(obj = combined.obj, category = 'cl.names.KnownMarkers.0.5', AutoAnnotBy = 'cl.names.KnownMarkers.0.5', dotsize = 2)
 
 }
+
+
+
+# End ------------------------
+combined.obj <- RecallReduction(obj = combined.obj, reduction = "umap", dim = 2)
+OutDir = getwd()
