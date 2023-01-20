@@ -12,7 +12,6 @@ p$"plotUpset" <- F
 # p$"n.overlaps" = 5
 
 # Plot ------------------------
-ls_genes = lapply(ls.Seurat, rownames)
 # names(ls_genes) = samples.short
 try.dev.off()
 ls_genes = lapply(ls.Seurat, rownames);
@@ -22,7 +21,7 @@ gene.overlap <- UpSetR::fromList(ls_genes)
 
 if (length(ls_genes) < 6) {
   # Wenn diagram ------------------------------------------------
-  qvenn(ls_genes, plotname = "Overlap of detected genes")
+  qvenn(list = ls_genes, plotname = "Overlap of detected genes")
 
   # plotUpset ------------------------------------------------
   # devtools::install_github("hms-dbmi/UpSetR") # too old version: install.packages("UpSetR")
