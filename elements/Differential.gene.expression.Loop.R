@@ -113,7 +113,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
   }
 } # for resolutions
-write.simple.xlsx(named_list = df.markers.all )
+write.simple.xlsx(named_list = df.markers.all, row_names = T )
 p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
 
 iprint('DefaultAssay', DefaultAssay(combined.obj))

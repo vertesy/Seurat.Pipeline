@@ -65,6 +65,7 @@ clUMAP('Phase')
 
 # CellFractionsBarplots ------------------------
 
+plotCellFractionsBarplots = TRUE
 if (plotCellFractionsBarplots) {
   pl.Fr = list(2)
   plotname = "Fraction.of.cell.cycle.stages.per.cluster"
@@ -131,8 +132,8 @@ if (PlotRidgeplots) {
 
 # Individual S and G2/M score plots ------------------------
 
-expr.q90.s.genes.found
-if (T) {
+
+if (FALSE) {
 
   # S ------------------------
   iprint("UMAP S ------------------------")
@@ -149,5 +150,5 @@ if (T) {
 
 
 # End ------------------------------------------------------------------------
-Idents(combined.obj) = p$"res.MetaD.colname"
+# Idents(combined.obj) = p$"res.MetaD.colname"
 create_set_Original_OutDir()
