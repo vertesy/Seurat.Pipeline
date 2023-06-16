@@ -15,9 +15,12 @@ tic();
 for (i in 1:n.datasets ) {
   iprint(names(ls.Seurat)[i], percentage_formatter(i/n.datasets, digitz = 2))
   sobj = ls.Seurat[[i]]
+
   {
     "Dynamic nFeature LP cutoff at 99.75% percentile"
-    below.nFeature_RNA <- floor(quantile(ls.Seurat[[i]]$'nFeature_RNA', probs = 0.9975))
+    stopifnot( !is_null(p$'qunatile.thr.lp.nFeature_RNA'))
+    stopifnot(p$'qunatile.thr.lp.nFeature_RNA'>0 & p$'qunatile.thr.lp.nFeature_RNA' <1)
+    below.nFeature_RNA <- floor(quantile(ls.Seurat[[i]]$'nFeature_RNA', probs = p$'qunatile.thr.lp.nFeature_RNA'))
   }
   sobj = subset(x = sobj, subset = `nFeature_RNA` > p$'thr.hp.nFeature_RNA' & `nFeature_RNA` < below.nFeature_RNA) # p$'thr.lp.nFeature_RNA'
   sobj = subset(x = sobj, subset = `percent.mito` > p$'thr.hp.mito' & `percent.mito` < p$'thr.lp.mito')
