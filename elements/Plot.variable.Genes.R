@@ -40,7 +40,7 @@ if (pairwise.scatters && n.datasets >1) {
             lapply(ls.Seurat,
                    FUN = HVFInfo),
             FUN = `[`, i='variance.standardized'),
-          FUN = as.named.vector, WhichDimNames = 1),
+          FUN = as.named.vector.df, WhichDimNames = 1),
         FUN = sort, decreasing = TRUE),
       FUN = head, n = topN)
   names(ls.variance.standardized) = samples
@@ -64,7 +64,7 @@ if (pairwise.scatters && n.datasets >1) {
 #             lapply(ls.Seurat,
 #                    FUN = HVFInfo),
 #             FUN = `[`, i='variance.standardized'),
-#           FUN = as.named.vector, WhichDimNames = 1),
+#           FUN = as.named.vector.df, WhichDimNames = 1),
 #         FUN = sort, decreasing = TRUE),
 #       FUN = head, n = topN)
 #   names(ls.variance.standardized.1000) = samples
