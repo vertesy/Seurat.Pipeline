@@ -84,11 +84,14 @@ if (p$"plotHexBinStatPlots") {
   save_plot(filename = ppp("UMAPs.stat.hex", p$"file.ext"), plot = p.stat.hex, base_height = 12, ncol = 1, nrow = 1) #Figure 2
 
   # pl.hex <- foreach(i = 1:length(plnames.fixed.params)) %dopar% {
-  for(i in 1:length(plnames.fixed.params)) {
-    pl.hex[[i]] <-  schex::plot_hexbin_meta(combined.obj, col = plnames.fixed.params[i], action = "prop")
+  if (exists('plnames.fixed.params')) {
+    for(i in 1:length(plnames.fixed.params)) {
+      pl.hex[[i]] <-  schex::plot_hexbin_meta(combined.obj, col = plnames.fixed.params[i], action = "prop")
+    }
+    p.stat.hex2 = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
+    save_plot(filename = ppp("UMAPs.proportions.hex", p$"file.ext"), plot = p.stat.hex2, base_height = 12, ncol = 1, nrow = 1) #Figure 2
   }
-  p.stat.hex2 = plot_grid(plotlist = pl.hex[1:4], nrow = 2, ncol = 2, labels = LETTERS[1:4]  )
-  save_plot(filename = ppp("UMAPs.proportions.hex", p$"file.ext"), plot = p.stat.hex2, base_height = 12, ncol = 1, nrow = 1) #Figure 2
+
 
 }
 
