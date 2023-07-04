@@ -6,6 +6,8 @@
 # try(dev.off(), silent = T)
 
 # Setup ------------------------
+ScatPlotSize = max(6, round(1.2 *n.datasets))
+
 # Calculate ------------------------
 
 
@@ -18,9 +20,9 @@ for (i in 1:n.datasets ) {
 
   {
     "Dynamic nFeature LP cutoff at 99.75% percentile"
-    stopifnot( !is_null(p$'qunatile.thr.lp.nFeature_RNA'))
-    stopifnot(p$'qunatile.thr.lp.nFeature_RNA'>0 & p$'qunatile.thr.lp.nFeature_RNA' <1)
-    below.nFeature_RNA <- floor(quantile(ls.Seurat[[i]]$'nFeature_RNA', probs = p$'qunatile.thr.lp.nFeature_RNA'))
+    stopifnot( !is_null(p$'quantile.thr.lp.nFeature_RNA'))
+    stopifnot(p$'quantile.thr.lp.nFeature_RNA'>0 & p$'quantile.thr.lp.nFeature_RNA' <1)
+    below.nFeature_RNA <- floor(quantile(ls.Seurat[[i]]$'nFeature_RNA', probs = p$'quantile.thr.lp.nFeature_RNA'))
   }
   sobj = subset(x = sobj, subset = `nFeature_RNA` > p$'thr.hp.nFeature_RNA' & `nFeature_RNA` < below.nFeature_RNA) # p$'thr.lp.nFeature_RNA'
   sobj = subset(x = sobj, subset = `percent.mito` > p$'thr.hp.mito' & `percent.mito` < p$'thr.lp.mito')
@@ -47,18 +49,18 @@ if (n.datasets>1) {
                                          )
     )
 
+  plotmin = round(0.9 * min(Nr.Cells.Before.Filtering))
+  plotmax = max(Nr.Cells.Before.Filtering)
   qscatter(CellCountsAndFiltering
            , subtitle = "Fraction of cells remaining after filtering"
            , abline = c(0,1)
+           , col = 1:nrow(CellCountsAndFiltering)
            , label = dotlabels
-           , xlim = c(0,max(Nr.Cells.Before.Filtering))
-           , ylim = c(0, max(Nr.Cells.Before.Filtering)))
+           , xlim = c(plotmin, plotmax)
+           , ylim = c(plotmin, plotmax)
+           , w = ScatPlotSize, h = ScatPlotSize)
 
-  # wplot(CellCountsAndFiltering, abline = "ab", a=0, b=1
-  #       , col = wcolorize(meta.tags$library, set = "rich")
-  #       , xlim = c(0,max(Nr.Cells.Before.Filtering))
-  #       , ylim = c(0, max(Nr.Cells.Before.Filtering))
-  # )
+
 }
 
 rm('sobj')
