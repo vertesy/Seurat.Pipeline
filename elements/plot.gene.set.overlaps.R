@@ -14,7 +14,7 @@ p$"plotUpset" <- F
 # Plot ------------------------
 # names(ls_genes) = samples.short
 try.dev.off()
-ls_genes = lapply(ls.Seurat, rownames);
+ls_genes  <- lapply(ls.Seurat, rownames);
 names(ls_genes) = samples.short; try.dev.off()
 
 gene.overlap <- UpSetR::fromList(ls_genes)
