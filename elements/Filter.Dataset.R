@@ -39,6 +39,7 @@ CellCountsAndFiltering <- cbind(
 )
 rownames(CellCountsAndFiltering) <-  samples.short
 
+qbarplot(Nr.Cells.Before.Filtering, label = Nr.Cells.Before.Filtering)
 
 
 if (n.datasets>1) {
