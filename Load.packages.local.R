@@ -29,7 +29,7 @@ require(MarkdownReports)
 require(ggExpress);
 require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
 # try(source("~/GitHub/Packages/Seurat.multicore/Seurat3.Multicore.Load.R"));
-
+require(UVI.tools)
 
 # 3. Source another custom library that is not a package ------------------------
 {
