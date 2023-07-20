@@ -10,6 +10,7 @@
 # plotCellFractionsBarplots = T
 PlotRidgeplots = F
 n.CC.genes = 16
+plotCellFractionsBarplots = TRUE
 
 stopifnot(all(names(meta.tags) %in% colnames(combined.obj@meta.data)))
 
@@ -17,9 +18,7 @@ stopifnot(all(names(meta.tags) %in% colnames(combined.obj@meta.data)))
 create_set_OutDir(OutDirOrig, "Cell.cycle")
 slotused <- if (n.datasets > 1 & p$'integration' == 'CCA') "integrated" else "RNA"
 
-
-
-ccDir = "~/Dropbox/Abel.IMBA/MetadataD/Gene.lists/cell_cycle_vignette_files/"
+ccDir = "~/Dropbox (VBC)/Abel.IMBA/Metadata.D/gene.lists/cell_cycle_vignette_files/"
 try(file.copy(from = ccDir, to = OutDir, recursive = T))
 # regev_lab_cell_cycle_genes = read.simple.vec(ccDir,'regev_lab_cell_cycle_genes.txt')
 
@@ -32,7 +31,7 @@ try(file.copy(from = ccDir, to = OutDir, recursive = T))
 
 combined.obj <- CellCycleScoring(combined.obj, s.features = cc.genes$'s.genes', g2m.features = cc.genes$'g2m.genes')
 # view cell cycle scores and phase assignments
-head(combined.obj)
+
 Idents(combined.obj) = "Phase"
 
 # Read In ------------------------
@@ -54,18 +53,18 @@ Cell.cycle.umap.tsne.pca <- list(
 )
 save4umaps.A4(Cell.cycle.umap.tsne.pca)
 
-
+try.dev.off()
 CC.score = list(
   'G2M.Score' = qUMAP('G2M.Score'),
   'S.Score'   = qUMAP('S.Score')
 )
 save2umaps.A4(CC.score)
 
-clUMAP('Phase')
+clUMAP('Phase', label = F)
 
 # CellFractionsBarplots ------------------------
 
-plotCellFractionsBarplots = TRUE
+
 if (plotCellFractionsBarplots) {
   pl.Fr = list(2)
   plotname = "Fraction.of.cell.cycle.stages.per.cluster"
@@ -77,7 +76,6 @@ if (plotCellFractionsBarplots) {
 }
 
 
-
 # CellFractionsBarplots ------------------------
 
 if (plotCellFractionsBarplots) {
@@ -86,7 +84,7 @@ if (plotCellFractionsBarplots) {
   # cols <- p$'res.MetaD.colname'
   cols <- GetNamedClusteringRuns(res = p$res.analyzed.DE[1])
   for (i in 1:l(meta.tags)) {
-    pl.Fr[[i]] <- scBarplot.CellFractions(fill.by = names(meta.tags)[i], group.by = cols, downsample = T)
+    pl.Fr[[i]] <- try(scBarplot.CellFractions(fill.by = names(meta.tags)[i], group.by = cols, downsample = T), silent = TRUE )
   }
 
 
