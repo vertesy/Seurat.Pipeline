@@ -6,14 +6,17 @@
 # try(dev.off(), silent = T)
 
 # Setup ------------------------
-ScatPlotSize = max(6, round(1.2 *n.datasets))
+ScatPlotSize <- max(6, round(1.2 *n.datasets))
 
-# Calculate ------------------------
+# Plot ------------------------
+
+Nr.Cells.Before.Filtering <- unlapply(ls.Seurat, ncol); # names(Nr.Cells.Before.Filtering) = suffices
+qbarplot(Nr.Cells.Before.Filtering, label <- Nr.Cells.Before.Filtering, ylab = "Cells"
+         , sub = paste('Total:', (sum(Nr.Cells.Before.Filtering))))
 
 
-
+# Filter ------------------------
 tic();
-# ls.Seurat <- foreach(i = 1:n.datasets ) %dopar% {
 for (i in 1:n.datasets ) {
   iprint(names(ls.Seurat)[i], percentage_formatter(i/n.datasets, digitz = 2))
   sobj = ls.Seurat[[i]]
@@ -31,7 +34,12 @@ for (i in 1:n.datasets ) {
 }; toc();
 
 
-Nr.Cells.After.Filtering = unlapply(ls.Seurat, ncol); names(Nr.Cells.After.Filtering) = samples.short
+Nr.Cells.After.Filtering <- unlapply(ls.Seurat, ncol)
+names(Nr.Cells.After.Filtering) <- samples.short
+
+
+qbarplot(Nr.Cells.After.Filtering, label = Nr.Cells.After.Filtering, ylab = "Cells"
+         , sub = paste('Total:', (sum(Nr.Cells.After.Filtering))))
 
 CellCountsAndFiltering <- cbind(
   "Before" = Nr.Cells.Before.Filtering
@@ -39,7 +47,6 @@ CellCountsAndFiltering <- cbind(
 )
 rownames(CellCountsAndFiltering) <-  samples.short
 
-qbarplot(Nr.Cells.Before.Filtering, label = Nr.Cells.Before.Filtering)
 
 
 if (n.datasets>1) {
