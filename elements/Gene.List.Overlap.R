@@ -8,6 +8,7 @@
 # try(source('~/GitHub/Packages/Seurat.utils/Functions/Jaccard.toolkit.R'))
 # try(source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/Functions/Jaccard.toolkit.R'))
 
+n_cuts <- min(4, n.datasets)-1
 
 # Read In ------------------------
 ls_genes  <- lapply(ls.Seurat, rownames);
@@ -18,11 +19,11 @@ PairwiseJaccardIndices <- jPairwiseJaccardIndexList(lsG = ls_genes)
 # ------------------------
 colnames(PairwiseJaccardIndices)
 
-ph.Jac.wo <- pheatmap::pheatmap(PairwiseJaccardIndices, display_numbers = T, cutree_rows = 3, cutree_cols = 3)
+ph.Jac.wo <- pheatmap::pheatmap(PairwiseJaccardIndices, display_numbers = T, cutree_rows = , cutree_cols = n_cuts)
 wplot_save_pheatmap(ph.Jac.wo, width = max(round(n.datasets*0.3), 8))
 
 nrGenesPerDataset <- unlapply(ls_genes, length)
-qbarplot(nrGenesPerDataset
+qbarplot(nrGenesPerDataset, label = nrGenesPerDataset
          , subtitle = "Not actually filtered on this thr.", hline = 20000
          , xlab.angle = 45)
 

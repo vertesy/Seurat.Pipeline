@@ -11,8 +11,8 @@ ScatPlotSize <- max(6, round(1.2 *n.datasets))
 # Plot ------------------------
 
 Nr.Cells.Before.Filtering <- unlapply(ls.Seurat, ncol); # names(Nr.Cells.Before.Filtering) = suffices
-qbarplot(Nr.Cells.Before.Filtering, label <- Nr.Cells.Before.Filtering, ylab = "Cells"
-         , sub = paste('Total:', (sum(Nr.Cells.Before.Filtering))))
+qbarplot(Nr.Cells.Before.Filtering, label = Nr.Cells.Before.Filtering, ylab = "Cells"
+         , subtitle = paste('Total:', sum(Nr.Cells.Before.Filtering)) )
 
 
 # Filter ------------------------
@@ -39,7 +39,7 @@ names(Nr.Cells.After.Filtering) <- samples.short
 
 
 qbarplot(Nr.Cells.After.Filtering, label = Nr.Cells.After.Filtering, ylab = "Cells"
-         , sub = paste('Total:', (sum(Nr.Cells.After.Filtering))))
+         , subtitle = paste('Total:', (sum(Nr.Cells.After.Filtering))))
 
 CellCountsAndFiltering <- cbind(
   "Before" = Nr.Cells.Before.Filtering
@@ -58,15 +58,16 @@ if (n.datasets>1) {
     )
 
   plotmin = round(0.9 * min(Nr.Cells.Before.Filtering))
-  plotmax = max(Nr.Cells.Before.Filtering)
+  plotmax = 1.2 * max(Nr.Cells.Before.Filtering)
   qscatter(CellCountsAndFiltering
            , subtitle = "Fraction of cells remaining after filtering"
            , abline = c(0,1)
-           , col = 1:nrow(CellCountsAndFiltering)
            , label = dotlabels
            , xlim = c(plotmin, plotmax)
            , ylim = c(plotmin, plotmax)
-           , w = ScatPlotSize, h = ScatPlotSize)
+           , w = ScatPlotSize, h = ScatPlotSize
+           # , col = 1:nrow(CellCountsAndFiltering)
+  )
 
 
 }
