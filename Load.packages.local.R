@@ -21,15 +21,19 @@ require(clipr)
 
 
 # 2. Load custom function libraries ------------------------
-require(Stringendo)
-require(ReadWriter)
-require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll/master/CodeAndRoll.R')
-require(MarkdownHelpers)
-require(MarkdownReports)
-require(ggExpress);
-require(Seurat.utils) # try(source("~/GitHub/Packages/Seurat.utils/00.Load.Seurat.Utils.LOCAL.R"));
-# try(source("~/GitHub/Packages/Seurat.multicore/Seurat3.Multicore.Load.R"));
-require(UVI.tools)
+require(Stringendo) # source('https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R')
+require(ReadWriter) # source('https://raw.githubusercontent.com/vertesy/ReadWriter/main/R/ReadWriter.R')
+require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/main/R/CodeAndRoll2.R')
+require(MarkdownHelpers) # source('https://raw.githubusercontent.com/vertesy/MarkdownHelpers/main/R/MarkdownHelpers.R')
+require(MarkdownReports) # source('https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R')
+require(ggExpress) # source('https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R')
+require(Seurat.utils) # source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R')
+require(UVI.tools) # source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=GHSAT0AAAAAACHD3DED5LL7SCKYQ2LEEXGIZHVWHCQ')
+# source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=GHSAT0AAAAAACHD3DEDZA3IEHUTC2ICHB7EZHVWHEA')
+require(Connectome.tools) # source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=GHSAT0AAAAAACHD3DEDG2MJ54KUDV6BIPESZHVWDNQ')
+# source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=GHSAT0AAAAAACHD3DEDDISG3JIQWPSNADBKZHVWDWQ')
+
+# source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R')
 
 # 3. Source another custom library that is not a package ------------------------
 {
