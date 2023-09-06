@@ -29,21 +29,23 @@ if (!require(MarkdownHelpers)) source('https://raw.githubusercontent.com/vertesy
 if (!require(MarkdownReports)) source('https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R');
 if (!require(ggExpress)) source('https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R');
 if (!require(Seurat.utils)) source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R');
-if (!require(UVI.tools)) source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=GHSAT0AAAAAACHD3DED5LL7SCKYQ2LEEXGIZHVWHCQ');
-if (!require(UVI.tools)) source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=GHSAT0AAAAAACHD3DEDZA3IEHUTC2ICHB7EZHVWHEA');
-if (!require(Connectome.tools)) source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=GHSAT0AAAAAACHD3DEDG2MJ54KUDV6BIPESZHVWDNQ');
-if (!require(Connectome.tools)) source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=GHSAT0AAAAAACHD3DEDDISG3JIQWPSNADBKZHVWDWQ');
+if (!require(UVI.tools)) source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=    ');
+if (!require(UVI.tools)) source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=    ');
+if (!require(Connectome.tools)) source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=    ');
+if (!require(Connectome.tools)) source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=    ');
 
 
 # 3. Load CBE specific function libraries ------------------------
 if (IfExistsAndTrue("onCBE")) {
-  "not working, pr"
-  try(dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64"), silent = F)
-  try(library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/'), silent = F)
-  require("htmltools")
+  # "not working, pr"
+  # try(dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64"), silent = F)
+  # try(library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/'), silent = F)
+  # require("htmltools")
 
   # options for CBE ------------------------
-  options(bitmapType = 'cairo')
+  # options(bitmapType = 'cairo')
+  oo=list.files()
+  oo=list.files
 
 } else {
   print("!!! onCBE is not defined as TRUE, thus CBE specific settings are not loaded.")
