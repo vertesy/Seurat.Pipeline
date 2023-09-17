@@ -43,7 +43,7 @@ if (IfExistsAndTrue("onCBE")) {
   # require("htmltools")
 
   # options for CBE ------------------------
-  # options(bitmapType = 'cairo')
+  options(bitmapType = 'cairo')
   oo=list.files()
   oo=list.files
 
