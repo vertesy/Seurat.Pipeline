@@ -59,7 +59,7 @@ if (n.datasets>1) {
 
   plotmin = round(0.9 * min(Nr.Cells.Before.Filtering))
   plotmax = 1.2 * max(Nr.Cells.Before.Filtering)
-  qscatter(CellCountsAndFiltering
+  ggExpress::qscatter(CellCountsAndFiltering
            , subtitle = "Fraction of cells remaining after filtering"
            , abline = c(0,1)
            , label = dotlabels

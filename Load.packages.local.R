@@ -9,7 +9,6 @@
 require(tidyverse) # graphics / utils
 require(cowplot)
 require(colorout)
-
 require(Seurat)
 
 require(future) # parallelization
