@@ -48,6 +48,27 @@ meta.tags <- list(
 lapply(meta.tags, unique)
 
 
+# Auto meta.tags ------------------------
+"Also think of:"
+"if (T) source('~/GitHub/ ... /GEX/Get.Annotation.from.Objectnames.sc16_19.R')"
+
+
+# SaveMiscData ------------------------
+SaveMiscData = TRUE
+"below may not work at this point of the script."
+if (SaveMiscData) {
+  i <- 0
+  for (obj in ls.Seurat) { i=i+1
+    iprint(i, '--------------------------------')
+    if (exists('meta.tags') && !is_null(meta.tags))      obj@misc$'meta.tags' <- meta.tags; iprint('meta.tags saved.'); iprint('Names:', names(meta.tags))
+    if (exists('n.datasets') && !is_null(n.datasets))    obj@misc$'n.datasets' <- n.datasets; iprint('n.datasets saved:', n.datasets)
+    if (exists('genes.ls') && !is_null(genes.ls))        obj@misc$'genes.ls' <- genes.ls; iprint('genes.ls saved.'); iprint('Names:', names(genes.ls))
+    if (exists('all.genes') && !is_null(all.genes))      obj@misc$'all.genes' <- all.genes; iprint('all.genes saved, head:', head(all.genes))
+    if (exists('p') && !is_null(p))                      obj@misc$'p' <- p; iprint('p saved.', length(p)); iprint('Names:', head(names(p)))
+  }
+}
+
+
 # QC ------------------------
 
 
