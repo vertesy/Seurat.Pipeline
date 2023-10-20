@@ -29,7 +29,8 @@ nrClass = length(plot_list)
 
 for (pl in 1:length(plots)) {
   LB = (pl <=  nrStat || pl > nrClass)
-  plot_list[[pl]] <- DimPlot(combined.obj, reduction = "umap", group.by = plots[pl], label = LB, repel = LB) +
+  plot_list[[pl]] <- DimPlot(combined.obj, reduction = "umap", group.by = plots[pl], label = LB, repel = LB
+                             , raster = MarkdownHelpers::FALSE.unless('b.raster')) +
     ggtitle(names(plot_list[pl]));
 }
 plot_list = plot_list[1:pl]
@@ -62,11 +63,13 @@ scaling.adj <- if (ncol(combined.obj) > 40000 ) 2 else 1
 plot.scaling.f <- max(1,round(l(stats2plot)/8)) * scaling.adj
 
 
-ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'umap', features = stats2plot)
+ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'umap', features = stats2plot
+                   , raster = MarkdownHelpers::FALSE.unless('b.raster'))
        , filename = ppp("umap.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
 
 if (!is.null(combined.obj@reductions$'tsne')) {
-  ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'tsne', features = stats2plot)
+  ggsave(FeaturePlot(combined.obj, min.cutoff = "q10", max.cutoff = "q90", reduction = 'tsne', features = stats2plot
+                     , raster = MarkdownHelpers::FALSE.unless('b.raster'))
          , filename = ppp("tsne.StatMarkers", p$"file.ext"), width = hA4 * plot.scaling.f, height = wA4 * plot.scaling.f)
 }
 
@@ -104,7 +107,7 @@ iprint('-------- StatMarker plots are saved')
 
 #  -----------------------------------
 #  -----------------------------------
-p$"plotClusterPhylogeny" = F
+p$"plotClusterPhylogeny" = T
 if (p$"plotClusterPhylogeny") {
   # install.packages('ape')
   # create_set_SubDir("ClusterPhylogeny")

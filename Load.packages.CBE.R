@@ -26,20 +26,22 @@ load_or_source <- function(path, web) {
 }
 
 # 2. Load custom function libraries ------------------------
+source('~/GitHub/Packages/Rocinante/R/Rocinante.R')
+# source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R')
 
-source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R')
+load_or_source(path = '~/GitHub/Packages/Stringendo', web =  'https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R'); warnings()
+load_or_source(path = '~/GitHub/Packages/ReadWriter', web =  'https://raw.githubusercontent.com/vertesy/ReadWriter/main/R/ReadWriter.R'); warnings()
+load_or_source(path = '~/GitHub/Packages/CodeAndRoll2', web =  'https://raw.githubusercontent.com/vertesy/CodeAndRoll2/main/R/CodeAndRoll2.R'); warnings()
+load_or_source(path = '~/GitHub/Packages/MarkdownHelpers', web =  'https://raw.githubusercontent.com/vertesy/MarkdownHelpers/main/R/MarkdownHelpers.R'); warnings()
+load_or_source(path = '~/GitHub/Packages/MarkdownReports', web =  'https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R'); warnings()
+load_or_source(path = '~/GitHub/Packages/ggExpress', web =  'https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R'); warnings()
+load_or_source(path = '~/GitHub/Packages/Seurat.utils', web =  'https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R'); warnings()
 
-load_or_source(path = '~/GitHub/Packages/Stringendo', web =  'https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R');
-load_or_source(path = '~/GitHub/Packages/ReadWriter', web =  'https://raw.githubusercontent.com/vertesy/ReadWriter/main/R/ReadWriter.R');
-load_or_source(path = '~/GitHub/Packages/CodeAndRoll2', web =  'https://raw.githubusercontent.com/vertesy/CodeAndRoll2/main/R/CodeAndRoll2.R');
-load_or_source(path = '~/GitHub/Packages/MarkdownHelpers', web =  'https://raw.githubusercontent.com/vertesy/MarkdownHelpers/main/R/MarkdownHelpers.R');
-load_or_source(path = '~/GitHub/Packages/MarkdownReports', web =  'https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R');
-load_or_source(path = '~/GitHub/Packages/ggExpress', web =  'https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R');
-load_or_source(path = '~/GitHub/Packages/Seurat.utils', web =  'https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R');
+"Below ones wont work"
 load_or_source(path = '~/GitHub/Packages/UVI.tools', web =  'https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=    ');
-load_or_source(path = '~/GitHub/Packages/UVI.tools', web =  'https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=    ');
+# load_or_source(path = '~/GitHub/Packages/UVI.tools', web =  'https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=    ');
 load_or_source(path = '~/GitHub/Packages/Connectome.tools', web =  'https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=    ');
-load_or_source(path = '~/GitHub/Packages/Connectome.tools', web =  'https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=    ');
+# load_or_source(path = '~/GitHub/Packages/Connectome.tools', web =  'https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=    ');
 
 # Old way ------------------------
 
@@ -65,13 +67,12 @@ if (IfExistsAndTrue("onCBE")) {
 
   # options for CBE ------------------------
   options(bitmapType = 'cairo')
-  oo=list.files()
+  # oo=list.files()
   oo=list.files
 
 } else {
   print("!!! onCBE is not defined as TRUE, thus CBE specific settings are not loaded.")
 }
-
 
 
 print("Custom packages loaded!")

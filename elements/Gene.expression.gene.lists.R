@@ -23,6 +23,10 @@ if (l(genes.ls$'Cluster.Labels.Hybrid.Genes')) {
 } else { iprint("genes.ls$Cluster.Labels.Hybrid.Genes IS NOT FOUND.")}
 
 
+OutDir
+qUMAP(AutoNaming.Genes[1])
+qUMAP(AutoNaming.Genes[2], )
+
 # ClassicMarkers.found <- check.genes(obj = combined.obj, list.of.genes = ClassicMarkers)
 ClassicMarkers.plus = c(genes.ls$'ClassicMarkers', genes.ls$'LargeSubsetMarkers', genes.ls$'QC.markers')
 multiFeaturePlot.A4(list.of.genes = ClassicMarkers.plus, obj = combined.obj, subdir =T)
