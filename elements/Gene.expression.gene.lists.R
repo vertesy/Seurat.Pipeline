@@ -4,6 +4,7 @@
 # source('~/GitHub/Packages/Seurat.pipeline/elements/Gene.expression.gene.lists.R')
 # source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Gene.expression.gene.lists.R")
 
+devtools::load_all(path = '~/GitHub/Packages/Seurat.utils');
 
 # create_set_SubDir("Gene.expression")
 create_set_OutDir(OutDirOrig,"Gene.expression")

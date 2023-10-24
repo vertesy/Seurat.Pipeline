@@ -5,14 +5,16 @@
 # source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Plots.stats.R")
 try.dev.off()
 
+stopifnot(exists('b.raster'))
+
 # Setup ------------------------------------------------------------------------
 create_set_Original_OutDir()
 create_set_SubDir(kppu("01.Basic.Stats", p$"file.ext"))
 if( !exists('meta.tags') )  {
-  meta.tags <- combined.obj@misc@meta.tags
+  recall.meta.tags.n.datasets(obj = combined.obj)
   if (is.null(meta.tags)) {
-    dummy <- intersect(c("sample", "library", "project", "medium", "percent.mito"), colnames(combined.obj@meta.data))
-    list.fromNames(name_vec = dummy)
+    dummy <- intersect(c("Sample", "library", "Genotype"), colnames(combined.obj@meta.data))
+    meta.tags <- list.fromNames(name_vec = dummy)
   }
 }
 
