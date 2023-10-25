@@ -4,6 +4,8 @@
 # source('~/GitHub/Packages/Seurat.pipeline/Load.packages.CBE.R')
 # source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/Load.packages.CBE.R")
 
+onCBE = TRUE; # stopifnot(exists('onCBE'))
+
 # 1. Load packages ------------------------
 require(tidyverse) # graphics / utils
 require(cowplot)

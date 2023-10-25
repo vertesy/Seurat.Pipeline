@@ -26,6 +26,8 @@ ParentDirDE <- OutDir
 stopifnot(exists('genes.ls'))
 
 
+# future::plan(workers = 16, strategy = "multisession")
+# future::nbrOfWorkers()
 
 # Calculation: Find ALL markers ------------------------------------------------------------------------
 res.analyzed.DE = p$'res.analyzed.DE'
@@ -34,7 +36,7 @@ iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
 i = 2
 
 # p$'res.analyzed.DE' = c(0.3, 0.5)
-for (i in 1:length(p$'res.analyzed.DE')) {
+for (i in 2:length(p$'res.analyzed.DE')) {
   (res = p$'res.analyzed.DE'[i])
   create_set_OutDir(p0(ParentDirDE,ppp('res', res)))
 
@@ -68,8 +70,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
 } # for
 
-
-
+# p$'res.analyzed.DE' <- c(.1, .3, .5)
 
 
 future::plan(workers = 1)
@@ -89,6 +90,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   Idents(combined.obj) <- p$'Ident.for.DEG'
   
   df.markers <- combined.obj@misc$'df.markers'[[ppp('res',res)]]
+  if(is.null(df.markers)) { kollapse('df.markers is NULL. Entries in @misc$df.markers: ', names(combined.obj@misc$'df.markers')); stop() }
   
   clUMAP(ident = p$'Ident.for.DEG')
   devtools::load_all(path = '~/GitHub/Packages/Seurat.utils');
@@ -101,17 +103,17 @@ for (i in 1:length(p$'res.analyzed.DE')) {
       # Auto Top genes ---------------------------------------------------------------
       combined.obj <- StoreAllMarkers(df_markers = df.markers, res = res)
       combined.obj <- AutoLabelTop.logFC(res = res);
-      clUMAP(ident = ppp("cl.names.top.gene.res",res))
+      clUMAP(ident = ppp("cl.names.top.gene.res", res))
 
       # Hybrid ---------------------------------------------------------------
-      combined.obj <- gruffi::AddGOGeneList.manual(genes = genes.ls$'Cluster.Labels.Hybrid.Genes.LowRes', GO = "BestMarkers")
-      combined.obj <- AutoLabel.KnownMarkers(KnownMarkers = genes.ls$'Cluster.Labels.Hybrid.Genes.LowRes', res = res)
+      combined.obj <- gruffi::AddGOGeneList.manual(genes = genes.ls$'Cluster.Labels.Hybrid.Genes.HiRes', GO = "BestMarkers")
+      combined.obj <- AutoLabel.KnownMarkers(KnownMarkers =  genes.ls$'Cluster.Labels.Hybrid.Genes.HiRes', res = res)
       clUMAP(ident = ppp("cl.names.KnownMarkers",res))
   }
 
   plot.av.enrichment.hist = T
   if (plot.av.enrichment.hist) {
-    df.markers.tbl <- as.tibble(df.markers)
+    df.markers.tbl <- as_tibble(df.markers)
     df.markers.tbl$cluster <- as.character(df.markers.tbl$cluster)
     p.deg.hist <- gghistogram(df.markers.tbl, x = "avg_log2FC",
                               title =  "Number of enriched genes per cluster",
