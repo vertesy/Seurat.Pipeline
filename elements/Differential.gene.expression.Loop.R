@@ -6,33 +6,28 @@
 
 # try(dev.off(), silent = T)
 
-# Functions ------------------------
+# Functions ------------------------------------------------
 library(dplyr)
 library(cowplot)
 iprint('DefaultAssay',DefaultAssay(combined.obj))
 
-# Parameters ------------------------
+# Parameters ------------------------------------------------
 # is.subclustering = p$"subclustering"
 plotHeatmap <- TRUE
 
-# Setup ------------------------
+# Setup ------------------------------------------------
 create_set_Original_OutDir()
 create_set_SubDir("Differential.Gene.expression")
 
-# if ( ww.variable.exists.and.true(p$"subclustering") ) {
-#   create_set_SubDir("Differential.Gene.expression")
-# } else {
-#   create_set_OutDir(OutDirOrig,"Differential.Gene.expression")
-# }
 ParentDirDE <- OutDir
 
 
-# Find ALL markers ------------------------------------------------------------------------
-# p$'res.analyzed.DE' = c(.2,.5)
+# Checks ------------------------------------------------
+stopifnot(exists('genes.ls'))
 
-# plan("multiprocess", workers = 6)
-# parallel.computing.by.future(workers_ = 6)
 
+
+# Calculation: Find ALL markers ------------------------------------------------------------------------
 res.analyzed.DE = p$'res.analyzed.DE'
 df.markers.all <- list.fromNames(res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
@@ -40,24 +35,19 @@ i = 2
 
 # p$'res.analyzed.DE' = c(0.3, 0.5)
 for (i in 1:length(p$'res.analyzed.DE')) {
-# p$"Cluster.Labels.Automatic" = T
-# for (i in 1:1) {
-
   (res = p$'res.analyzed.DE'[i])
-  create_set_OutDir(p0(ParentDirDE,ppp('res',res)))
+  create_set_OutDir(p0(ParentDirDE,ppp('res', res)))
 
   # Setup clustering identity for DE ------------------------------------
   p$'Ident.for.DEG' <-
     if (p$"cl.annotation"  == "ordered") {          GetOrderedClusteringRuns(res = res)
-    # } else if (p$"cl.annotation"  == "named") {     GetNamedClusteringRuns(res = res)
     } else if (p$"cl.annotation"  == "simple") {    GetClusteringRuns(res = res)
-    } else {print("not found")}
+    } else { print("not found") }
 
   stopifnot(p$'Ident.for.DEG' %in% names(combined.obj@meta.data))
   Idents(combined.obj) <- p$'Ident.for.DEG'
 
-  # Find DEG ------------------------------------
-
+  # Find DEG ------------------------------------------------------------------------
   # Increasing min.pct, logfc.threshold, and min.diff.pct, will increase the speed of DE testing,
   # but could also miss features that are prefiltered
 
@@ -71,15 +61,39 @@ for (i in 1:length(p$'res.analyzed.DE')) {
                                       , min.cells.feature = p$"min.cells.feature"
                                       , logfc.threshold = p$"logfc.threshold"); toc();
   df.markers <- Add.DE.combined.score(df.markers) # , colLFC = 'avg_log2FC'
-
   combined.obj@misc$'df.markers'[[ppp('res',res)]] <- df.markers
   fname <- ppp('df.markers',res,'tsv')
   write.simple.tsv(df.markers, ManualName = fname)
   df.markers.all[[i]] <- df.markers
 
+} # for
+
+
+
+
+
+future::plan(workers = 1)
+
+# Stats and plots ------------------------------------------------------------------------
+for (i in 1:length(p$'res.analyzed.DE')) {
+  (res = p$'res.analyzed.DE'[i])
+  create_set_OutDir(p0(ParentDirDE,ppp('res', res)))
+  
+  # Setup clustering identity for DE ------------------------------------
+  p$'Ident.for.DEG' <-
+    if (p$"cl.annotation"  == "ordered") {          GetOrderedClusteringRuns(res = res)
+    } else if (p$"cl.annotation"  == "simple") {    GetClusteringRuns(res = res)
+    } else { print("not found") }
+  
+  stopifnot(p$'Ident.for.DEG' %in% names(combined.obj@meta.data))
+  Idents(combined.obj) <- p$'Ident.for.DEG'
+  
+  df.markers <- combined.obj@misc$'df.markers'[[ppp('res',res)]]
+  
   clUMAP(ident = p$'Ident.for.DEG')
+  devtools::load_all(path = '~/GitHub/Packages/Seurat.utils');
   PlotTopGenesPerCluster(obj = combined.obj, cl_res = res, nrGenes = p$'n.markers', order.by = p$"DEG.ranking"
-                         , df_markers = combined.obj@misc$"df.markers"[[paste0("res.",res)]] )
+                         , df_markers = combined.obj@misc$"df.markers"[[paste0("res.",res)]])
   create_set_OutDir(ParentDirDE)
 
   if (p$"Cluster.Labels.Automatic") {

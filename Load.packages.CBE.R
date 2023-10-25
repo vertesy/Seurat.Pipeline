@@ -36,6 +36,9 @@ load_or_source(path = '~/GitHub/Packages/MarkdownHelpers', web =  'https://raw.g
 load_or_source(path = '~/GitHub/Packages/MarkdownReports', web =  'https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R'); warnings()
 load_or_source(path = '~/GitHub/Packages/ggExpress', web =  'https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R'); warnings()
 load_or_source(path = '~/GitHub/Packages/Seurat.utils', web =  'https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R'); warnings()
+load_or_source(path = '~/GitHub/Packages/gruffi', web =  'https://raw.githubusercontent.com/jn-goe/gruffi/main/R/gruffi.R'); warnings()
+# devtools::install_github(repo = "jn-goe/gruffi", upgrade = F)
+
 
 "Below ones wont work"
 load_or_source(path = '~/GitHub/Packages/UVI.tools', web =  'https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=    ');
