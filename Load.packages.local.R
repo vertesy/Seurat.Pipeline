@@ -17,20 +17,35 @@ require(future) # parallelization
 require(tictoc)
 # require(schex)
 require(clipr)
+require(devtools)
 
 
 # 2. Load custom function libraries ------------------------
-require(Stringendo) # source('https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R')
-require(ReadWriter) # source('https://raw.githubusercontent.com/vertesy/ReadWriter/main/R/ReadWriter.R')
-require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/main/R/CodeAndRoll2.R')
-require(MarkdownHelpers) # source('https://raw.githubusercontent.com/vertesy/MarkdownHelpers/main/R/MarkdownHelpers.R')
-require(MarkdownReports) # source('https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R')
-require(ggExpress) # source('https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R')
-require(Seurat.utils) # source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R')
-require(UVI.tools) # source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=GHSAT0AAAAAACHD3DED5LL7SCKYQ2LEEXGIZHVWHCQ')
-# source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=GHSAT0AAAAAACHD3DEDZA3IEHUTC2ICHB7EZHVWHEA')
-require(Connectome.tools) # source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=GHSAT0AAAAAACHD3DEDG2MJ54KUDV6BIPESZHVWDNQ')
-# source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=GHSAT0AAAAAACHD3DEDDISG3JIQWPSNADBKZHVWDWQ')
+
+load_all(path = '~/GitHub/Packages/Stringendo');
+load_all(path = '~/GitHub/Packages/ReadWriter');
+load_all(path = '~/GitHub/Packages/CodeAndRoll2');
+load_all(path = '~/GitHub/Packages/MarkdownHelpers');
+load_all(path = '~/GitHub/Packages/MarkdownReports');
+load_all(path = '~/GitHub/Packages/ggExpress');
+load_all(path = '~/GitHub/Packages/Seurat.utils');
+
+load_all(path = '~/GitHub/Packages/UVI.tools');
+load_all(path = '~/GitHub/Packages/Connectome.tools');
+
+
+#
+# require(Stringendo) # source('https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R')
+# require(ReadWriter) # source('https://raw.githubusercontent.com/vertesy/ReadWriter/main/R/ReadWriter.R')
+# require(CodeAndRoll2) # source('https://raw.githubusercontent.com/vertesy/CodeAndRoll2/main/R/CodeAndRoll2.R')
+# require(MarkdownHelpers) # source('https://raw.githubusercontent.com/vertesy/MarkdownHelpers/main/R/MarkdownHelpers.R')
+# require(MarkdownReports) # source('https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R')
+# require(ggExpress) # source('https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R')
+# require(Seurat.utils) # source('https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R')
+# require(UVI.tools) # source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=GHSAT0AAAAAACHD3DED5LL7SCKYQ2LEEXGIZHVWHCQ')
+# # source('https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=GHSAT0AAAAAACHD3DEDZA3IEHUTC2ICHB7EZHVWHEA')
+# require(Connectome.tools) # source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=GHSAT0AAAAAACHD3DEDG2MJ54KUDV6BIPESZHVWDNQ')
+# # source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=GHSAT0AAAAAACHD3DEDDISG3JIQWPSNADBKZHVWDWQ')
 
 # source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R')
 

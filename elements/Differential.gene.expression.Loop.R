@@ -90,8 +90,8 @@ for (i in 1:length(p$'res.analyzed.DE')) {
       clUMAP(ident = ppp("cl.names.top.gene.res",res))
 
       # Hybrid ---------------------------------------------------------------
-      combined.obj <- gruffi::AddGOGeneList.manual(genes = p$"Cluster.Labels.Hybrid.Genes", GO = "BestMarkers")
-      combined.obj <- AutoLabel.KnownMarkers(KnownMarkers = p$"Cluster.Labels.Hybrid.Genes", res = res)
+      combined.obj <- gruffi::AddGOGeneList.manual(genes = genes.ls$'Cluster.Labels.Hybrid.Genes.LowRes', GO = "BestMarkers")
+      combined.obj <- AutoLabel.KnownMarkers(KnownMarkers = genes.ls$'Cluster.Labels.Hybrid.Genes.LowRes', res = res)
       clUMAP(ident = ppp("cl.names.KnownMarkers",res))
   }
 

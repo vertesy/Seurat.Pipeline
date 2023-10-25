@@ -67,13 +67,14 @@ if (IfExistsAndTrue("onCBE")) {
 
   # options for CBE ------------------------
   options(bitmapType = 'cairo')
-  # oo=list.files()
-  oo=list.files
-
+  oo = list.files
+  b.raster = TRUE
 } else {
   print("!!! onCBE is not defined as TRUE, thus CBE specific settings are not loaded.")
 }
 
 
 print("Custom packages loaded!")
+
+
 
