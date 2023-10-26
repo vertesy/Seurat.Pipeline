@@ -5,11 +5,14 @@
 # source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Filter.Dataset.R")
 # try(dev.off(), silent = T)
 
-# Setup ------------------------
+# Parameters ------------------------
 ScatPlotSize <- max(6, round(1.2 *n.datasets))
 
-# Plot ------------------------
+# Setup ------------------------
+stopifnot(exists('Samples'))
+stopifnot(exists('n.datasets'))
 
+# Plot ------------------------
 Nr.Cells.Before.Filtering <- unlapply(ls.Seurat, ncol); # names(Nr.Cells.Before.Filtering) = suffices
 qbarplot(Nr.Cells.Before.Filtering, label = Nr.Cells.Before.Filtering, ylab = "Cells"
          , subtitle = paste('Total:', sum(Nr.Cells.Before.Filtering)) )
@@ -35,7 +38,7 @@ for (i in 1:n.datasets ) {
 
 
 Nr.Cells.After.Filtering <- unlapply(ls.Seurat, ncol)
-names(Nr.Cells.After.Filtering) <- samples.short
+names(Nr.Cells.After.Filtering) <- Samples
 
 
 qbarplot(Nr.Cells.After.Filtering, label = Nr.Cells.After.Filtering, ylab = "Cells"
@@ -45,7 +48,7 @@ CellCountsAndFiltering <- cbind(
   "Before" = Nr.Cells.Before.Filtering
   , "After" = Nr.Cells.After.Filtering
 )
-rownames(CellCountsAndFiltering) <-  samples.short
+rownames(CellCountsAndFiltering) <-  Samples
 
 
 
