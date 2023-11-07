@@ -3,6 +3,7 @@
 ######################################################################
 # source('~/GitHub/Packages/Seurat.pipeline/Load.packages.CBE.R')
 # source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/Load.packages.CBE.R")
+# source('~/.pack.R')
 
 onCBE = TRUE; # stopifnot(exists('onCBE'))
 
