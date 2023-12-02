@@ -110,7 +110,7 @@ for (i in clzUsed) { print(i)
 # write_clip(enrichmentGO$description[specific.GO.terms])
 
 
-if (p$"getSTRINGlinks") write.simple.tsv(sort.natural(string_link))
+if (p$"getSTRINGlinks") write.simple.tsv(gtools::mixedsort(string_link))
 v.clusters.sorted <- sort(v.clusters)
 clnames.GO <- ppp(v.clusters.sorted,clnames.GO)
 is(Idents(combined.obj))
