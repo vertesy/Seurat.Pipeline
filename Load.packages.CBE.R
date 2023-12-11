@@ -17,6 +17,7 @@ require(Seurat)
 
 require(future) # parallelization
 require(doMC)
+require(checkmate)
 
 require(tictoc)
 # require(schex)
@@ -39,11 +40,14 @@ load_or_source(path = '~/GitHub/Packages/MarkdownHelpers', web =  'https://raw.g
 load_or_source(path = '~/GitHub/Packages/MarkdownReports', web =  'https://raw.githubusercontent.com/vertesy/MarkdownReports/master/R/MarkdownReports.R'); warnings()
 load_or_source(path = '~/GitHub/Packages/ggExpress', web =  'https://raw.githubusercontent.com/vertesy/ggExpress/master/R/ggExpress.R'); warnings()
 load_or_source(path = '~/GitHub/Packages/Seurat.utils', web =  'https://raw.githubusercontent.com/vertesy/Seurat.utils/master/R/Seurat.Utils.R'); warnings()
-load_or_source(path = '~/GitHub/Packages/gruffi', web =  'https://raw.githubusercontent.com/jn-goe/gruffi/main/R/gruffi.R'); warnings()
+# load_or_source(path = '~/GitHub/Packages/gruffi', web =  'https://raw.githubusercontent.com/jn-goe/gruffi/main/R/gruffi.R'); warnings()
 # devtools::install_github(repo = "jn-goe/gruffi", upgrade = F)
 
+load_or_source(path = '~/GitHub/Packages/PackageTools', web =  'https://raw.githubusercontent.com/vertesy/PackageTools/main/R/PackageTools.R');
+load_or_source(path = '~/GitHub/Packages/isoENV', web =  'https://raw.githubusercontent.com/vertesy/isoENV/main/R/isoENV.R');
 
-"Below ones wont work"
+"Below ones wont work online"
+load_or_source(path = '~/GitHub/Packages/NestedMultiplexer', web =  'https://raw.githubusercontent.com/vertesy/NestedMultiplexer/main/R/NestedMultiplexer?token=    ');
 load_or_source(path = '~/GitHub/Packages/UVI.tools', web =  'https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.R?token=    ');
 # load_or_source(path = '~/GitHub/Packages/UVI.tools', web =  'https://raw.githubusercontent.com/vertesy/UVI.tools/main/R/UVI.tools.Bulk.R?token=    ');
 load_or_source(path = '~/GitHub/Packages/Connectome.tools', web =  'https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=    ');
