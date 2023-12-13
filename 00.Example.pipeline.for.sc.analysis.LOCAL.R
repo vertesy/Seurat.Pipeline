@@ -46,8 +46,8 @@ meta.tags <- list(
 
 "The part below will not work out of the box."
 for (i in 1:n.datasets ) {
-  ls.Seurat[[i]] <- add.meta.fraction(col.name = "percent.mito", gene.symbol.pattern = "^MT\\.|^MT-", obj = ls.Seurat[[i]])
-  ls.Seurat[[i]] <- add.meta.fraction(col.name = "percent.ribo", gene.symbol.pattern = "^RPL|^RPS", obj = ls.Seurat[[i]])
+  ls.Seurat[[i]] <- addMetaFraction(col.name = "percent.mito", gene.symbol.pattern = "^MT\\.|^MT-", obj = ls.Seurat[[i]])
+  ls.Seurat[[i]] <- addMetaFraction(col.name = "percent.ribo", gene.symbol.pattern = "^RPL|^RPS", obj = ls.Seurat[[i]])
 
   META = ls.Seurat[[i]]@meta.data
   nCells = nrow(META)
