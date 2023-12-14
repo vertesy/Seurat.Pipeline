@@ -36,29 +36,6 @@ for (i in 1:n.datasets) {
 
 
 # Plot pairwise.scatters------------------------------------------------------------------------
-# if (pairwise.scatters && n.datasets >1) {
-#   topN =100
-#   ls.variance.standardized =
-#     lapply(
-#       lapply(
-#         lapply(
-#           lapply(
-#             lapply(ls.Seurat,
-#                    FUN = HVFInfo),
-#             FUN = `[`, i='variance.standardized'),
-#           FUN = as.named.vector.df, WhichDimNames = 1),
-#         FUN = sort, decreasing = TRUE),
-#       FUN = head, n = topN)
-#   names(ls.variance.standardized) = samples
-#
-#   plotname=ppp("Pairwise Correlation of Standardized Variance of top", topN,"genes.")
-#   size <- round(length(ls.Seurat)/2)+5
-#   try.dev.off()
-#   pdf(file = "Genes standardized variance correlation across datasets.pdf",width = size, height = size)
-#   x <- pairs(ls.variance.standardized, main=plotname, upper.panel = panel.cor.pearson)
-#   try.dev.off()
-# }
-
 if (pairwise.scatters && n.datasets > 1) {
   topN = 100
   ls.variance.standardized <- purrr::map(ls.Seurat, ~ {
@@ -83,3 +60,29 @@ if (pairwise.scatters && n.datasets > 1) {
 # End ------------------------------------------------------------------------
 
 create_set_Original_OutDir()
+
+
+
+# OLD: Plot pairwise.scatters------------------------------------------------------------------------
+# if (pairwise.scatters && n.datasets >1) {
+#   topN =100
+#   ls.variance.standardized =
+#     lapply(
+#       lapply(
+#         lapply(
+#           lapply(
+#             lapply(ls.Seurat,
+#                    FUN = HVFInfo),
+#             FUN = `[`, i='variance.standardized'),
+#           FUN = as.named.vector.df, WhichDimNames = 1),
+#         FUN = sort, decreasing = TRUE),
+#       FUN = head, n = topN)
+#   names(ls.variance.standardized) = samples
+#
+#   plotname=ppp("Pairwise Correlation of Standardized Variance of top", topN,"genes.")
+#   size <- round(length(ls.Seurat)/2)+5
+#   try.dev.off()
+#   pdf(file = "Genes standardized variance correlation across datasets.pdf",width = size, height = size)
+#   x <- pairs(ls.variance.standardized, main=plotname, upper.panel = panel.cor.pearson)
+#   try.dev.off()
+# }

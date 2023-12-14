@@ -5,17 +5,19 @@
 # source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Filtering.plots.3D.multiplex.R")
 # try(dev.off(), silent = T)
 
+# Functions ------------------------
+require("foreach")
+
 # Setup ------------------------
 create_set_OutDir(OutDirOrig, "Filtering.plots3D")
 plot3DFiltLinear = F
 
 # stopifnot(length(combined.obj$log10.HGA_Markers) > 0 )
 
-require(foreach)
 # Calculate ------------------------
 
 
-ls.pltLog <- foreach(i = 1:n.datasets) %dopar% {
+ls.pltLog <- foreach(i = 1:length(ls.Seurat)) %dopar% {
 
   plotting.data <- ls.Seurat[[i]]@meta.data
   plotting.data$'percent.ribo' <- clip.outliers.at.percentile(plotting.data$percent.ribo, probs = c(.005, .995))
@@ -45,14 +47,14 @@ ls.pltLog <- foreach(i = 1:n.datasets) %dopar% {
     pltLog
 }
 
-  for (i in 1:n.datasets) {
-    iprint(names(ls.Seurat)[i], percentage_formatter(i/n.datasets, digitz = 1))
-    SavePlotlyAsHtml(ls.pltLog[[i]], category. = ppp("log10.Filtering", meta.tags$library[i]))
+  for (i in 1:length(ls.Seurat)) {
+    iprint(names(ls.Seurat)[i], percentage_formatter(i/length(ls.Seurat), digitz = 1))
+    SavePlotlyAsHtml(ls.pltLog[[i]], category. = ppp("log10.Filtering", names(ls.Seurat)[i]))
   }
 
 # Plot3D ------------------------
 if (plot3DFiltLinear) {
-  ls.pltLin <- foreach(i = 1:n.datasets) %dopar% {
+  ls.pltLin <- foreach(i = 1:length(ls.Seurat)) %dopar% {
 
     pltLin <-  plotly::plot_ly(data = plotting.data
                     , x = ~nFeature_RNA, y = ~percent.mito, z = ~percent.ribo
@@ -69,11 +71,10 @@ if (plot3DFiltLinear) {
     pltLin
   }
 
-  for (i in 1:n.datasets) {
-    iprint(names(ls.Seurat)[i], percentage_formatter(i/n.datasets, digitz = 1))
-    SavePlotlyAsHtml(ls.pltLin[[i]], category. = ppp("Filtering", meta.tags$library[i]))
-  }
-
+  for (i in 1:length(ls.Seurat)) {
+    iprint(names(ls.Seurat)[i], percentage_formatter(i/length(ls.Seurat), digitz = 1))
+    SavePlotlyAsHtml(plotly_obj = ls.pltLin[[i]], category. = ppp("Filtering", names(ls.Seurat)[i]))
+  } # for
 }
 
 
