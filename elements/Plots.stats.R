@@ -14,7 +14,7 @@ if( !exists('meta.tags') )  {
   recall.meta.tags.n.datasets(obj = combined.obj)
   if (is.null(meta.tags)) {
     dummy <- intersect(c("Sample", "library", "Genotype"), colnames(combined.obj@meta.data))
-    meta.tags <- list.fromNames(name_vec = dummy)
+    meta.tags <- list.fromNames(x = dummy)
   }
 }
 
