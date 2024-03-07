@@ -11,7 +11,7 @@ ls.Seurat.downsampled <- list.fromNames(names(ls.Seurat))
 # ls.Seurat.downsampled <- foreach(i=1:n.datasets ) %dopar% {
   for (i in 1:n.datasets ) {
   iprint(names(ls.Seurat)[i], percentage_formatter(i/n.datasets, digitz = 2))
-  sobj <- subsetSeuObj(ls.Seurat[[i]], nCells = p$"dSample.Organoids")
+  sobj <- downsampleSeuObj(ls.Seurat[[i]], nCells = p$"dSample.Organoids")
   ls.Seurat.downsampled[[i]] <- sobj
   # sobj
 }; toc();# names(ls.Seurat)  <- samples

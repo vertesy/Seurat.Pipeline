@@ -205,6 +205,6 @@ if (FALSE) {
 
 # Downsample combined datasets if needed ------------------------
 if (FALSE) {
-  subsetSeuObj.and.Save(obj = combined.obj, fraction = 0.1, dir = OutDir)
-  subsetSeuObj.and.Save(obj = combined.obj, fraction = 0.25, dir = OutDir)
+  downsampleSeuObj.and.Save(obj = combined.obj, fraction = 0.1, dir = OutDir)
+  downsampleSeuObj.and.Save(obj = combined.obj, fraction = 0.25, dir = OutDir)
 }
