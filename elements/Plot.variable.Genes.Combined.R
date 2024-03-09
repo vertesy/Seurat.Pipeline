@@ -1,22 +1,20 @@
 ######################################################################
-# Plot.variable.Genes.R
+# Plot.variable.Genes.Combined.R
 ######################################################################
-# source('~/GitHub/Packages/Seurat.pipeline/elements/Plot.variable.Genes.R')
-# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Plot.variable.Genes.R")
+file.remove('~/GitHub/Packages/Seurat.pipeline/elements/Plot.variable.Genes.Combined.R')
+# source("https://raw.githubusercontent.com/vertesy/Seurat.Pipeline/main/elements/Plot.variable.Genes.Combined.R")
 
 
-
+VariableFeaturePlot
 # Functions ------------------------------------------------------------------------
 
 
 # Setup ------------------------------------------------------------------------
-ls.VarGenes.top20 = list.fromNames(names(ls.Seurat))
 create_set_OutDir(OutDirOrig, "variable.genes")
 
 pairwise.scatters = T
 
 
-if(!exists('samples')) samples <- paste0("Sample.", 1:length(ls.Seurat))
 
 
 # Plot ------------------------------------------------------------------------

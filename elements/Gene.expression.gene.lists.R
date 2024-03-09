@@ -7,7 +7,7 @@
 devtools::load_all(path = '~/GitHub/Packages/Seurat.utils');
 
 # create_set_SubDir("Gene.expression")
-create_set_OutDir(OutDirOrig,"Gene.expression")
+create_set_OutDir(OutDirOrig, "Gene.expression", newName = 'OutDirGEX')
 # OutDirOrig ="~/Dropbox/Abel.IMBA/AnalysisD/Bajaj/iN.migration..premRNA."
 
 
