@@ -19,7 +19,7 @@ PlotTopGenes(obj = combined.obj)
 # multiFeaturePlot.A4(list.of.genes = Highest.Expressed.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
 
 if (l(genes.ls$'Cluster.Labels.Hybrid.Genes')) {
-  AutoNaming.Genes = genes.ls$'Cluster.Labels.Hybrid.Genes'
+  AutoNaming.Genes = genes.ls$'Cluster.Labels.Hybrid.Genes.LowRes'
   multiFeaturePlot.A4(list.of.genes = AutoNaming.Genes, obj = combined.obj, intersectionAssay = "RNA", subdir =T)
 } else { iprint("genes.ls$Cluster.Labels.Hybrid.Genes IS NOT FOUND.")}
 
