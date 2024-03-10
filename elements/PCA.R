@@ -13,9 +13,10 @@ create_set_OutDir(OutDirOrig)
 create_set_SubDir("PCA")
 axistextPCA = 6
 
-seu.plot.PC.var.explained(obj =  combined.obj)
+r$Seurat.utils()
+scPlotPCAvarExplained(obj =  combined.obj)
 
-
+seu.plot.PC.var.explained
 # PCA.heatmap ------------------------
 slotused <- if (n.datasets > 1 & p$'integration' == 'CCA') "integrated" else "RNA"
 DefaultAssay(combined.obj) <- slotused
