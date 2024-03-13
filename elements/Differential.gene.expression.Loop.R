@@ -7,8 +7,9 @@
 # try(dev.off(), silent = T)
 
 # Functions ------------------------------------------------
-library(dplyr)
-library(cowplot)
+require(dplyr)
+require(cowplot)
+require(presto)
 iprint('DefaultAssay',DefaultAssay(combined.obj))
 
 # Parameters ------------------------------------------------
@@ -26,17 +27,14 @@ ParentDirDE <- OutDir
 stopifnot(exists('genes.ls'))
 
 
-# future::plan(workers = 16, strategy = "multisession")
-# future::nbrOfWorkers()
-
 # Calculation: Find ALL markers ------------------------------------------------------------------------
 res.analyzed.DE = p$'res.analyzed.DE'
-df.markers.all <- list.fromNames(res.analyzed.DE)
+df.markers.all <- list.fromNames(x = res.analyzed.DE)
 iprint("Resolutions analyzed: ", p$'res.analyzed.DE')
 i = 2
 
 # p$'res.analyzed.DE' = c(0.3, 0.5)
-for (i in 2:length(p$'res.analyzed.DE')) {
+for (i in 1:length(p$'res.analyzed.DE')) {
   (res = p$'res.analyzed.DE'[i])
   create_set_OutDir(p0(ParentDirDE,ppp('res', res)))
 
@@ -60,38 +58,41 @@ for (i in 2:length(p$'res.analyzed.DE')) {
                                       , min.pct = p$"min.pct"
                                       , min.diff.pct = p$"min.diff.pct"
                                       , min.cells.group = p$"min.cells.group"
-                                      , min.cells.feature = p$"min.cells.feature"
-                                      , logfc.threshold = p$"logfc.threshold"); toc();
+                                      # , min.cells.group = 50
+                                      , logfc.threshold = p$"logfc.threshold"
+                                      # , logfc.threshold = .5
+                                      , max.cells.per.ident = p$"max.cells.per.ident"
+                                      # , max.cells.per.ident = 100
+  ); toc();
+
   df.markers <- Add.DE.combined.score(df.markers) # , colLFC = 'avg_log2FC'
   combined.obj@misc$'df.markers'[[ppp('res',res)]] <- df.markers
+
   fname <- ppp('df.markers',res,'tsv')
-  write.simple.tsv(df.markers, ManualName = fname)
+  write.simple.tsv(df.markers, filename = fname)
   df.markers.all[[i]] <- df.markers
-
+  xsave(df.markers, suffix = kpp("res", res))
 } # for
+xsave(combined.obj, suffix = kpp("w.DGEA", kpp('res', p$'res.analyzed.DE')))
 
-# p$'res.analyzed.DE' <- c(.1, .3, .5)
-
-
-future::plan(workers = 1)
 
 # Stats and plots ------------------------------------------------------------------------
 for (i in 1:length(p$'res.analyzed.DE')) {
   (res = p$'res.analyzed.DE'[i])
-  create_set_OutDir(p0(ParentDirDE,ppp('res', res)))
-  
+  create_set_OutDir(p0(ParentDirDE, ppp('res', res)))
+
   # Setup clustering identity for DE ------------------------------------
   p$'Ident.for.DEG' <-
     if (p$"cl.annotation"  == "ordered") {          GetOrderedClusteringRuns(res = res)
     } else if (p$"cl.annotation"  == "simple") {    GetClusteringRuns(res = res)
     } else { print("not found") }
-  
+
   stopifnot(p$'Ident.for.DEG' %in% names(combined.obj@meta.data))
   Idents(combined.obj) <- p$'Ident.for.DEG'
-  
+
   df.markers <- combined.obj@misc$'df.markers'[[ppp('res',res)]]
   if(is.null(df.markers)) { kollapse('df.markers is NULL. Entries in @misc$df.markers: ', names(combined.obj@misc$'df.markers')); stop() }
-  
+
   clUMAP(ident = p$'Ident.for.DEG')
   devtools::load_all(path = '~/GitHub/Packages/Seurat.utils');
   PlotTopGenesPerCluster(obj = combined.obj, cl_res = res, nrGenes = p$'n.markers', order.by = p$"DEG.ranking"
@@ -129,7 +130,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
   }
 } # for resolutions
-write.simple.xlsx(named_list = df.markers.all, row_names = T )
+write.simple.xlsx(named_list = df.markers.all, rowname_column = 1 )
 p$"Cluster.Labels.Automatic" = F # so that it only runs 1x
 
 iprint('DefaultAssay', DefaultAssay(combined.obj))
