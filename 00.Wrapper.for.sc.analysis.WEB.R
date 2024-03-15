@@ -186,7 +186,7 @@ if (FALSE) {
   combined.obj <- read_rds(kpps(rdsDir, 'combined.obj__2021.04.22_14.10.Rds.gz'))
 
   recall.parameters()
-  recall.all.genes()
+  recallAllGenes()
   recall.meta.tags.n.datasets()
 }
 

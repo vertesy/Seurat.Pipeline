@@ -33,7 +33,7 @@ inFile = "~/Dropbox/Abel.IMBA/AnalysisD/_RDS.files/SEO.rds/re_m1500c21.dSample.O
 # inFile = "~/Documents/RDS.files/EDA.Literature/combined.obj__2021.01.05_14.56.Rds.gz" # 20GB
 combined.obj <- read_rds(inFile)
 combined.obj <- RecallReduction(obj = combined.obj, dim = 2)
-recall.all.genes()
+recallAllGenes()
 
 
 isave.RDS(object = combined.obj, inOutDir = F)
