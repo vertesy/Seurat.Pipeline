@@ -51,14 +51,14 @@ Cell.cycle.umap.tsne.pca <- list(
   "pca.1.2" = DimPlot(combined.obj,  reduction = "pca", dims = c(1,2)),
   "pca.1.3" = DimPlot(combined.obj,  reduction = "pca", dims = c(1,3))
 )
-save4umaps.A4(Cell.cycle.umap.tsne.pca)
+save4plotsA4(Cell.cycle.umap.tsne.pca)
 
 try.dev.off()
 CC.score = list(
   'G2M.Score' = qUMAP('G2M.Score'),
   'S.Score'   = qUMAP('S.Score')
 )
-save2umaps.A4(CC.score)
+save2plots.A4(CC.score)
 
 clUMAP('Phase', label = F)
 
