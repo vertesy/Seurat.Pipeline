@@ -17,17 +17,19 @@ if (p$'OrderClsByPrCurve') require(princurve)
 create_set_Original_OutDir()
 suffix = ""
 if(!exists('n.datasets')) n.datasets <- 1
-(prefix = p0(if (n.datasets > 1 & p$'integration' == 'CCA') "integrated" else "RNA", "_snn_res"))
+(prefix = paste0(if (n.datasets > 1 & p$'integration' == 'CCA') "integrated" else "RNA", "_snn_res"))
 
 
 # AutoNumber.by.UMAP ------------------------
+i=1
 for (i in 1:length(p$'res.analyzed.DE')) {
   res = p$'res.analyzed.DE'[i]
   (res.full = trimws(ppp(prefix, res, suffix), whitespace = '\\.'))
+  clUMAP(res.full)
 
   combined.obj <- AutoNumber.by.UMAP(obj = combined.obj, dim =  abs(p$"Reorder.Dim"), reduction = "umap", swap = (p$"Reorder.Dim" < 0), res = res.full)
   identity.used <- ppp(res.full, "ordered")
-  clUMAP(identity.used)
+  # clUMAP(identity.used)
 
   # AutoNumber.by.PrinCurve ------------------------
   if (p$'OrderClsByPrCurve') {
