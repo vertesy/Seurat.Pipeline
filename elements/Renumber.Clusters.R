@@ -37,7 +37,6 @@ for (i in 1:length(p$'res.analyzed.DE')) {
     identity.used <- ppp(res.full, "prin.curve")
     clUMAP(identity.used)
   }
-
 }
 
 

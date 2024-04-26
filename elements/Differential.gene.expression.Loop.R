@@ -23,10 +23,11 @@ iprint('DefaultAssay',DefaultAssay(combined.obj))
 # Parameters ------------------------------------------------
 # is.subclustering = p$"subclustering"
 plotHeatmap <- TRUE
+rerun <- FALSE
 
 # Setup ------------------------------------------------
 create_set_Original_OutDir()
-create_set_SubDir("Differential.Gene.expression")
+create_set_SubDir("Differential.Gene.expression.2")
 
 ParentDirDE <- OutDir
 
@@ -59,28 +60,35 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   # Increasing min.pct, logfc.threshold, and min.diff.pct, will increase the speed of DE testing,
   # but could also miss features that are prefiltered
 
-  tic(); df.markers <- FindAllMarkers(combined.obj, verbose = T
-                                      , test.use = p$"test"
-                                      , only.pos = p$"only.pos"
-                                      , return.thresh	= p$"return.thresh"
-                                      , min.pct = p$"min.pct"
-                                      , min.diff.pct = p$"min.diff.pct"
-                                      , min.cells.group = p$"min.cells.group"
-                                      # , min.cells.group = 50
-                                      , logfc.threshold = p$"logfc.threshold"
-                                      # , logfc.threshold = .5
-                                      , max.cells.per.ident = p$"max.cells.per.ident"
-                                      # , max.cells.per.ident = 100
-  ); toc();
+  if (rerun) {
+    tic(); df.markers <- FindAllMarkers(combined.obj, verbose = T
+                                        , test.use = p$"test"
+                                        , only.pos = p$"only.pos"
+                                        , return.thresh	= p$"return.thresh"
+                                        , min.pct = p$"min.pct"
+                                        , min.diff.pct = p$"min.diff.pct"
+                                        , min.cells.group = p$"min.cells.group"
+                                        # , min.cells.group = 50
+                                        , logfc.threshold = p$"logfc.threshold"
+                                        # , logfc.threshold = .5
+                                        , max.cells.per.ident = p$"max.cells.per.ident"
+                                        # , max.cells.per.ident = 100
+    ); toc();
 
-  df.markers <- Add.DE.combined.score(df.markers) # , colLFC = 'avg_log2FC'
-  combined.obj@misc$'df.markers'[[ppp('res',res)]] <- df.markers
+    df.markers <- Add.DE.combined.score(df.markers) # , colLFC = 'avg_log2FC'
+    combined.obj@misc$'df.markers'[[ppp('res',res)]] <- df.markers
+  } else {
+    df.markers <- combined.obj@misc$'df.markers'[[ppp('res',res)]]
+    if(is.null(df.markers)) { kollapse('df.markers is NULL. Entries in @misc$df.markers: ', names(combined.obj@misc$'df.markers')); stop()
+    }
+  }
 
   fname <- ppp('df.markers',res,'tsv')
   write.simple.tsv(df.markers, filename = fname)
   df.markers.all[[i]] <- df.markers
   xsave(df.markers, suffix = kpp("res", res))
 } # for
+create_set_OutDir(ParentDirDE)
 xsave(combined.obj, suffix = kpp("w.DGEA", kpp('res', p$'res.analyzed.DE')))
 
 
@@ -102,7 +110,7 @@ for (i in 1:length(p$'res.analyzed.DE')) {
   if(is.null(df.markers)) { kollapse('df.markers is NULL. Entries in @misc$df.markers: ', names(combined.obj@misc$'df.markers')); stop() }
 
   clUMAP(ident = p$'Ident.for.DEG')
-  devtools::load_all(path = '~/GitHub/Packages/Seurat.utils');
+  # devtools::load_all(path = '~/GitHub/Packages/Seurat.utils');
   PlotTopGenesPerCluster(obj = combined.obj, cl_res = res, nrGenes = p$'n.markers', order.by = p$"DEG.ranking"
                          , df_markers = combined.obj@misc$"df.markers"[[paste0("res.",res)]])
   create_set_OutDir(ParentDirDE)
@@ -116,8 +124,8 @@ for (i in 1:length(p$'res.analyzed.DE')) {
 
       # Hybrid ---------------------------------------------------------------
       combined.obj <- gruffi::AddGOGeneList.manual(genes = genes.ls$'Cluster.Labels.Hybrid.Genes.HiRes', GO = "BestMarkers")
-      combined.obj <- AutoLabel.KnownMarkers(KnownMarkers =  genes.ls$'Cluster.Labels.Hybrid.Genes.HiRes', res = res)
-      clUMAP(ident = ppp("cl.names.KnownMarkers",res))
+      # combined.obj <- AutoLabel.KnownMarkers(KnownMarkers =  genes.ls$'Cluster.Labels.Hybrid.Genes.HiRes', res = res)
+      # clUMAP(ident = ppp("cl.names.KnownMarkers",res))
   }
 
   plot.av.enrichment.hist = T
