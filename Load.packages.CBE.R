@@ -70,7 +70,7 @@ try(load_or_source(path = '~/GitHub/Packages/PackageTools', web =  'https://raw.
 
 
 # 3. Load CBE specific function libraries ------------------------
-if (IfExistsAndTrue("onCBE")) {
+if (ifExistsAndTrue("onCBE")) {
   # "not working, pr"
   # try(dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64"), silent = F)
   # try(library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/'), silent = F)
