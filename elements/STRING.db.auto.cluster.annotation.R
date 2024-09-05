@@ -118,7 +118,7 @@ symdiff(Idents(combined.obj),  v.clusters.sorted)
 
 
 (Ident.GO <- translate(vec = as.character(combined.obj@meta.data[, p$'Ident.for.DEG'])
-                       , oldvalues = as.character(v.clusters.sorted), newvalues = clnames.GO))
+                       , old = as.character(v.clusters.sorted), new = clnames.GO))
 combined.obj[[GOident]] <- Ident.GO
 clUMAP(ident = GOident , sub = "nr. of genes provided to STRING after dash", h=15)
 

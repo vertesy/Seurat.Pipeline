@@ -57,8 +57,8 @@ for (i in 1:l(path.SubDirs)) {
 
   # Parse metadata ------------------------
   df.assignments$assignment.named <- translate(vec = df.assignments$assignment
-                                               , oldvalues = orig.IDs
-                                               , newvalues = ppp(orig.IDs, cell.lines))
+                                               , old = orig.IDs
+                                               , new = ppp(orig.IDs, cell.lines))
   # Basic stats ------------------------
   status.of.assignment <- table(df.assignments$status)
   qpie(status.of.assignment)
