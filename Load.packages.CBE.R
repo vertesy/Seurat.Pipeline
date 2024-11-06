@@ -10,7 +10,6 @@ onCBE = TRUE; # stopifnot(exists('onCBE'))
 # 1. Load packages ------------------------
 require(tidyverse) # graphics / utils
 require(cowplot)
-require(MarkdownReports)
 require(colorout)
 
 require(Seurat)
@@ -52,7 +51,7 @@ load_or_source(path = '~/GitHub/Packages/UVI.tools', web =  'https://raw.githubu
 load_or_source(path = '~/GitHub/Packages/Connectome.tools', web =  'https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=    ');
 # load_or_source(path = '~/GitHub/Packages/Connectome.tools', web =  'https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=    ');
 
-try(load_or_source(path = '~/GitHub/Packages/PackageTools', web =  'https://raw.githubusercontent.com/vertesy/PackageTools/main/R/PackageTools.R'), silent = T)
+# try(load_or_source(path = '~/GitHub/Packages/PackageTools', web =  'https://raw.githubusercontent.com/vertesy/PackageTools/main/R/PackageTools.R'), silent = T)
 
 # Old way ------------------------
 
@@ -68,21 +67,6 @@ try(load_or_source(path = '~/GitHub/Packages/PackageTools', web =  'https://raw.
 # if (!require(Connectome.tools)) source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.R?token=    ');
 # if (!require(Connectome.tools)) source('https://raw.githubusercontent.com/vertesy/Connectome.tools/main/R/Connectome.tools.AAV.R?token=    ');
 
-
-# 3. Load CBE specific function libraries ------------------------
-if (ifExistsAndTrue("onCBE")) {
-  # "not working, pr"
-  # try(dyn.load("/software/2020/software/nodejs/10.15.1-foss-2018b/lib/libnode.so.64"), silent = F)
-  # try(library(V8,lib.loc = '/software/2020/software/v8/3.3.1-foss-2018b-r-4.0.2/'), silent = F)
-  # require("htmltools")
-
-  # options for CBE ------------------------
-  options(bitmapType = 'cairo')
-  oo = list.files
-  b.raster = TRUE
-} else {
-  print("!!! onCBE is not defined as TRUE, thus CBE specific settings are not loaded.")
-}
 
 
 print("Custom packages loaded!")
