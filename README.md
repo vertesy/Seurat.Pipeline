@@ -31,13 +31,13 @@ Seurat Pipeline is an example single-cell analysis pipeline using Seurat and a s
 require("devtools")
 
 # Install dependencies
-devtools::install_github(repo = "vertesy/Stringendo", upgrade = F)
-devtools::install_github(repo = "vertesy/CodeAndRoll2", upgrade = F)
-devtools::install_github(repo = "vertesy/ReadWriter", upgrade = F)
-devtools::install_github(repo = "vertesy/MarkdownHelpers", upgrade = F)
-devtools::install_github(repo = "vertesy/Markdownreports", upgrade = F)
-devtools::install_github(repo = "vertesy/ggExpress", upgrade = F)
-devtools::install_github(repo = "vertesy/Seurat.utils", upgrade = F)
+devtools::install_github(repo = "vertesy/Stringendo", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/CodeAndRoll2", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/ReadWriter", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/MarkdownHelpers", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/Markdownreports", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/ggExpress", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/Seurat.utils", ref = "main", upgrade = F)
 
 # Install Seurat Pipeline
 
