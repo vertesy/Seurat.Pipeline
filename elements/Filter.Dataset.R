@@ -26,12 +26,21 @@ qbarplot(Nr.Cells.Before.Filtering,
 tic()
 for (i in 1:length(ls.Seurat)) {
   iprint(names(ls.Seurat)[i], percentage_formatter(i / length(ls.Seurat), digitz = 2))
-  
-  {
+
+  if (ifExistsAndTrue('QunatileCutoffPassingMinFeature')) {
+    # this Should follow the logic that The quantile should only be applied on cells that already passed the minimum end feature RNA high pass threshold
+    # Sth like:
+    nFtr <- ls.Seurat[[i]]$"nFeature_RNA"
+    nFtr_valid <- nFtr[nFtr >  p$"thr.hp.nFeature_RNA"]                                # restrict to high-quality cells, otherwise the quantile may be Influenced by the amount of junk in the library.
+    below.nFeature_RNA <- floor(quantile(nFtr_valid, probs = p$"quantile.thr.lp.nFeature_RNA"))
+
+
+  } else {
     "Dynamic nFeature LP cutoff at 99.75% percentile"
     below.nFeature_RNA <- floor(stats::quantile(ls.Seurat[[i]]$"nFeature_RNA", probs = p$"quantile.thr.lp.nFeature_RNA"))
+
   }
-  
+
   ls.Seurat[[i]] <- subset(
     x = ls.Seurat[[i]], subset =
       `nFeature_RNA` > p$"thr.hp.nFeature_RNA" & `nFeature_RNA` < below.nFeature_RNA &
