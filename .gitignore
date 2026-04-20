@@ -41,3 +41,4 @@ vignettes/*.pdf
 # Plots accidentally saved
 .pdf
 .png
+.DS_Store
