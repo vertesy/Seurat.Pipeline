@@ -11,14 +11,13 @@ onCBE = TRUE; # stopifnot(exists('onCBE'))
 require(tidyverse) # graphics / utils
 require(cowplot)
 require(colorout)
-
+require(tictoc)
 require(Seurat)
 
 require(future) # parallelization
 require(doMC)
 require(checkmate)
 
-require(tictoc)
 # require(schex)
 
 load_or_source <- function(path, web) {
@@ -32,7 +31,9 @@ load_or_source <- function(path, web) {
 source('~/GitHub/Packages/Rocinante/R/Rocinante.R')
 # source('https://raw.githubusercontent.com/vertesy/Rocinante/main/R/Rocinante.R')
 
-load_or_source(path = '~/GitHub/Packages/Stringendo', web =  'https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R'); warnings()
+if(!("Stringendo" %in% loadedNamespaces())) { # This package has been loaded already by ppp.R.
+  load_or_source(path = '~/GitHub/Packages/Stringendo', web =  'https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R'); warnings()
+}
 load_or_source(path = '~/GitHub/Packages/ReadWriter', web =  'https://raw.githubusercontent.com/vertesy/ReadWriter/main/R/ReadWriter.R'); warnings()
 load_or_source(path = '~/GitHub/Packages/CodeAndRoll2', web =  'https://raw.githubusercontent.com/vertesy/CodeAndRoll2/main/R/CodeAndRoll2.R'); warnings()
 load_or_source(path = '~/GitHub/Packages/MarkdownHelpers', web =  'https://raw.githubusercontent.com/vertesy/MarkdownHelpers/main/R/MarkdownHelpers.R'); warnings()
@@ -42,7 +43,7 @@ load_or_source(path = '~/GitHub/Packages/Seurat.utils', web =  'https://raw.gith
 # load_or_source(path = '~/GitHub/Packages/gruffi', web =  'https://raw.githubusercontent.com/jn-goe/gruffi/main/R/gruffi.R'); warnings()
 # devtools::install_github(repo = "jn-goe/gruffi", upgrade = F)
 
-# load_or_source(path = '~/GitHub/Packages/isoENV', web =  'https://raw.githubusercontent.com/vertesy/isoENV/main/R/isoENV.R');
+load_or_source(path = '~/GitHub/Packages/isoENV', web =  'https://raw.githubusercontent.com/vertesy/isoENV/main/R/isoENV.R');
 
 "Below ones wont work online"
 load_or_source(path = '~/GitHub/Packages/NestedMultiplexer', web =  'https://raw.githubusercontent.com/vertesy/NestedMultiplexer/main/R/NestedMultiplexer?token=    ');
