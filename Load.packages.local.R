@@ -21,7 +21,7 @@ require(devtools)
 
 
 # 2. Load custom function libraries ------------------------
-
+require(devtools)
 load_all(path = '~/GitHub/Packages/Stringendo');
 load_all(path = '~/GitHub/Packages/ReadWriter');
 load_all(path = '~/GitHub/Packages/CodeAndRoll2');
